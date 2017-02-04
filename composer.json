@@ -1,7 +1,7 @@
 {
-    "name": "cakephp/app",
-    "description": "CakePHP skeleton app",
-    "homepage": "http://cakephp.org",
+    "name": "giumar/fortunecookies",
+    "description": "Simple Ticket System",
+    "homepage": "http://giumar.net",
     "type": "project",
     "license": "MIT",
     "require": {
