@@ -19,7 +19,7 @@ class InstallShell extends Shell
 			Configure::write('Security.salt', $salt);
 		}
 		*/
-
+		Configure::write('debug', true);
 		Configure::write('Security.salt', '1234567890987654321');
 		Configure::write('Datasources.default.className', 'Cake\Database\Connection');
 		Configure::write('Datasources.default.driver', 'Cake\Database\Driver\Mysql');
