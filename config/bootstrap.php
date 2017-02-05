@@ -65,6 +65,8 @@ use Cake\Mailer\Email;
 use Cake\Network\Request;
 use Cake\Utility\Inflector;
 use Cake\Utility\Security;
+use Cake\Filesystem\Folder;
+use Cake\Filesystem\File;
 
 /*
  * Read configuration file and inject configuration into various
@@ -86,8 +88,11 @@ try {
  * You can use a file like app_local.php to provide local overrides to your
  * shared configuration.
  */
-//Configure::load('app_local', 'default');
-
+$file = new File('config/app_local.php', false);
+if($file->exists()) {
+	Configure::load('app_local', 'default');
+}
+$file->close();
 /*
  * When debug = true the metadata cache should only last
  * for a short time.

@@ -35,8 +35,10 @@ class InstallShell extends Shell
 		Configure::write('Datasources.default.log', false);
 		Configure::write('Datasources.default.quoteIdentifiers', false);
 		Configure::write('Datasources.default.url', env('DATABASE_URL', null));
-		
-		$this->out(Configure::dump('app', 'default'));
-		
+		$file = new File('config/app_local.php', false);
+		if(!$file->exists()) {
+			$this->out(Configure::dump('app_local', 'default'));
+		}
+		$file->close();
     }
 }
