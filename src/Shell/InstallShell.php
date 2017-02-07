@@ -28,7 +28,7 @@ class InstallShell extends Shell
 		Configure::write('Datasources.default.username', 'root');
 		Configure::write('Datasources.default.password', 'semaphoredb');
 		Configure::write('Datasources.default.database', 'fc_test');
-		Configure::write('Datasources.default.encoding', 'uf8');
+		Configure::write('Datasources.default.encoding', 'utf8');
 		Configure::write('Datasources.default.timezone', 'UTC');
 		Configure::write('Datasources.default.flags', []);
 		Configure::write('Datasources.default.cacheMetadata', true);
