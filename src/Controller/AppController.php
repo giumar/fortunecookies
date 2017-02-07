@@ -46,7 +46,7 @@ class AppController extends Controller
         $this->loadComponent('Security');
         $this->loadComponent('Csrf');
 		$this->loadComponent('Auth', [
-			'authorize'=> 'Controller',
+			'authorize' => ['Controller'],
             'authenticate' => [
                 'Form' => [
                     'fields' => [
@@ -59,11 +59,27 @@ class AppController extends Controller
                 'controller' => 'Users',
                 'action' => 'login'
             ],
-			'unauthorizedRedirect' => $this->referer()
+			'logoutAction' => [
+                'controller' => 'Tickets',
+                'action' => 'index'
+            ],
+			//'unauthorizedRedirect' => $this->referer()
 		]);
 		$this->Auth->allow();
     }
 
+	public function isAuthorized($user)
+	{
+		// Admin can access every action
+		if (isset($user['role']) && $user['role'] === 'admin') {
+			return true;
+		}
+
+		// Default deny
+		return false;
+	}
+	
+	
     /**
      * Before render callback.
      *
