@@ -1,3 +1,5 @@
+[![Build Status](https://semaphoreci.com/api/v1/giumar/fortunecookies/branches/master/badge.svg)](https://semaphoreci.com/giumar/fortunecookies)
+
 # README #
 
 This README would normally document whatever steps are necessary to get your application up and running.
