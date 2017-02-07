@@ -3,3 +3,4 @@
 /tmp/*
 /logs/*
 webroot/
+config/app_local.php
