@@ -16,7 +16,7 @@
 </nav>
 <div class="tickets view large-9 medium-8 columns content">
     <h3><?= h($ticket->title) ?></h3>
-    <table class="vertical-table">
+    <table class="table vertical-table">
         <tr>
             <th scope="row"><?= __('Title') ?></th>
             <td><?= h($ticket->title) ?></td>
@@ -37,7 +37,7 @@
     <div class="related">
         <h4><?= __('Related Operations') ?></h4>
         <?php if (!empty($ticket->operations)): ?>
-        <table cellpadding="0" cellspacing="0">
+        <table cellpadding="0" cellspacing="0" class="table">
             <tr>
                 <th scope="col"><?= __('Id') ?></th>
                 <th scope="col"><?= __('Ticket Id') ?></th>

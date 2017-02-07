@@ -45,6 +45,23 @@ class AppController extends Controller
         $this->loadComponent('Flash');
         $this->loadComponent('Security');
         $this->loadComponent('Csrf');
+		$this->loadComponent('Auth', [
+			'authorize'=> 'Controller',
+            'authenticate' => [
+                'Form' => [
+                    'fields' => [
+                        'username' => 'email',
+                        'password' => 'password'
+                    ]
+                ]
+            ],
+            'loginAction' => [
+                'controller' => 'Users',
+                'action' => 'login'
+            ],
+			'unauthorizedRedirect' => $this->referer()
+		]);
+		$this->Auth->allow();
     }
 
     /**
