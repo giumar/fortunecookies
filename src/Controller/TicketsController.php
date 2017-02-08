@@ -106,4 +106,24 @@ class TicketsController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+	
+	public function addOperation($id = null) {
+		$ticket = $this->Tickets->get($id, [
+            'contain' => []
+        ]);
+		
+		$this->loadModel('Operations');
+		$newOperation = $this->Operations->newEntity();
+		if ($this->request->is('post')) {
+            $newOperation = $this->Operations->patchEntity($newOperation, $this->request->data);
+            if ($this->Operations->save($newOperation)) {
+                $this->Flash->success(__('The new operation has been saved.'));
+
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('The new operation could not be saved. Please, try again.'));
+        }
+		$newOperation->ticket_id = $id;
+		$this->set('newOperation', $newOperation);
+	}
 }
