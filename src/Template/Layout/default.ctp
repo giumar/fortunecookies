@@ -57,56 +57,48 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
 						</button>
-						<?= $this->Html->link('Home', ['controller'=>'tickets', 'action'=>'index'],['class'=>'navbar-brand']); ?>
+						<?= $this->Html->link('FC Home', ['controller'=>'tickets', 'action'=>'index'],['class'=>'navbar-brand']); ?>
 					</div>
 
 					<!-- Collect the nav links, forms, and other content for toggling -->
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 						<ul class="nav navbar-nav">
-							<li><?= $this->Html->link('Operations', ['controller'=>'operations', 'action'=>'index']); ?></li>
-							<li><?= $this->Html->link('Users', ['controller'=>'users', 'action'=>'index']); ?></li>
-							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-								<ul class="dropdown-menu">
-									<li><a href="#">Action</a></li>
-									<li><a href="#">Another action</a></li>
-									<li><a href="#">Something else here</a></li>
-									<li role="separator" class="divider"></li>
-									<li><a href="#">Separated link</a></li>
-									<li role="separator" class="divider"></li>
-									<li><a href="#">One more separated link</a></li>
-								</ul>
-							</li>
+							<li><?= $this->Html->link('Tickets', ['controller'=>'tickets', 'action'=>'index']); ?></li>							
 						</ul>
-						<form class="navbar-form navbar-left">
+						<form class="navbar-form navbar-right">
 							<div class="form-group">
 								<input type="text" class="form-control" placeholder="Search">
 							</div>
 							<button type="submit" class="btn btn-default">Submit</button>
 						</form>
 						<ul class="nav navbar-nav navbar-right">
-							<li><?= $this->Html->link('Logout', ['controller'=>'users', 'action'=>'logout']); ?></li>
 							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User profile <span class="caret"></span></a>
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+									<?php if($this->request->session()->check('Auth')) {
+										echo $this->request->session()->read('Auth.User.email');
+									} else {
+										echo "User profile ";
+									}
+									?>
+									<span class="caret"></span>
+								</a>
 								<ul class="dropdown-menu">
 									<li><a href="#">Options</a></li>
 									<li><a href="#">My Profile</a></li>
-									<li><a href="#">Something else here</a></li>
-									<li role="separator" class="divider"></li>
-									<li><a href="#">Separated link</a></li>
 								</ul>
 							</li>
 							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Administration <span class="caret"></span></a>
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Administration <i class="fa fa-cogs" aria-hidden="true"></i> <span class="caret"></span></a>
 								<ul class="dropdown-menu">
-									<li><a href="#">Action</a></li>
+									<li><?= $this->Html->link('Users', ['controller'=>'users', 'action'=>'index']); ?></li>
 									<li><a href="#">Another action</a></li>
 									<li><a href="#">Something else here</a></li>
 									<li role="separator" class="divider"></li>
 									<li><a href="#">Separated link</a></li>
 								</ul>
 							</li>
-						</ul>
+							<li><?= $this->Html->link('Logout <i class="fa fa-sign-out" aria-hidden="true"></i>', ['controller'=>'users', 'action'=>'logout'], ['class'=>'','escape'=>false]);?></li>
+						</ul>						
 					</div><!-- /.navbar-collapse -->
 				</div><!-- /.container-fluid -->
 			</nav>
