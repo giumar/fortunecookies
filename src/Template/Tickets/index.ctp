@@ -3,6 +3,7 @@
   * @var \App\View\AppView $this
   */
 ?>
+<!--
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
@@ -11,9 +12,12 @@
         <li><?= $this->Html->link(__('New Operation'), ['controller' => 'Operations', 'action' => 'add']) ?></li>
     </ul>
 </nav>
-<div class="tickets index large-9 medium-8 columns content">
-    <h3><?= __('Tickets') ?></h3>
-    <table cellpadding="0" cellspacing="0" class="table">
+-->
+<div class="panel panel-default">
+    <div class="panel-heading">
+		<h3><?= __('Tickets') ?></h3><?= $this->Html->link(__('<span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> New Ticket '), ['action' => 'add'], ['escape'=>false, 'class'=>'btn btn-default']) ?>
+    </div>
+	<table class="table">
         <thead>
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
@@ -39,14 +43,16 @@
             <?php endforeach; ?>
         </tbody>
     </table>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
-        </ul>
-        <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
-    </div>
+	<div class="panel-footer">
+		<div class="paginator">
+			<ul class="pagination">
+				<?= $this->Paginator->first('<< ' . __('first')) ?>
+				<?= $this->Paginator->prev('< ' . __('previous')) ?>
+				<?= $this->Paginator->numbers() ?>
+				<?= $this->Paginator->next(__('next') . ' >') ?>
+				<?= $this->Paginator->last(__('last') . ' >>') ?>
+			</ul>
+			<p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
+		</div>
+	</div>
 </div>
