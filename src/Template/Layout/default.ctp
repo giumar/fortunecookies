@@ -78,7 +78,7 @@
 								<ul class="dropdown-menu">
 									<li><?= $this->Html->link('Users', ['controller'=>'users', 'action'=>'index']); ?></li>
 									<li><?= $this->Html->link('Types', ['controller'=>'tickettypes', 'action'=>'index']); ?></li>
-									<li><a href="#">Something else here</a></li>
+									<li><?= $this->Html->link('Statuses', ['controller'=>'ticketstatuses', 'action'=>'index']); ?></li>
 									<li role="separator" class="divider"></li>
 									<li><a href="#">Separated link</a></li>
 								</ul>
