@@ -19,7 +19,7 @@ class TicketsController extends AppController
     public function index()
     {
         
-		$tickets = $this->paginate($this->Tickets->find('all', ['contain'=>'Tickettypes']));
+		$tickets = $this->paginate($this->Tickets->find('all', ['contain'=>['Tickettypes', 'Ticketstatuses']]));
 
         $this->set(compact('tickets'));
         $this->set('_serialize', ['tickets']);
@@ -86,7 +86,8 @@ class TicketsController extends AppController
             $this->Flash->error(__('The ticket could not be saved. Please, try again.'));
         }
 		$tickettypes = $this->Tickets->Tickettypes->find('list');
-        $this->set(compact('ticket','tickettypes'));
+		$ticketstatuses = $this->Tickets->Ticketstatuses->find('list');
+        $this->set(compact('ticket', 'tickettypes', 'ticketstatuses'));
         $this->set('_serialize', ['ticket']);
     }
 
