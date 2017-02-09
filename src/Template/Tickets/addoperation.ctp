@@ -3,7 +3,7 @@
   * @var \App\View\AppView $this
   */
 ?>
-<div class="row">
+<div class="col-xs-12">
     <?= $this->Form->create($newOperation) ?>
     <fieldset>
         <legend><?= __('Add Operation') ?></legend>

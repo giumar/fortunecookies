@@ -3,7 +3,7 @@
   * @var \App\View\AppView $this
   */
 ?>
-<div class="row">
+<div class="col-xs-12">
 	<nav class="large-3 medium-4 columns" id="actions-sidebar">
 		<ul class="nav nav-tabs">
 			<li><?= $this->Html->link(__('Edit Ticket'), ['action' => 'edit', $ticket->id]) ?> </li>
@@ -15,7 +15,7 @@
 		</ul>
 	</nav>
 </div>
-<div class="row">
+<div class="col-xs-12">
 	<div class="panel panel-default">
 		<div class="panel-heading">#<?= $this->Number->format($ticket->id) ?> <?= h($ticket->title) ?></div>
 		<div class="panel-body">
