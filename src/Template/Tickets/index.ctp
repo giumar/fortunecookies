@@ -22,6 +22,7 @@
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('title') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('ticketype_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('created') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
@@ -32,6 +33,7 @@
             <tr>
                 <td><?= $this->Number->format($ticket->id) ?></td>
                 <td><?= h($ticket->title) ?></td>
+                <td><?= h($ticket->tickettype['name']) ?></td>
                 <td><?= h($ticket->created) ?></td>
                 <td><?= h($ticket->modified) ?></td>
                 <td class="actions">

@@ -43,6 +43,9 @@ class TicketsTable extends Table
         $this->hasMany('Operations', [
             'foreignKey' => 'ticket_id'
         ]);
+		$this->belongsTo('Tickettypes', [
+            'foreignKey' => 'tickettype_id'
+        ]);
     }
 
     /**
