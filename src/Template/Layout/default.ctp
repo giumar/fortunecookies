@@ -1,29 +1,12 @@
 <?php
-/**
- * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
- *
- * Licensed under The MIT License
- * For full copyright and license information, please see the LICENSE.txt
- * Redistributions of files must retain the above copyright notice.
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @link          http://cakephp.org CakePHP(tm) Project
- * @since         0.10.0
- * @license       http://www.opensource.org/licenses/mit-license.php MIT License
- */
 
-$cakeDescription = 'CakePHP: the rapid development php framework';
 ?>
 <!DOCTYPE html>
 <html>
 <head>
     <?= $this->Html->charset() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        <?= $cakeDescription ?>:
-        <?= $this->fetch('title') ?>
-    </title>
+    <title><?= $this->fetch('title') ?></title>
     <?= $this->Html->meta('icon') ?>
 	<?php /*
     <?= $this->Html->css('base.css') ?>
@@ -43,11 +26,14 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+	<style type="text/css">
+		body {padding-top:60px;}
+	</style>
 </head>
 <body>
 	<div class="container">
 		<div class="row">
-			<nav class="navbar navbar-default">
+			<nav class="navbar navbar-default navbar-fixed-top">
 				<div class="container-fluid">
 					<!-- Brand and toggle get grouped for better mobile display -->
 					<div class="navbar-header">
@@ -57,7 +43,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
 						</button>
-						<?= $this->Html->link('FC Home', ['controller'=>'tickets', 'action'=>'index'],['class'=>'navbar-brand']); ?>
+						<?= $this->Html->link('FC Home', ['controller'=>'dashboard', 'action'=>'index'],['class'=>'navbar-brand']); ?>
 					</div>
 
 					<!-- Collect the nav links, forms, and other content for toggling -->
@@ -74,7 +60,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 						<ul class="nav navbar-nav navbar-right">
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-									<?php if($this->request->session()->check('Auth')) {
+									<?php if($this->request->session()->check('Auth.User')) {
 										echo $this->request->session()->read('Auth.User.email');
 									} else {
 										echo "User profile ";
@@ -91,7 +77,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Administration <i class="fa fa-cogs" aria-hidden="true"></i> <span class="caret"></span></a>
 								<ul class="dropdown-menu">
 									<li><?= $this->Html->link('Users', ['controller'=>'users', 'action'=>'index']); ?></li>
-									<li><a href="#">Another action</a></li>
+									<li><?= $this->Html->link('Types', ['controller'=>'tickettypes', 'action'=>'index']); ?></li>
 									<li><a href="#">Something else here</a></li>
 									<li role="separator" class="divider"></li>
 									<li><a href="#">Separated link</a></li>

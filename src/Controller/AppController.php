@@ -63,9 +63,9 @@ class AppController extends Controller
                 'controller' => 'Tickets',
                 'action' => 'index'
             ],
-			//'unauthorizedRedirect' => $this->referer()
+			'unauthorizedRedirect' => $this->referer()
 		]);
-		$this->Auth->allow();
+		$this->Auth->deny();
     }
 
 	public function isAuthorized($user)
@@ -75,8 +75,8 @@ class AppController extends Controller
 			return true;
 		}
 
-		// Default deny
-		return false;
+		// Default permit
+		return true;
 	}
 	
 	

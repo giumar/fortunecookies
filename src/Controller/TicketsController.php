@@ -18,7 +18,8 @@ class TicketsController extends AppController
      */
     public function index()
     {
-        $tickets = $this->paginate($this->Tickets);
+        
+		$tickets = $this->paginate($this->Tickets->find('all', ['contain'=>'Tickettypes']));
 
         $this->set(compact('tickets'));
         $this->set('_serialize', ['tickets']);
@@ -34,7 +35,7 @@ class TicketsController extends AppController
     public function view($id = null)
     {
         $ticket = $this->Tickets->get($id, [
-            'contain' => ['Operations']
+            'contain' => ['Operations', 'Tickettypes']
         ]);
 
         $this->set('ticket', $ticket);
@@ -72,7 +73,7 @@ class TicketsController extends AppController
     public function edit($id = null)
     {
         $ticket = $this->Tickets->get($id, [
-            'contain' => []
+            'contain' => ['Tickettypes']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $ticket = $this->Tickets->patchEntity($ticket, $this->request->data);
@@ -83,7 +84,8 @@ class TicketsController extends AppController
             }
             $this->Flash->error(__('The ticket could not be saved. Please, try again.'));
         }
-        $this->set(compact('ticket'));
+		$tickettypes = $this->Tickets->Tickettypes->find('list');
+        $this->set(compact('ticket','tickettypes'));
         $this->set('_serialize', ['ticket']);
     }
 
