@@ -60,7 +60,7 @@
 						<ul class="nav navbar-nav navbar-right">
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-									<?php if($this->request->session()->check('Auth')) {
+									<?php if($this->request->session()->check('Auth.User')) {
 										echo $this->request->session()->read('Auth.User.email');
 									} else {
 										echo "User profile ";
