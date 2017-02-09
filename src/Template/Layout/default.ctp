@@ -43,7 +43,7 @@
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
 						</button>
-						<?= $this->Html->link('FC Home', ['controller'=>'tickets', 'action'=>'index'],['class'=>'navbar-brand']); ?>
+						<?= $this->Html->link('FC Home', ['controller'=>'dashboard', 'action'=>'index'],['class'=>'navbar-brand']); ?>
 					</div>
 
 					<!-- Collect the nav links, forms, and other content for toggling -->
