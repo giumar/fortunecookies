@@ -25,7 +25,7 @@ return [
         'multicheckboxWrapper' => '<fieldset{{attrs}}>{{content}}</fieldset>',
         'option' => '<option value="{{value}}"{{attrs}}>{{text}}</option>',
         'optgroup' => '<optgroup label="{{label}}"{{attrs}}>{{content}}</optgroup>',
-        'select' => '<select name="{{name}}"{{attrs}}>{{content}}</select>',
+        'select' => '<select class="form-control" name="{{name}}"{{attrs}}>{{content}}</select>',
         'selectMultiple' => '<select name="{{name}}[]" multiple="multiple"{{attrs}}>{{content}}</select>',
         'radio' => '<input type="radio" name="{{name}}" value="{{value}}"{{attrs}}>',
         'radioWrapper' => '{{label}}',
