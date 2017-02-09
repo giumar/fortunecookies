@@ -31,7 +31,7 @@
 	</style>
 </head>
 <body>
-	<div class="container">
+	<div class="container-fluid">
 		<div class="row">
 			<nav class="navbar navbar-default navbar-fixed-top">
 				<div class="container-fluid">
