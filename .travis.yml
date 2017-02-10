@@ -24,7 +24,8 @@ matrix:
 
 before_script:
   - composer selfupdate
-  - composer install --prefer-dist
+  - composer install --prefer-dist --no-suggest
+  - bin\cake migrations migrate
 #  - if [[ $PHPCS = 1 ]]; then composer require cakephp/cakephp-codesniffer:~2.1; fi
 #  - if [[ $PHPCS != 1 ]]; then composer install; fi
 #  - if [[ $PHPCS != 1 ]]; then composer run-script post-install-cmd --no-interaction; fi
