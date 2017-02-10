@@ -9,9 +9,9 @@
         <li><?= $this->Html->link(__('New Ticketstatus'), ['action' => 'add']) ?></li>
     </ul>
 </nav>
-<div class="ticketstatuses index large-9 medium-8 columns content">
+<div class="col-xs-12">
     <h3><?= __('Ticketstatuses') ?></h3>
-    <table cellpadding="0" cellspacing="0">
+    <table cellpadding="0" cellspacing="0" class="table">
         <thead>
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>

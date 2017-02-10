@@ -9,7 +9,7 @@
         <li><?= $this->Html->link(__('New User'), ['action' => 'add']) ?></li>
     </ul>
 </nav>
-<div class="users index large-9 medium-8 columns content">
+<div class="col-xs-12">
     <h3><?= __('Users') ?></h3>
     <table cellpadding="0" cellspacing="0" class="table">
         <thead>

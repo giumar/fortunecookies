@@ -12,9 +12,9 @@
         <li><?= $this->Html->link(__('New Ticketstatus'), ['action' => 'add']) ?> </li>
     </ul>
 </nav>
-<div class="ticketstatuses view large-9 medium-8 columns content">
+<div class="col-xs-12">
     <h3><?= h($ticketstatus->name) ?></h3>
-    <table class="vertical-table">
+    <table class="table vertical-table">
         <tr>
             <th scope="row"><?= __('Name') ?></th>
             <td><?= h($ticketstatus->name) ?></td>

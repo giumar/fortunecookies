@@ -1,4 +1,4 @@
-<div class="users form">
+<div class="col-xs-12">
 <?= $this->Flash->render('auth') ?>
 <?= $this->Form->create(null, ['templates'=>'bs4form']) ?>
     <fieldset>

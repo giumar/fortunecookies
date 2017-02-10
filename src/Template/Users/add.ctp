@@ -9,8 +9,8 @@
         <li><?= $this->Html->link(__('List Users'), ['action' => 'index']) ?></li>
     </ul>
 </nav>
-<div class="users form large-9 medium-8 columns content">
-    <?= $this->Form->create($user) ?>
+<div class="col-xs-12">
+    <?= $this->Form->create($user, ['templates'=>'bs4form']) ?>
     <fieldset>
         <legend><?= __('Add User') ?></legend>
         <?php
@@ -18,6 +18,6 @@
             echo $this->Form->input('password');
         ?>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+    <?= $this->Form->submit(__('Submit')) ?>
     <?= $this->Form->end() ?>
 </div>

@@ -9,14 +9,14 @@
         <li><?= $this->Html->link(__('List Tickettypes'), ['action' => 'index']) ?></li>
     </ul>
 </nav>
-<div class="tickettypes form large-9 medium-8 columns content">
-    <?= $this->Form->create($tickettype) ?>
+<div class="col-xs-12">
+    <?= $this->Form->create($tickettype, ['templates'=>'bs4form']) ?>
     <fieldset>
         <legend><?= __('Add Tickettype') ?></legend>
         <?php
             echo $this->Form->input('name');
         ?>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+    <?= $this->Form->submit(__('Submit')) ?>
     <?= $this->Form->end() ?>
 </div>

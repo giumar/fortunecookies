@@ -6,12 +6,12 @@
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Tickettype'), ['action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('New type of ticket'), ['action' => 'add']) ?></li>
     </ul>
 </nav>
-<div class="tickettypes index large-9 medium-8 columns content">
-    <h3><?= __('Tickettypes') ?></h3>
-    <table cellpadding="0" cellspacing="0">
+<div class="col-xs-12">
+    <h3><?= __('Types of ticket') ?></h3>
+    <table cellpadding="0" cellspacing="0" class="table">
         <thead>
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
