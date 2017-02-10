@@ -15,6 +15,9 @@ env:
   - DB=mysql
   - DB=sqlite
 
+services:
+  - mysql
+
 matrix:
   fast_finish: true
 #
