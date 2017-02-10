@@ -32,6 +32,7 @@ matrix:
 
 before_script:
   - mysql -e 'CREATE DATABASE IF NOT EXISTS test_fc;'
+  - echo "$applocal_mysql" > ./config/app_local.php
   - composer selfupdate
   - composer install --prefer-dist --no-suggest --no-interaction
   - php bin/cake.php migrations migrate
