@@ -43,9 +43,12 @@ before_install:
   - mysql -e 'CREATE DATABASE IF NOT EXISTS test_fc;'
 
 script:
-  - vendor/bin/phpunit
+  - vendor/bin/phpunit --coverage-clover=coverage.xml
 #  - if [[ $PHPCS != 1 ]]; then phpunit; fi
 #  - if [[ $PHPCS = 1 ]]; then vendor/bin/phpcs -p --extensions=php --standard=vendor/cakephp/cakephp-codesniffer/CakePHP ./src ./tests ./config ./webroot; fi
+
+after_success:
+    - bash <(curl -s https://codecov.io/bash)
 
 cache:
   directories:
