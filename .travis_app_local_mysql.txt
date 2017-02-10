@@ -1,0 +1,36 @@
+<?php 
+return [
+	'Datasources' => [
+        'default' => [
+            'className' => 'Cake\Database\Connection',
+            'driver' => 'Cake\Database\Driver\Mysql',
+            'persistent' => false,
+            'host' => '127.0.0.1',
+            'username' => 'root',
+            'password' => '',
+            'database' => 'test_fc',
+            'encoding' => 'utf8',
+            'timezone' => 'UTC',
+            'flags' => [],
+            'cacheMetadata' => true,
+            'log' => false,
+            'quoteIdentifiers' => false,
+            'url' => env('DATABASE_URL', null),
+        ],
+        'test' => [
+            'className' => 'Cake\Database\Connection',
+            'driver' => 'Cake\Database\Driver\Mysql',
+            'persistent' => false,
+            'host' => '127.0.0.1',
+            'username' => 'root',
+            'password' => '',
+            'database' => 'test_fc',
+            'encoding' => 'utf8',
+            'timezone' => 'UTC',
+            'cacheMetadata' => true,
+            'quoteIdentifiers' => false,
+            'log' => false,
+            'url' => env('DATABASE_TEST_URL', null),
+        ],
+    ],
+];
