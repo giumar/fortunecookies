@@ -31,7 +31,6 @@ matrix:
 #      env: PHPCS=1
 
 before_script:
-  - mysql -e 'CREATE DATABASE IF NOT EXISTS test_fc;'
   - composer selfupdate
   - composer install --prefer-dist --no-suggest --no-interaction
   - cp ./.travis_app_local_mysql.txt ./config/app_local.php
@@ -41,7 +40,7 @@ before_script:
 #  - if [[ $PHPCS != 1 ]]; then composer run-script post-install-cmd --no-interaction; fi
 
 before_install:
-  
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS test_fc;'
 
 script:
   - vendor/bin/phpunit
