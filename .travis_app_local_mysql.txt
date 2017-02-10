@@ -8,7 +8,7 @@ return [
             'host' => '127.0.0.1',
             'username' => 'root',
             'password' => '',
-            'database' => 'fc',
+            'database' => 'test_fc',
             'encoding' => 'utf8',
             'timezone' => 'UTC',
             'flags' => [],
