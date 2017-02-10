@@ -34,7 +34,7 @@ before_script:
   - mysql -e 'CREATE DATABASE IF NOT EXISTS test_fc;'
   - composer selfupdate
   - composer install --prefer-dist --no-suggest --no-interaction
-  - cp ./.travis_app_local_mysql.txt > ./config/app_local.php
+  - cp ./.travis_app_local_mysql.txt ./config/app_local.php
   - php bin/cake.php migrations migrate
 #  - if [[ $PHPCS = 1 ]]; then composer require cakephp/cakephp-codesniffer:~2.1; fi
 #  - if [[ $PHPCS != 1 ]]; then composer install; fi
