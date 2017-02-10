@@ -30,6 +30,9 @@ before_script:
 #  - if [[ $PHPCS != 1 ]]; then composer install; fi
 #  - if [[ $PHPCS != 1 ]]; then composer run-script post-install-cmd --no-interaction; fi
 
+before_install:
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS test_fc;'
+
 script:
   - vendor/bin/phpunit
 #  - if [[ $PHPCS != 1 ]]; then phpunit; fi
