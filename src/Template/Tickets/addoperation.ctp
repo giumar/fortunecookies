@@ -4,7 +4,7 @@
   */
 ?>
 <div class="col-xs-12">
-    <?= $this->Form->create($newOperation) ?>
+    <?= $this->Form->create($newOperation, ['templates'=>'bs4form']) ?>
     <fieldset>
         <legend><?= __('Add Operation') ?></legend>
         <?php
@@ -13,6 +13,6 @@
             echo $this->Form->input('end');
         ?>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+    <?= $this->Form->submit(__('Submit')) ?>
     <?= $this->Form->end() ?>
 </div>

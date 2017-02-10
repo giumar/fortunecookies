@@ -60,7 +60,8 @@ class TicketsController extends AppController
             $this->Flash->error(__('The ticket could not be saved. Please, try again.'));
         }
 		$types = $this->Tickets->Tickettypes->find('list');
-        $this->set(compact('ticket', 'types'));
+		$statuses = $this->Tickets->Ticketstatuses->find('list');
+        $this->set(compact('ticket', 'types', 'statuses'));
         $this->set('_serialize', ['ticket']);
     }
 
