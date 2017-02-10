@@ -18,6 +18,11 @@ env:
 services:
   - mysql
 
+mysql:
+  database: test_fc
+  username: root
+  encoding: utf8  
+  
 matrix:
   fast_finish: true
 #
@@ -26,15 +31,16 @@ matrix:
 #      env: PHPCS=1
 
 before_script:
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS test_fc;'
   - composer selfupdate
-  - composer install --prefer-dist --no-suggest
+  - composer install --prefer-dist --no-suggest --no-interaction
   - php bin/cake.php migrations migrate
 #  - if [[ $PHPCS = 1 ]]; then composer require cakephp/cakephp-codesniffer:~2.1; fi
 #  - if [[ $PHPCS != 1 ]]; then composer install; fi
 #  - if [[ $PHPCS != 1 ]]; then composer run-script post-install-cmd --no-interaction; fi
 
 before_install:
-  - mysql -e 'CREATE DATABASE IF NOT EXISTS test_fc;'
+  
 
 script:
   - vendor/bin/phpunit
