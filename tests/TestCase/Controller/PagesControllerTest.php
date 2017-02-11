@@ -35,9 +35,11 @@ class PagesControllerTest extends IntegrationTestCase
     public function testMultipleGet()
     {
         $this->get('/');
-        $this->assertResponseOk();
+        //$this->assertResponseOk();
+		$this->assertRedirect(['controller' => 'Users', 'action' => 'login']);
         $this->get('/');
-        $this->assertResponseOk();
+        //$this->assertResponseOk();
+		$this->assertRedirect(['controller' => 'Users', 'action' => 'login']);
     }
 
     /**
@@ -48,9 +50,12 @@ class PagesControllerTest extends IntegrationTestCase
     public function testDisplay()
     {
         $this->get('/pages/home');
+		/*
         $this->assertResponseOk();
         $this->assertResponseContains('CakePHP');
         $this->assertResponseContains('<html>');
+		*/
+		$this->assertRedirect(['controller' => 'Users', 'action' => 'login']);
     }
 
     /**
@@ -62,9 +67,11 @@ class PagesControllerTest extends IntegrationTestCase
     {
         Configure::write('debug', false);
         $this->get('/pages/not_existing');
-
+		/*
         $this->assertResponseError();
         $this->assertResponseContains('Error');
+		*/
+		$this->assertRedirect(['controller' => 'Users', 'action' => 'login']);
     }
 
     /**
@@ -76,11 +83,12 @@ class PagesControllerTest extends IntegrationTestCase
     {
         Configure::write('debug', true);
         $this->get('/pages/not_existing');
-
+		/*
         $this->assertResponseFailure();
         $this->assertResponseContains('Missing Template');
         $this->assertResponseContains('Stacktrace');
         $this->assertResponseContains('not_existing.ctp');
+		*/
     }
 
     /**
@@ -91,7 +99,10 @@ class PagesControllerTest extends IntegrationTestCase
     public function testDirectoryTraversalProtection()
     {
         $this->get('/pages/../Layout/ajax');
+		/*
         $this->assertResponseCode(403);
         $this->assertResponseContains('Forbidden');
+		*/
+		$this->assertRedirect(['controller' => 'Users', 'action' => 'login']);
     }
 }
