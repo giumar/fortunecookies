@@ -27,51 +27,110 @@ use Cake\View\Exception\MissingTemplateException;
  */
 class PagesControllerTest extends IntegrationTestCase
 {
-    /**
+    public function testDisplayEmptyUnauthenticated()
+    {
+        $this->get('/pages/');
+		$this->assertRedirect(['controller' => 'Users', 'action' => 'login']);
+    }
+	public function testDisplayEmptyAuthenticated()
+    {
+        $this->session([
+			'Auth' => [
+				'User' => [
+					'id' => 1,
+					'username' => 'admin',
+				]
+			]
+		]);
+		
+		$this->get('/pages/');
+		$this->assertRedirect(['controller' => 'Dashboard', 'action' => 'index']);
+    }
+	
+	
+	/**
      * testMultipleGet method
      *
      * @return void
      */
-    public function testMultipleGet()
+    public function testMultipleGetUnauthenticated()
     {
-        $this->get('/');
-        //$this->assertResponseOk();
+        $this->get('/pages/home.ctp');
 		$this->assertRedirect(['controller' => 'Users', 'action' => 'login']);
-        $this->get('/');
-        //$this->assertResponseOk();
+        $this->get('/pages/home.ctp');
 		$this->assertRedirect(['controller' => 'Users', 'action' => 'login']);
     }
 
+	public function testMultipleGetAuthenticated()
+	{
+		$this->session([
+			'Auth' => [
+				'User' => [
+					'id' => 1,
+					'username' => 'admin',
+				]
+			]
+		]);
+		$this->get('/pages/home');
+        $this->assertResponseOk();
+		$this->get('/pages/home');
+        $this->assertResponseOk();
+	}
+	
     /**
      * testDisplay method
      *
      * @return void
      */
-    public function testDisplay()
+    public function testDisplayUnauthenticated()
     {
         $this->get('/pages/home');
-		/*
-        $this->assertResponseOk();
-        $this->assertResponseContains('CakePHP');
-        $this->assertResponseContains('<html>');
-		*/
 		$this->assertRedirect(['controller' => 'Users', 'action' => 'login']);
     }
 
+	public function testDisplayAuthenticated()
+    {
+        $this->session([
+			'Auth' => [
+				'User' => [
+					'id' => 1,
+					'username' => 'admin',
+				]
+			]
+		]);
+		$this->get('/pages/home');
+        $this->assertResponseOk();
+        $this->assertResponseContains('CakePHP');
+        $this->assertResponseContains('<html>');
+    }
+	
+	public function testMissingTemplateUnauthenticated()
+    {
+		Configure::write('debug', false);
+        $this->get('/pages/not_existing');
+		$this->assertRedirect(['controller' => 'Users', 'action' => 'login']);
+    }
+	
     /**
      * Test that missing template renders 404 page in production
      *
      * @return void
      */
-    public function testMissingTemplate()
+    public function testMissingTemplateAuthenticated()
     {
-        Configure::write('debug', false);
+        $this->session([
+			'Auth' => [
+				'User' => [
+					'id' => 1,
+					'username' => 'admin',
+				]
+			]
+		]);
+		
+		Configure::write('debug', false);
         $this->get('/pages/not_existing');
-		/*
         $this->assertResponseError();
         $this->assertResponseContains('Error');
-		*/
-		$this->assertRedirect(['controller' => 'Users', 'action' => 'login']);
     }
 
     /**
@@ -79,16 +138,30 @@ class PagesControllerTest extends IntegrationTestCase
      *
      * @return void
      */
-    public function testMissingTemplateInDebug()
+    public function testMissingTemplateInDebugAuthenticated()
     {
-        Configure::write('debug', true);
+        $this->session([
+			'Auth' => [
+				'User' => [
+					'id' => 1,
+					'username' => 'admin',
+				]
+			]
+		]);
+		
+		Configure::write('debug', true);
         $this->get('/pages/not_existing');
-		/*
         $this->assertResponseFailure();
         $this->assertResponseContains('Missing Template');
         $this->assertResponseContains('Stacktrace');
         $this->assertResponseContains('not_existing.ctp');
-		*/
+    }
+	
+	public function testMissingTemplateInDebugUnauthenticated()
+    {
+        Configure::write('debug', true);
+        $this->get('/pages/not_existing');
+		$this->assertRedirect(['controller' => 'Users', 'action' => 'login']);
     }
 
     /**
@@ -96,13 +169,25 @@ class PagesControllerTest extends IntegrationTestCase
      *
      * @return void
      */
-    public function testDirectoryTraversalProtection()
+    public function testDirectoryTraversalProtectionUnauthenticated()
     {
         $this->get('/pages/../Layout/ajax');
-		/*
-        $this->assertResponseCode(403);
-        $this->assertResponseContains('Forbidden');
-		*/
 		$this->assertRedirect(['controller' => 'Users', 'action' => 'login']);
+    }
+	
+	public function testDirectoryTraversalProtectionAuthenticated()
+    {
+        $this->session([
+			'Auth' => [
+				'User' => [
+					'id' => 1,
+					'username' => 'admin',
+				]
+			]
+		]);
+		
+		$this->get('/pages/../Layout/ajax');
+        $this->assertResponseCode(403);
+        $this->assertResponseContains('Forbidden');		
     }
 }
