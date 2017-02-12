@@ -43,4 +43,24 @@ class ApplicationTest extends IntegrationTestCase
         $this->assertInstanceOf(AssetMiddleware::class, $middleware->get(1));
         $this->assertInstanceOf(RoutingMiddleware::class, $middleware->get(2));
     }
+	
+	public function testJSONResponse()
+	{
+		$this->session([
+			'Auth' => [
+				'User' => [
+					'id' => 1,
+					'username' => 'admin',
+				]
+			]
+		]);
+		$this->configRequest([
+            'headers' => ['Accept' => 'application/json']
+        ]);
+		$result = $this->get('/pages/home.json');
+
+        // Check that the response was a 200
+        $this->assertResponseOk();
+	}
+	
 }
