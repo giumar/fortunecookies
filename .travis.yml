@@ -30,6 +30,11 @@ matrix:
 #    - php: 7.0
 #      env: PHPCS=1
 
+addons:
+    code_climate:
+        repo_token: 0b3e8b1e905bbea0d9d991090bf84a74404b256065bac4216a89890741416b31
+
+
 before_script:
   - composer selfupdate
   - composer install --prefer-dist --no-suggest --no-interaction
