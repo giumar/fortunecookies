@@ -33,7 +33,8 @@
             <tr>
                 <th scope="col"><?= __('Start') ?></th>
                 <th scope="col"><?= __('End') ?></th>
-                <th scope="col"><?= __('Created') ?></th>
+                <th scope="col"><?= __('Description') ?></th>
+				<th scope="col"><?= __('Created') ?></th>
                 <th scope="col"><?= __('Modified') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
@@ -41,6 +42,7 @@
             <tr>
                 <td><?= h($operations->start) ?></td>
                 <td><?= h($operations->end) ?></td>
+                <td><?= h($operations->description) ?></td>
                 <td><?= h($operations->created) ?></td>
                 <td><?= h($operations->modified) ?></td>
                 <td class="actions">

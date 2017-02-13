@@ -32,6 +32,10 @@
         <tr>
             <th scope="row"><?= __('End') ?></th>
             <td><?= h($operation->end) ?></td>
+        </tr>        
+		<tr>
+            <th scope="row"><?= __('Description') ?></th>
+            <td><?= h($operation->description) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Created') ?></th>
