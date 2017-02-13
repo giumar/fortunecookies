@@ -60,8 +60,8 @@ class AppController extends Controller
                 'action' => 'login'
             ],
 			'logoutAction' => [
-                'controller' => 'Tickets',
-                'action' => 'index'
+                'controller' => 'Users',
+                'action' => 'login'
             ],
 			'unauthorizedRedirect' => $this->referer()
 		]);
