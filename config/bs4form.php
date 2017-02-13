@@ -29,6 +29,6 @@ return [
         'selectMultiple' => '<select name="{{name}}[]" multiple="multiple"{{attrs}}>{{content}}</select>',
         'radio' => '<input type="radio" name="{{name}}" value="{{value}}"{{attrs}}>',
         'radioWrapper' => '{{label}}',
-        'textarea' => '<textarea name="{{name}}"{{attrs}}>{{value}}</textarea>',
+        'textarea' => '<textarea class="form-control" name="{{name}}"{{attrs}}>{{value}}</textarea>',
         'submitContainer' => '<div class="submit">{{content}}</div>',
 ];

@@ -23,6 +23,7 @@
 			<div class="col-xs-12 col-md-3">ID: <?= $this->Number->format($ticket->id) ?></div>
 			<div class="col-xs-12 col-md-3">Created: <?= h($ticket->created) ?></div>
 			<div class="col-xs-12 col-md-3">Modified: <?= h($ticket->modified) ?></div>
+			<div class="col-xs-12 col-md-12">Description: <?= h($ticket->description) ?></div>
 		</div>
 	</div>
     <div class="related">

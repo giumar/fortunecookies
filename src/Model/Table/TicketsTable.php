@@ -67,6 +67,9 @@ class TicketsTable extends Table
             ->requirePresence('title', 'create')
             ->notEmpty('title');
 
+        $validator
+            ->allowEmpty('title', 'create');			
+			
         return $validator;
     }
 }
