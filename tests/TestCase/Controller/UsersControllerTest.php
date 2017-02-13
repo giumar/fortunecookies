@@ -19,6 +19,35 @@ class UsersControllerTest extends IntegrationTestCase
         'app.users'
     ];
 
+	public function setUp()
+    {
+        parent::setUp();
+
+		$this->session([
+			'Auth' => [
+				'User' => [
+					'id' => 1,
+					'username' => 'admin',
+				]
+			]
+		]);
+		
+    }
+
+    /**
+     * tearDown method
+     *
+     * @return void
+     */
+    public function tearDown()
+    {
+		unset($this->session);	
+	
+        parent::tearDown();
+    }
+	
+	
+	
     /**
      * Test index method
      *
@@ -26,7 +55,8 @@ class UsersControllerTest extends IntegrationTestCase
      */
     public function testIndex()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->get('/users');
+		$this->assertResponseOk();
     }
 
     /**
@@ -36,7 +66,10 @@ class UsersControllerTest extends IntegrationTestCase
      */
     public function testView()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->get('/users/view/1');
+		$this->assertResponseOk();
+		$this->assertResponseContains('<title>Users</title>');
+		$this->assertResponseContains('info@example.com');
     }
 
     /**
@@ -67,5 +100,16 @@ class UsersControllerTest extends IntegrationTestCase
     public function testDelete()
     {
         $this->markTestIncomplete('Not implemented yet.');
+    }
+	
+	/**
+     * Test delete method
+     *
+     * @return void
+     */
+    public function testLogout()
+    {
+        $this->get('/users/logout');
+		$this->assertRedirect(['controller' => 'Users', 'action' => 'login']);
     }
 }
