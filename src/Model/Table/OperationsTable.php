@@ -68,6 +68,9 @@ class OperationsTable extends Table
             ->requirePresence('end', 'create')
             ->notEmpty('end');
 
+        $validator
+            ->allowEmpty('description', 'create');
+			
         return $validator;
     }
 

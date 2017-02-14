@@ -19,6 +19,7 @@
             echo $this->Form->input('ticket_id', ['options' => $tickets]);
             echo $this->Form->input('start');
             echo $this->Form->input('end');
+            echo $this->Form->input('description');
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
