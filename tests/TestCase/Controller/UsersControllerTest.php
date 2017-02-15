@@ -89,7 +89,20 @@ class UsersControllerTest extends IntegrationTestCase
      */
     public function testEdit()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->get('/users/edit/1');
+		$this->assertResponseOk();
+		$this->assertResponseContains('<title>Users</title>');
+		$this->assertResponseContains('info@example.com');
+		
+		$data = [
+            'email' => 'info-test@example.com',
+            'password' => 'new-password'
+        ];
+        $this->post('/users/edit/1', $data);
+
+        $this->assertResponseSuccess();
+
+		
     }
 
     /**
@@ -99,7 +112,8 @@ class UsersControllerTest extends IntegrationTestCase
      */
     public function testDelete()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+		$this->delete('/users/delete/1');
+		$this->assertResponseOk();
     }
 	
 	/**
