@@ -20,6 +20,33 @@ class OperationsControllerTest extends IntegrationTestCase
         'app.tickets'
     ];
 
+	public function setUp()
+    {
+        parent::setUp();
+
+		$this->session([
+			'Auth' => [
+				'User' => [
+					'id' => 1,
+					'username' => 'admin',
+				]
+			]
+		]);
+		
+    }
+
+    /**
+     * tearDown method
+     *
+     * @return void
+     */
+    public function tearDown()
+    {
+		unset($this->session);	
+	
+        parent::tearDown();
+    }
+	
     /**
      * Test index method
      *
@@ -27,7 +54,8 @@ class OperationsControllerTest extends IntegrationTestCase
      */
     public function testIndex()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->get('/operations');
+		$this->assertResponseOk();
     }
 
     /**
@@ -37,7 +65,10 @@ class OperationsControllerTest extends IntegrationTestCase
      */
     public function testView()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->get('/operations/view/1');
+		$this->assertResponseOk();
+		$this->assertResponseContains('<title>Operations</title>');
+		$this->assertResponseContains('2/7/17, 4:19 AM');
     }
 
     /**
@@ -47,7 +78,19 @@ class OperationsControllerTest extends IntegrationTestCase
      */
     public function testAdd()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->enableCsrfToken();
+		$this->enableSecurityToken();
+
+		
+		$data = [
+			'ticket_id'=> 1,
+            'start' => '2017-02-07 00:00:01',
+            'end' => '2017-02-07 01:59:59'
+        ];
+		
+		$this->post('/operations/add', $data);
+
+        $this->assertResponseSuccess();
     }
 
     /**
@@ -57,7 +100,19 @@ class OperationsControllerTest extends IntegrationTestCase
      */
     public function testEdit()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->enableCsrfToken();
+		$this->enableSecurityToken();
+		
+		$this->get('/operations/edit/1');
+		$this->assertResponseOk();
+		
+		$data = [
+            'start' => '2017-02-07 00:00:01',
+            'end' => '2017-02-07 01:59:59'
+        ];
+        $this->post('/operations/edit/1', $data);
+
+        $this->assertResponseSuccess();
     }
 
     /**
@@ -68,5 +123,11 @@ class OperationsControllerTest extends IntegrationTestCase
     public function testDelete()
     {
         $this->markTestIncomplete('Not implemented yet.');
+		/*
+		$this->enableCsrfToken();
+		$this->enableSecurityToken();
+		
+		$this->delete('/operations/delete/1');
+		$this->assertResponseOk();*/
     }
 }
