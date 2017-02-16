@@ -3,6 +3,7 @@ namespace App\Test\TestCase\Controller;
 
 use App\Controller\OperationsController;
 use Cake\TestSuite\IntegrationTestCase;
+use Cake\I18n\Time;
 
 /**
  * App\Controller\OperationsController Test Case
@@ -68,7 +69,8 @@ class OperationsControllerTest extends IntegrationTestCase
         $this->get('/operations/view/1');
 		$this->assertResponseOk();
 		$this->assertResponseContains('<title>Operations</title>');
-		$this->assertResponseContains('2/7/17, 4:19 AM');
+		$time = new Time('2017-02-07 04:19:45');
+		$this->assertResponseContains(h($time));
     }
 
     /**
