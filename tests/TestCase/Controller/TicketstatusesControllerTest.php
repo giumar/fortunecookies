@@ -19,6 +19,33 @@ class TicketstatusesControllerTest extends IntegrationTestCase
         'app.ticketstatuses'
     ];
 
+	public function setUp()
+    {
+        parent::setUp();
+
+		$this->session([
+			'Auth' => [
+				'User' => [
+					'id' => 1,
+					'username' => 'admin',
+				]
+			]
+		]);
+		
+    }
+
+    /**
+     * tearDown method
+     *
+     * @return void
+     */
+    public function tearDown()
+    {
+		unset($this->session);	
+	
+        parent::tearDown();
+    }	
+	
     /**
      * Test index method
      *
@@ -26,7 +53,8 @@ class TicketstatusesControllerTest extends IntegrationTestCase
      */
     public function testIndex()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+		$this->get('/ticketstatuses');
+		$this->assertResponseOk();
     }
 
     /**
@@ -36,7 +64,10 @@ class TicketstatusesControllerTest extends IntegrationTestCase
      */
     public function testView()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->get('/ticketstatuses/view/1');
+		$this->assertResponseOk();
+		$this->assertResponseContains('<title>Ticketstatuses</title>');
+		$this->assertResponseContains('Lorem ipsum dolor sit amet');
     }
 
     /**
@@ -46,7 +77,17 @@ class TicketstatusesControllerTest extends IntegrationTestCase
      */
     public function testAdd()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+		
+		$this->enableCsrfToken();
+		$this->enableSecurityToken();
+
+		$data = [
+            'name' => 'New Ticket Status'
+        ];
+		
+		$this->post('/ticketstatuses/add', $data);
+
+        $this->assertResponseSuccess();
     }
 
     /**
@@ -56,7 +97,20 @@ class TicketstatusesControllerTest extends IntegrationTestCase
      */
     public function testEdit()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->enableCsrfToken();
+		$this->enableSecurityToken();
+		
+		$this->get('/ticketstatuses/edit/1');
+		$this->assertResponseOk();
+		$this->assertResponseContains('<title>Ticketstatuses</title>');
+		$this->assertResponseContains('Lorem ipsum dolor sit amet');
+		
+		$data = [
+            'name' => 'Again Lorem ipsum dolor sit amet'
+        ];
+        $this->post('/ticketstatuses/edit/1', $data);
+
+        $this->assertResponseSuccess();
     }
 
     /**
@@ -67,5 +121,11 @@ class TicketstatusesControllerTest extends IntegrationTestCase
     public function testDelete()
     {
         $this->markTestIncomplete('Not implemented yet.');
+		/*
+		$this->enableCsrfToken();
+		$this->enableSecurityToken();
+		
+		$this->delete('/ticketstatuses/delete/1');
+		$this->assertResponseOk();*/
     }
 }

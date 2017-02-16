@@ -19,6 +19,33 @@ class TickettypesControllerTest extends IntegrationTestCase
         'app.tickettypes'
     ];
 
+	public function setUp()
+    {
+        parent::setUp();
+
+		$this->session([
+			'Auth' => [
+				'User' => [
+					'id' => 1,
+					'username' => 'admin',
+				]
+			]
+		]);
+		
+    }
+
+    /**
+     * tearDown method
+     *
+     * @return void
+     */
+    public function tearDown()
+    {
+		unset($this->session);	
+	
+        parent::tearDown();
+    }	
+	
     /**
      * Test index method
      *
@@ -26,7 +53,8 @@ class TickettypesControllerTest extends IntegrationTestCase
      */
     public function testIndex()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->get('/tickettypes');
+		$this->assertResponseOk();
     }
 
     /**
@@ -36,7 +64,10 @@ class TickettypesControllerTest extends IntegrationTestCase
      */
     public function testView()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->get('/tickettypes/view/1');
+		$this->assertResponseOk();
+		$this->assertResponseContains('<title>Tickettypes</title>');
+		$this->assertResponseContains('Lorem ipsum dolor sit amet');
     }
 
     /**
@@ -46,7 +77,16 @@ class TickettypesControllerTest extends IntegrationTestCase
      */
     public function testAdd()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $this->enableCsrfToken();
+		$this->enableSecurityToken();
+
+		$data = [
+            'name' => 'New Ticketype'
+        ];
+		
+		$this->post('/tickettypes/add', $data);
+
+        $this->assertResponseSuccess();
     }
 
     /**
@@ -56,7 +96,21 @@ class TickettypesControllerTest extends IntegrationTestCase
      */
     public function testEdit()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+		
+		$this->enableCsrfToken();
+		$this->enableSecurityToken();
+		
+		$this->get('/tickettypes/edit/1');
+		$this->assertResponseOk();
+		$this->assertResponseContains('<title>Tickettypes</title>');
+		$this->assertResponseContains('Lorem ipsum dolor sit amet');
+		
+		$data = [
+            'name' => 'Again Lorem ipsum dolor sit amet'
+        ];
+        $this->post('/tickettypes/edit/1', $data);
+
+        $this->assertResponseSuccess();
     }
 
     /**
@@ -67,5 +121,11 @@ class TickettypesControllerTest extends IntegrationTestCase
     public function testDelete()
     {
         $this->markTestIncomplete('Not implemented yet.');
+		/*
+		$this->enableCsrfToken();
+		$this->enableSecurityToken();
+		
+		$this->delete('/tickettypes/delete/1');
+		$this->assertResponseOk();*/
     }
 }
