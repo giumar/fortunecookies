@@ -124,12 +124,11 @@ class OperationsControllerTest extends IntegrationTestCase
      */
     public function testDelete()
     {
-        $this->markTestIncomplete('Not implemented yet.');
-		/*
+
 		$this->enableCsrfToken();
 		$this->enableSecurityToken();
 		
 		$this->delete('/operations/delete/1');
-		$this->assertResponseOk();*/
+		$this->assertRedirect();
     }
 }

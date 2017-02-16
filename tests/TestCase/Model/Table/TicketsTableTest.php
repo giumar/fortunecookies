@@ -59,9 +59,8 @@ class TicketsTableTest extends TestCase
      */
     public function testInitialize()
     {
-        //$this->markTestIncomplete('Not implemented yet.');
-		$query = $this->Tickets->find();
-		$this->assertInstanceOf('Cake\ORM\Query', $query);
+        $ris = $this->Tickets->find('all')->toArray();
+		$this->assertGreaterThan(0, count($ris));
     }
 
     /**

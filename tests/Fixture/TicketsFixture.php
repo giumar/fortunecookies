@@ -19,6 +19,8 @@ class TicketsFixture extends TestFixture
     public $fields = [
         'id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'autoIncrement' => true, 'precision' => null],
         'title' => ['type' => 'string', 'length' => 255, 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
+        'tickettype_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
+        'ticketstatus_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
         'created' => ['type' => 'datetime', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
         'modified' => ['type' => 'datetime', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
         '_constraints' => [
@@ -39,7 +41,9 @@ class TicketsFixture extends TestFixture
     public $records = [
         [
             'id' => 1,
-            'title' => 'Lorem ipsum dolor sit amet',
+            'title' => 'Lorem ipsum dolor sit amet',			
+			'tickettype_id' => 1,
+			'ticketstatus_id' => 1,
             'created' => '2017-02-07 04:19:52',
             'modified' => '2017-02-07 04:19:52'
         ],

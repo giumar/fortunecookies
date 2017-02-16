@@ -58,7 +58,8 @@ class TicketstatusesTableTest extends TestCase
      */
     public function testInitialize()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $ris = $this->Ticketstatuses->find('all')->toArray();
+		$this->assertGreaterThan(0, count($ris));
     }
 
     /**

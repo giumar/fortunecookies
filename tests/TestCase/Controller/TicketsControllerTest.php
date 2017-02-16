@@ -16,10 +16,10 @@ class TicketsControllerTest extends IntegrationTestCase
      * @var array
      */
     public $fixtures = [
-        'app.tickets',
-        'app.operations',
-        'app.ticketstatuses',
+		'app.ticketstatuses',
         'app.tickettypes',
+        'app.tickets',
+        'app.operations',        
     ];
 
 	public function setUp()
@@ -56,10 +56,8 @@ class TicketsControllerTest extends IntegrationTestCase
      */
     public function testIndex()
     {
-        $this->markTestIncomplete('Not implemented yet.');
-		/*
-		$this->get('/tickets/index');
-		$this->assertResponseOk();*/
+        $this->get('/tickets/index');
+		$this->assertResponseOk();
     }
 
     /**
@@ -69,12 +67,10 @@ class TicketsControllerTest extends IntegrationTestCase
      */
     public function testView()
     {
-        $this->markTestIncomplete('Not implemented yet.');
-		/*
-		$this->get('/tickets/view/1');
+        $this->get('/tickets/view/1');
 		$this->assertResponseOk();
 		$this->assertResponseContains('<title>Tickets</title>');
-		$this->assertResponseContains('Lorem ipsum dolor sit amet');*/
+		$this->assertResponseContains('Lorem ipsum dolor sit amet');
     }
 
     /**
@@ -84,8 +80,6 @@ class TicketsControllerTest extends IntegrationTestCase
      */
     public function testAdd()
     {
-        $this->markTestIncomplete('Not implemented yet.');
-		/*
 		$this->enableCsrfToken();
 		$this->enableSecurityToken();
 
@@ -93,12 +87,14 @@ class TicketsControllerTest extends IntegrationTestCase
 		$this->assertResponseOk();
 		
 		$data = [
-            'title' => 'New ticket'
+            'title' => 'New ticket',
+			'ticketstatus_id'=>1,
+			'tickettype_id'=>1,
         ];
 		
 		$this->post('/tickets/add', $data);
 
-        $this->assertResponseSuccess();*/
+        $this->assertResponseSuccess();
     }
 
     /**
@@ -108,8 +104,6 @@ class TicketsControllerTest extends IntegrationTestCase
      */
     public function testEdit()
     {
-        $this->markTestIncomplete('Not implemented yet.');
-		/*
 		$this->enableCsrfToken();
 		$this->enableSecurityToken();
 		
@@ -124,7 +118,6 @@ class TicketsControllerTest extends IntegrationTestCase
         $this->post('/tickets/edit/1', $data);
 
         $this->assertResponseSuccess();
-		*/
     }
 
     /**
@@ -134,12 +127,12 @@ class TicketsControllerTest extends IntegrationTestCase
      */
     public function testDelete()
     {
-        $this->markTestIncomplete('Not implemented yet.');
-		/*
+        //$this->markTestIncomplete('Not implemented yet.');
+
 		$this->enableCsrfToken();
 		$this->enableSecurityToken();
 		
 		$this->delete('/tickets/delete/1');
-		$this->assertResponseOk();*/
+		$this->assertRedirect();
     }
 }

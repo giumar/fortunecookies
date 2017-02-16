@@ -58,7 +58,8 @@ class UsersTableTest extends TestCase
      */
     public function testInitialize()
     {
-        $this->markTestIncomplete('Not implemented yet.');
+        $ris = $this->Users->find('all')->toArray();
+		$this->assertGreaterThan(0, count($ris));
     }
 
     /**

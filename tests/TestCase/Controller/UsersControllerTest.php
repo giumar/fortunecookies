@@ -125,14 +125,11 @@ class UsersControllerTest extends IntegrationTestCase
      */
     public function testDelete()
     {
-		$this->markTestIncomplete('Not implemented yet.');
-		/*
 		$this->enableCsrfToken();
 		$this->enableSecurityToken();
 		
 		$this->delete('/users/delete/1');
-		$this->assertResponseOk();
-		*/
+		$this->assertRedirect();
     }
 	
 	/**

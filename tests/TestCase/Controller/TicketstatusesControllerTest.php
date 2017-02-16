@@ -121,11 +121,11 @@ class TicketstatusesControllerTest extends IntegrationTestCase
     public function testDelete()
     {
         $this->markTestIncomplete('Not implemented yet.');
-		/*
+
 		$this->enableCsrfToken();
 		$this->enableSecurityToken();
 		
 		$this->delete('/ticketstatuses/delete/1');
-		$this->assertResponseOk();*/
+		$this->assertRedirect();
     }
 }
