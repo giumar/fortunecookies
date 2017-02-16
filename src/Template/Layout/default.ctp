@@ -29,6 +29,7 @@
 </head>
 <body>
 	<div class="container-fluid">
+		<?php if($this->request->session()->check('Auth.User')) { ?>
 		<div class="row">
 			<nav class="navbar navbar-default navbar-fixed-top">
 				<div class="container-fluid">
@@ -86,6 +87,7 @@
 				</div><!-- /.container-fluid -->
 			</nav>
 		</div>
+		<?php } ?>
 		<div class="page-header">
 			<h1><?= $this->fetch('title') ?></h1>
 		</div>
@@ -97,10 +99,12 @@
 		<div class="row">
 			<?= $this->fetch('content') ?>
 		</div>
+		<?php if($this->request->session()->check('Auth.User')) { ?>
 		<div class="row">
 			<footer>
 			</footer>
 		</div>
+		<?php } ?>
 	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
