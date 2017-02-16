@@ -67,6 +67,7 @@ use Cake\Utility\Inflector;
 use Cake\Utility\Security;
 use Cake\Filesystem\Folder;
 use Cake\Filesystem\File;
+use Cake\Routing\DispatcherFactory;
 
 /*
  * Read configuration file and inject configuration into various
@@ -200,6 +201,9 @@ Type::build('datetime')
 Type::build('timestamp')
     ->useImmutable();
 
+DispatcherFactory::add('LocaleSelector');	
+	
+	
 /*
  * Custom Inflector rules, can be set to correctly pluralize or singularize
  * table, model, controller names or whatever other string is passed to the
