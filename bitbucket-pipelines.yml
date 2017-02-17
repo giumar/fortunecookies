@@ -10,6 +10,6 @@ pipelines:
     - step:
         script: # Modify the commands below to build your repository.
           - apt-get update
-          - apt-get -y install sudo zip unzip php php-xdebug php-intl php-mbstring php-pdo* php-mysql php-sqlite composer phpunit
+          - apt-get -y install sudo zip unzip php php-xdebug php-intl php-mbstring php-pdo* php-mysql php-sqlite3 composer phpunit
           - composer install --prefer-dist --no-interaction --no-progress -a
           - php bin/cake.php migrations migrate
