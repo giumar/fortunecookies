@@ -11,5 +11,5 @@ pipelines:
         script: # Modify the commands below to build your repository.
           - apt-get update
           - apt-get -y install php php-xdebug php-intl composer phpunit
-          - composer selfupdate
-          - composer install --prefer-dist --no-interaction --no-progress --no-suggest -o -vv
+          - composer.phar selfupdate
+          - composer.phar install --prefer-dist --no-interaction --no-progress --no-suggest -o -vv
