@@ -9,5 +9,6 @@ pipelines:
   default:
     - step:
         script: # Modify the commands below to build your repository.
+          - uname -a
           - composer selfupdate
           - composer install --prefer-dist --no-interaction --no-progress --no-suggest -o -vv
