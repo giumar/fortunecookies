@@ -3,12 +3,13 @@
 # Only use spaces to indent your .yml configuration.
 # -----
 # You can specify a custom docker image from Docker Hub as your build environment.
-#image: giumar/cakephp
+image: ubuntu/latest
 
 pipelines:
   default:
     - step:
         script: # Modify the commands below to build your repository.
-          - uname -a
+          - apt-get update
+          - apt-get -y upgrade
           - composer selfupdate
           - composer install --prefer-dist --no-interaction --no-progress --no-suggest -o -vv
