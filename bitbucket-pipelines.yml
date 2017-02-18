@@ -23,3 +23,4 @@ pipelines:
           - sudo mysql -u root -proot -e "GRANT ALL ON test_myapp.* TO 'my_app'@'localhost';"
           - composer install --prefer-dist --no-interaction --no-progress -a
           - php bin/cake.php migrations migrate
+          - vendor/bin/phpunit
