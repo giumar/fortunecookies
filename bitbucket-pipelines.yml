@@ -11,7 +11,8 @@ pipelines:
         script: # Modify the commands below to build your repository.
           - export DEBIAN_FRONTEND=noninteractive
           - apt-get update
-          - apt-get -y install sudo zip unzip php php-xdebug php-intl php-mbstring php-pdo* php-mysql php-sqlite3 composer phpunit
+          - apt-get -y install sudo zip unzip curl
+          - apt-get -y install php php-curl php-xdebug php-intl php-mbstring php-pdo* php-mysql php-sqlite3 composer phpunit
           - sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password password root'
           - sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password root'
           - apt-get -y install mysql-server mysql-client
