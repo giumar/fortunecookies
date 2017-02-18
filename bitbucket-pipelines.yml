@@ -28,4 +28,4 @@ pipelines:
           # SourceClear vulnerability scan
           #- sudo curl -sSL https://download.sourceclear.com/ci.sh | sh
           # CodeCov upload results
-          - if [ $? -eq 0 ]; then bash <(curl -s https://codecov.io/bash); fi
+          - if [ $? -eq 0 ]; then bash <(curl -s https://codecov.io/bash) -t $CODECOV_TOKEN; fi
