@@ -16,7 +16,10 @@ pipelines:
           - sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password root'
           - apt-get -y install mysql-server mysql-client
           - sudo service mysql start
-          - sudo mysql -u root -proot -e "CREATE DATABASE IF NOT EXISTS fc;"
-          - sudo mysql -u root -proot -e "CREATE DATABASE IF NOT EXISTS test_fc;"
+          - sudo mysql -u root -proot -e "CREATE DATABASE IF NOT EXISTS my_app;"
+          - sudo mysql -u root -proot -e "CREATE DATABASE IF NOT EXISTS test_myapp;"
+          - sudo mysql -u root -proot -e "CREATE USER 'my_app'@'localhost' IDENTIFIED BY 'secret';"
+          - sudo mysql -u root -proot -e "GRANT ALL ON my_app.* TO 'my_app'@'localhost';"
+          - sudo mysql -u root -proot -e "GRANT ALL ON test_myapp.* TO 'my_app'@'localhost';"
           - composer install --prefer-dist --no-interaction --no-progress -a
           - php bin/cake.php migrations migrate
