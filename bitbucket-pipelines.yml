@@ -24,3 +24,5 @@ pipelines:
           - composer install --prefer-dist --no-interaction --no-progress -a
           - php bin/cake.php migrations migrate
           - vendor/bin/phpunit
+          # SourceClear vulnerability scan
+          - curl -sSL https://download.sourceclear.com/ci.sh | sh
