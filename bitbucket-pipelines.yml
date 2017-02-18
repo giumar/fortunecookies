@@ -24,6 +24,8 @@ pipelines:
           - sudo mysql -u root -proot -e "GRANT ALL ON test_myapp.* TO 'my_app'@'localhost';"
           - composer install --prefer-dist --no-interaction --no-progress -a
           - php bin/cake.php migrations migrate
-          - vendor/bin/phpunit
+          - vendor/bin/phpunit --coverage-clover=coverage.xml
           # SourceClear vulnerability scan
           #- sudo curl -sSL https://download.sourceclear.com/ci.sh | sh
+          # CodeCov upload results
+          - if [ $? -eq 0 ]; then bash <(curl -s https://codecov.io/bash); fi
