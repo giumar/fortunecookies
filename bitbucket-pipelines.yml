@@ -15,6 +15,7 @@ pipelines:
           - sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password password root'
           - sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password root'
           - apt-get -y install mysql-server mysql-client
+          - sudo service mysql start
           - sudo mysql -u root -proot -e "CREATE DATABASE fc IF NOT EXISTS;"
           - sudo mysql -u root -proot -e "CREATE DATABASE test_fc IF NOT EXISTS;"
           - composer install --prefer-dist --no-interaction --no-progress -a
