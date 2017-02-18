@@ -4,6 +4,7 @@ Semaphore    | [![Build Status](https://semaphoreci.com/api/v1/giumar/fortunecoo
 Travis       | [![Build Status](https://travis-ci.org/giumar/fortunecookies.svg?branch=master)](https://travis-ci.org/giumar/fortunecookies) | | |
 Code Climate | | [![Code Climate](https://codeclimate.com/github/giumar/fortunecookies/badges/gpa.svg)](https://codeclimate.com/github/giumar/fortunecookies) | [![Test Coverage](https://codeclimate.com/github/giumar/fortunecookies/badges/coverage.svg)](https://codeclimate.com/github/giumar/fortunecookies/coverage) | [![Issue Count](https://codeclimate.com/github/giumar/fortunecookies/badges/issue_count.svg)](https://codeclimate.com/github/giumar/fortunecookies)
 CircleCI     | [![CircleCI](https://circleci.com/bb/giumar/fortunecookies.svg?style=svg)](https://circleci.com/bb/giumar/fortunecookies)
+CodeCov      | | | [![codecov](https://codecov.io/bb/giumar/fortunecookies/branch/master/graph/badge.svg)](https://codecov.io/bb/giumar/fortunecookies) | |
 
 # FortuneCookies #
 
