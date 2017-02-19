@@ -87,10 +87,10 @@
 				</div><!-- /.container-fluid -->
 			</nav>
 		</div>
-		<?php } ?>
 		<div class="page-header">
 			<h1><?= $this->fetch('title') ?></h1>
 		</div>
+		<?php } ?>
 		<?php if($this->Flash->render()) : ?>
 		<div class="row">
 			<?= $this->Flash->render() ?>
