@@ -5,6 +5,7 @@ Travis       | [![Build Status](https://travis-ci.org/giumar/fortunecookies.svg?
 Code Climate | | [![Code Climate](https://codeclimate.com/github/giumar/fortunecookies/badges/gpa.svg)](https://codeclimate.com/github/giumar/fortunecookies) | [![Test Coverage](https://codeclimate.com/github/giumar/fortunecookies/badges/coverage.svg)](https://codeclimate.com/github/giumar/fortunecookies/coverage) | [![Issue Count](https://codeclimate.com/github/giumar/fortunecookies/badges/issue_count.svg)](https://codeclimate.com/github/giumar/fortunecookies)
 CircleCI     | [![CircleCI](https://circleci.com/bb/giumar/fortunecookies.svg?style=svg)](https://circleci.com/bb/giumar/fortunecookies)
 CodeCov      | | | [![codecov](https://codecov.io/bb/giumar/fortunecookies/branch/master/graph/badge.svg)](https://codecov.io/bb/giumar/fortunecookies) | |
+Scrutinizer  | [![Build Status](https://scrutinizer-ci.com/g/giumar/fortunecookies/badges/build.png?b=master)](https://scrutinizer-ci.com/g/giumar/fortunecookies/build-status/master) | [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/giumar/fortunecookies/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/giumar/fortunecookies/?branch=master) | [![Code Coverage](https://scrutinizer-ci.com/g/giumar/fortunecookies/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/giumar/fortunecookies/?branch=master) | 
 
 # FortuneCookies #
 
