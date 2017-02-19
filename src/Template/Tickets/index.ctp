@@ -24,13 +24,12 @@
 				<?php foreach ($tickets as $ticket): ?>
 				<tr>
 					<td><?= $this->Number->format($ticket->id) ?></td>
-					<td><strong><?= h($ticket->title) ?></strong></td>
+					<td><?= $this->Html->link(h(h($ticket->title)), ['action' => 'view', $ticket->id]) ?></td>
 					<td><?= h($ticket->tickettype['name']) ?></td>
 					<td><?= h($ticket->ticketstatus['name']) ?></td>
 					<td><?= h($ticket->created) ?></td>
 					<td><?= h($ticket->modified) ?></td>
 					<td class="actions">
-						<?= $this->Html->link(__('View'), ['action' => 'view', $ticket->id]) ?>
 						<?= $this->Html->link(__('Edit'), ['action' => 'edit', $ticket->id]) ?>
 						<?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $ticket->id], ['confirm' => __('Are you sure you want to delete # {0}?', $ticket->id)]) ?>
 					</td>
