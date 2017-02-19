@@ -72,7 +72,7 @@
 								</ul>
 							</li>
 							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Administration <i class="fa fa-cogs" aria-hidden="true"></i> <span class="caret"></span></a>
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cogs" aria-hidden="true"></i> Administration <span class="caret"></span></a>
 								<ul class="dropdown-menu">
 									<li><?= $this->Html->link('Users', ['controller'=>'users', 'action'=>'index']); ?></li>
 									<li><?= $this->Html->link('Types', ['controller'=>'tickettypes', 'action'=>'index']); ?></li>
@@ -81,7 +81,7 @@
 									<li><a href="#">Separated link</a></li>
 								</ul>
 							</li>
-							<li><?= $this->Html->link('Logout <i class="fa fa-sign-out" aria-hidden="true"></i>', ['controller'=>'users', 'action'=>'logout'], ['class'=>'','escape'=>false]);?></li>
+							<li><?= $this->Html->link('<i class="fa fa-sign-out" aria-hidden="true"></i> Logout', ['controller'=>'users', 'action'=>'logout'], ['class'=>'','escape'=>false]);?></li>
 						</ul>						
 					</div><!-- /.navbar-collapse -->
 				</div><!-- /.container-fluid -->
