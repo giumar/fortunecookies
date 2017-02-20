@@ -42,7 +42,7 @@ before_install:
   - mysql -e 'CREATE DATABASE IF NOT EXISTS test_fc;'
 
 script:
-  - vendor/bin/phpunit --coverage-clover=coverage.xml
+  - vendor/bin/phpunit --coverage-clover=coverage.xml --log-junit=phpunit.xml --color=auto
   - sonar-scanner
 
 after_success:
