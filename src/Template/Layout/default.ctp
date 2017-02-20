@@ -101,9 +101,11 @@
 			<h1><?= $this->fetch('title') ?></h1>
 		</div>
 		<?php } ?>
-		<?php if($this->Flash->render()) : ?>
+		<?php if($this->Flash) : ?>
 		<div class="row">
-			<?= $this->Flash->render() ?>
+			<div class="col-xs-12">
+				<?= $this->Flash->render() ?>
+			</div>
 		</div>
 		<?php endif; ?>
 		<div class="row">
