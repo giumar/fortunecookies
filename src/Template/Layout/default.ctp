@@ -25,6 +25,7 @@
     <![endif]-->
 	<style type="text/css">
 		body {padding-top:60px;}
+		body {padding-top:40px;}
 	</style>
 </head>
 <body>
