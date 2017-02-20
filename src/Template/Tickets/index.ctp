@@ -5,7 +5,7 @@
 				<div class="col-xs-3 col-md-3">
 					<h4><?= __('Tickets') ?></h4>
 				</div>
-				<div class="col-xs-9"><?= $this->Html->link(__('<span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> New Ticket '), ['action' => 'add'], ['escape'=>false, 'class'=>'btn btn-default']) ?></div>
+				<div class="col-xs-9"><?= $this->Html->link(__('<i class="fa fa-plus-circle" aria-hidden="true"></i> New Ticket '), ['action' => 'add'], ['escape'=>false, 'class'=>'btn btn-default']) ?></div>
 			</div>
 		</div>
 		<table class="table table-condensed">

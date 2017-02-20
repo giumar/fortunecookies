@@ -27,7 +27,7 @@
 		</div>
 	</div>
     <div class="related">
-        <h4><?= __('Related Operations') ?><?= $this->Html->link('Add Operation', ['controller'=>'tickets', 'action'=>'addoperation', $ticket->id]); ?></h4>
+        <h4><?= __('Related Operations') ?></h4> <?= $this->Html->link('<i class="fa fa-plus-circle" aria-hidden="true"></i> Add Operation', ['controller'=>'tickets', 'action'=>'addoperation', $ticket->id], ['class'=>'btn btn-default', 'escape'=>false]); ?>
         <?php if (!empty($ticket->operations)): ?>
         <table cellpadding="0" cellspacing="0" class="table">
             <tr>
