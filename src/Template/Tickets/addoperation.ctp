@@ -7,12 +7,35 @@
     <?= $this->Form->create($newOperation, ['templates'=>'bs4form']) ?>
     <fieldset>
         <legend><?= __('Add Operation') ?></legend>
-        <?php
-            echo $this->Form->hidden('ticket_id', ['value' => $newOperation->ticket_id]);
-            echo $this->Form->input('start');
-            echo $this->Form->input('end');
-            echo $this->Form->input('description');
-        ?>
+        <?= $this->Form->hidden('ticket_id', ['value' => $newOperation->ticket_id]); ?>
+		<div class='col-xs-3'>
+            <div class="form-group">
+                <div class='input-group date' id='date-start'>
+                    <?= $this->Form->text('start'); ?>
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+        </div>		
+		<div class='col-xs-3'>
+            <div class="form-group">
+                <div class='input-group date' id='date-end'>
+                    <?= $this->Form->text('end'); ?>
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+		<div class="col-xs-1"></div>
+        <script type="text/javascript">
+            $(function () {
+                $('#date-start').datetimepicker({ locale:'en' });
+				$('#date-end').datetimepicker({ locale:'en' });
+            });
+        </script>
+        <?php echo $this->Form->input('description'); ?>
     </fieldset>
     <?= $this->Form->submit(__('Submit')) ?>
     <?= $this->Form->end() ?>
