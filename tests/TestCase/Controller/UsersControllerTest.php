@@ -73,11 +73,11 @@ class UsersControllerTest extends IntegrationTestCase
     }
 
     /**
-     * Test add method
+     * Test add user method with valid email
      *
      * @return void
      */
-    public function testAdd()
+    public function testAddNewUserValidEmail()
     {
         $this->enableCsrfToken();
 		$this->enableSecurityToken();
@@ -90,14 +90,58 @@ class UsersControllerTest extends IntegrationTestCase
 		$this->post('/users/add', $data);
 
         $this->assertResponseSuccess();
+		$this->assertRedirect(['controller'=>'users', 'action' => 'index']);
     }
-
-    /**
-     * Test edit method
+	
+	/**
+     * Test add user method without valid email
      *
      * @return void
      */
-    public function testEdit()
+    public function testAddNewUserNotValidEmail()
+    {
+        $this->enableCsrfToken();
+		$this->enableSecurityToken();
+
+		$data = [
+            'email' => 'new-user@example-wrong',
+            'password' => 'new-password'
+        ];
+		
+		$this->post('/users/add', $data);
+
+        $this->assertResponseOk();
+		$this->assertResponseContains('The user could not be saved. Please, try again.');
+    }
+	
+	/**
+     * Test add user method without a password
+     *
+     * @return void
+     */
+    public function testAddNewUserWithoutPassword()
+    {
+        $this->enableCsrfToken();
+		$this->enableSecurityToken();
+
+		$data = [
+            'email' => 'new-user@example-wrong',
+            'password' => ''
+        ];
+		
+		$this->post('/users/add', $data);
+
+        $this->assertResponseOk();
+		$this->assertResponseContains('The user could not be saved. Please, try again.');
+    }
+	
+
+    /**
+     * Test edit method with new valid parameters
+     *
+     * @return void
+     */
+    public function testEditWithNewValidEmailAndPassword()
     {
         $this->enableCsrfToken();
 		$this->enableSecurityToken();
@@ -108,16 +152,71 @@ class UsersControllerTest extends IntegrationTestCase
 		$this->assertResponseContains('info@example.com');
 		
 		$data = [
-            'email' => 'info-test@example.com',
+            'email' => 'new-info@example.com',
             'password' => 'new-password'
         ];
         $this->post('/users/edit/1', $data);
 
         $this->assertResponseSuccess();
-
+		$this->assertRedirect(['controller'=>'users', 'action' => 'index']);
 		
     }
 
+/**
+     * Test edit method with new valid parameters
+     *
+     * @return void
+     */
+    public function testEditWithNewValidEmailAndNotValidPassword()
+    {
+        $this->enableCsrfToken();
+		$this->enableSecurityToken();
+		
+		$this->get('/users/edit/1');
+		$this->assertResponseOk();
+		$this->assertResponseContains('<title>Users</title>');
+		$this->assertResponseContains('info@example.com');
+		
+		$data = [
+            'email' => 'new-info@example.com',
+            'password' => ''
+        ];
+        $this->post('/users/edit/1', $data);
+
+		$this->assertResponseOk();
+		$this->assertResponseContains('<title>Users</title>');		
+		$this->assertResponseContains('The user could not be saved. Please, try again.');
+		
+    }
+
+/**
+     * Test edit method with new valid parameters
+     *
+     * @return void
+     */
+    public function testEditWithNewNotValidEmailAndValidPassword()
+    {
+        $this->enableCsrfToken();
+		$this->enableSecurityToken();
+		
+		$this->get('/users/edit/1');
+		$this->assertResponseOk();
+		$this->assertResponseContains('<title>Users</title>');
+		$this->assertResponseContains('info@example.com');
+		
+		$data = [
+            'email' => 'new-info@.com',
+            'password' => 'new-password'
+        ];
+        $this->post('/users/edit/1', $data);
+
+		$this->assertResponseOk();
+		$this->assertResponseContains('<title>Users</title>');		
+		$this->assertResponseContains('The user could not be saved. Please, try again.');
+		
+    }	
+	
+	
     /**
      * Test delete method
      *
