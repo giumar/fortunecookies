@@ -6,3 +6,4 @@ webroot/
 config/app_local.php
 config/Migrations/schema-dump-default.lock
 test.bat
+web.config
