@@ -122,15 +122,12 @@ class TicketsController extends AppController
 		$this->loadModel('Operations');
 		$newOperation = $this->Operations->newEntity();
 		if ($this->request->is('post')) {
-			debug($newOperation);
-            //$newOperation = $this->Operations->patchEntity($newOperation, $this->request->data);
-			$start = Time::parseDateTime($this->request->data['start']);
-			$end = Time::parseDateTime($this->request->data['end']);
+			$datetimeStart = Time::parseDateTime($this->request->data['start']);
+			$datetimeEnd = Time::parseDateTime($this->request->data['end']);
 			$newOperation->ticket_id = $this->request->data['ticket_id'];
 			$newOperation->description = $this->request->data['description'];
-			$newOperation->start = $start;
-			$newOperation->end = $end;
-			debug($newOperation);
+			$newOperation->start = $datetimeStart;
+			$newOperation->end = $datetimeEnd;
             if ($this->Operations->save($newOperation)) {
                 $this->Flash->success(__('The new operation has been saved.'));
 
