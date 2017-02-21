@@ -2,6 +2,8 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\I18n\Time;
+use Cake\I18n\I18n;
 
 /**
  * Tickets Controller
@@ -120,7 +122,15 @@ class TicketsController extends AppController
 		$this->loadModel('Operations');
 		$newOperation = $this->Operations->newEntity();
 		if ($this->request->is('post')) {
-            $newOperation = $this->Operations->patchEntity($newOperation, $this->request->data);
+			debug($newOperation);
+            //$newOperation = $this->Operations->patchEntity($newOperation, $this->request->data);
+			$start = Time::parseDateTime($this->request->data['start']);
+			$end = Time::parseDateTime($this->request->data['end']);
+			$newOperation->ticket_id = $this->request->data['ticket_id'];
+			$newOperation->description = $this->request->data['description'];
+			$newOperation->start = $start;
+			$newOperation->end = $end;
+			debug($newOperation);
             if ($this->Operations->save($newOperation)) {
                 $this->Flash->success(__('The new operation has been saved.'));
 
