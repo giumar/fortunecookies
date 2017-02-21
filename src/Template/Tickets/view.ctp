@@ -17,7 +17,7 @@
 </div>
 <div class="col-xs-12">
 	<div class="panel panel-default">
-		<div class="panel-heading">#<?= $this->Number->format($ticket->id) ?> <?= h($ticket->title) ?></div>
+		<div class="panel-heading"><h3><span class="label label-default">#<?= $this->Number->format($ticket->id) ?></span> <?= h($ticket->title) ?></h3></div>
 		<div class="panel-body">
 			<div class="col-xs-12 col-md-3">Title: <?= h($ticket->title) ?></div>
 			<div class="col-xs-12 col-md-3">ID: <?= $this->Number->format($ticket->id) ?></div>
