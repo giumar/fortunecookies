@@ -27,7 +27,14 @@
 		</div>
 	</div>
     <div class="related">
-        <h4><?= __('Related Operations') ?></h4> <?= $this->Html->link('<i class="fa fa-plus-circle" aria-hidden="true"></i> Add Operation', ['controller'=>'tickets', 'action'=>'addoperation', $ticket->id], ['class'=>'btn btn-default', 'escape'=>false]); ?>
+		<div class="row">
+			<div class="col-xs-2">
+				<h4><?= __('Related Operations') ?></h4> 
+			</div>
+			<div class="col-xs-10">
+				<?= $this->Html->link('<i class="fa fa-plus-circle" aria-hidden="true"></i> Add Operation', ['controller'=>'tickets', 'action'=>'addoperation', $ticket->id], ['class'=>'btn btn-success', 'escape'=>false]); ?>
+			</div>
+		</div>
         <?php if (!empty($ticket->operations)): ?>
         <table cellpadding="0" cellspacing="0" class="table">
             <tr>
@@ -47,7 +54,7 @@
                 <td><?= h($operations->modified) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['controller' => 'Operations', 'action' => 'view', $operations->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'Operations', 'action' => 'edit', $operations->id]) ?>
+                    <?= $this->Html->link(__('Edit'), ['controller' => 'Tickets', 'action' => 'edit_operation', $operations->id]) ?>
                     <?= $this->Form->postLink(__('Delete'), ['controller' => 'Operations', 'action' => 'delete', $operations->id], ['confirm' => __('Are you sure you want to delete # {0}?', $operations->id)]) ?>
                 </td>
             </tr>
