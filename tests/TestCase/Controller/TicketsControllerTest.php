@@ -70,6 +70,10 @@ class TicketsControllerTest extends IntegrationTestCase
         $this->get('/tickets/view/1');
 		$this->assertResponseOk();
 		$this->assertResponseContains('<title>Tickets</title>');
+		
+		//Test header as <h3> and Ticket ID inside a badge class. See https://github.com/giumar/fortunecookies/issues/21
+		//
+		$this->assertResponseContains('<div class="panel-heading"><h3><span class="label label-default">#1</span> ');
 		$this->assertResponseContains('Lorem ipsum dolor sit amet');
     }
 
@@ -127,12 +131,37 @@ class TicketsControllerTest extends IntegrationTestCase
      */
     public function testDelete()
     {
-        //$this->markTestIncomplete('Not implemented yet.');
-
-		$this->enableCsrfToken();
+        $this->enableCsrfToken();
 		$this->enableSecurityToken();
 		
 		$this->delete('/tickets/delete/1');
 		$this->assertRedirect();
     }
+	
+	/**
+     * Test addOperation method
+     *
+     * @return void
+     */
+    public function testAddOperation()
+    {
+
+		$this->enableCsrfToken();
+		$this->enableSecurityToken();
+		
+		$this->get('/tickets/addoperation/1');
+		$this->assertResponseOk();
+		$this->assertResponseContains('<title>Tickets</title>');
+		
+		$data = [
+            'start' => '2017-01-01 00:01',
+            'end' => '2017-01-01 01:01',
+			//'ticket_id' => '1',
+            'description' => 'New description',
+        ];
+		
+		$this->post('/tickets/addoperation/1', $data);
+        $this->assertResponseSuccess();
+    }
+	
 }

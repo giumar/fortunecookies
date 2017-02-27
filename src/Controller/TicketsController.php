@@ -114,7 +114,9 @@ class TicketsController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 	
-    public function addOperation($id = null) {
+    public function addOperation($id = null) 
+    {
+        
         $ticket = $this->Tickets->get($id, [
             'contain' => []
         ]);
@@ -131,11 +133,36 @@ class TicketsController extends AppController
             if ($this->Operations->save($newOperation)) {
                 $this->Flash->success(__('The new operation has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'view', $id]);
             }
             $this->Flash->error(__('The new operation could not be saved. Please, try again.'));
         }
-        $newOperation->ticket_id = $id;
-        $this->set('newOperation', $newOperation);
+      
+		    $newOperation->ticket_id = $id;
+		    $this->set('newOperation', $newOperation);
+    }
+	
+    public function editOperation($id = null)
+    { 
+      $this->loadModel('Operations');
+	
+      $operation = $this->Operations->get($id, [
+        'contain' => []
+      ]);
+      
+      if ($this->request->is(['patch', 'post', 'put'])) {
+        $this->request->data['start'] = Time::parseDateTime($this->request->data['start']);
+        $this->request->data['end'] = Time::parseDateTime($this->request->data['end']);
+        $operation = $this->Operations->patchEntity($operation, $this->request->data);
+        if ($this->Operations->save($operation)) {
+          $this->Flash->success(__('The operation has been saved.'));
+
+          return $this->redirect(['action' => 'view', $id]);
+        }
+        $this->Flash->error(__('The operation could not be saved. Please, try again.'));
+      }
+      $tickets = $this->Operations->Tickets->find('list', ['limit' => 200]);
+      $this->set(compact('operation', 'tickets'));
+      $this->set('_serialize', ['operation']);
     }
 }
