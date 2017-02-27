@@ -161,4 +161,32 @@ class TicketsController extends AppController
         $this->set(compact('operation', 'tickets'));
         $this->set('_serialize', ['operation']);
 	}
+	
+	public function viewOperation($id = null) {
+		
+		$this->loadModel('Operations');
+		$operation = $this->Operations->get($id, [
+			'contain' => ['Tickets']
+		]);
+
+		$this->set('operation', $operation);
+		$this->set('_serialize', ['operation']);
+	}
+	
+	public function deleteOperation($id = null) {
+		
+		$this->loadModel('Operations');
+		$this->request->allowMethod(['post', 'delete']);
+        $operation = $this->Operations->get($id, [
+			'contain' => ['Tickets']
+		]
+		);
+        if ($this->Operations->delete($operation)) {
+            $this->Flash->success(__('The operation has been deleted.'));
+        } else {
+            $this->Flash->error(__('The operation could not be deleted. Please, try again.'));
+        }
+
+        return $this->redirect(['action' => 'view', $operation->ticket_id]);
+	}
 }

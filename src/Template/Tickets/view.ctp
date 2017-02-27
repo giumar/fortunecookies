@@ -53,9 +53,9 @@
                 <td><?= h($operations->created) ?></td>
                 <td><?= h($operations->modified) ?></td>
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'Operations', 'action' => 'view', $operations->id]) ?>
+                    <?= $this->Html->link(__('View'), ['controller' => 'Tickets', 'action' => 'view_operation', $operations->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['controller' => 'Tickets', 'action' => 'edit_operation', $operations->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Operations', 'action' => 'delete', $operations->id], ['confirm' => __('Are you sure you want to delete # {0}?', $operations->id)]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Tickets', 'action' => 'delete_operation', $operations->id], ['confirm' => __('Are you sure you want to delete # {0}?', $operations->id)]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>
