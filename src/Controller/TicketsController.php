@@ -144,7 +144,7 @@ class TicketsController extends AppController
 		$this->loadModel('Operations');
 	
 		$operation = $this->Operations->get($id, [
-            'contain' => []
+            'contain' => ['Tickets']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
 			$this->request->data['start'] = Time::parseDateTime($this->request->data['start']);
@@ -153,7 +153,7 @@ class TicketsController extends AppController
             if ($this->Operations->save($operation)) {
                 $this->Flash->success(__('The operation has been saved.'));
 
-                return $this->redirect(['action' => 'view', $id]);
+                return $this->redirect(['action' => 'view', $operation->ticket_id]);
             }
             $this->Flash->error(__('The operation could not be saved. Please, try again.'));
         }
