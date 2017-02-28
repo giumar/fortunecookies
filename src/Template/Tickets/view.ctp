@@ -47,7 +47,7 @@
                 <td><?= h($operations->modified) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['controller' => 'Operations', 'action' => 'view', $operations->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'Operations', 'action' => 'edit', $operations->id]) ?>
+                    <?= $this->Html->link(__('Edit'), ['controller' => 'Tickets', 'action' => 'editOperation', $operations->id]) ?>
                     <?= $this->Form->postLink(__('Delete'), ['controller' => 'Operations', 'action' => 'delete', $operations->id], ['confirm' => __('Are you sure you want to delete # {0}?', $operations->id)]) ?>
                 </td>
             </tr>

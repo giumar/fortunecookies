@@ -131,11 +131,41 @@ class TicketsController extends AppController
             if ($this->Operations->save($newOperation)) {
                 $this->Flash->success(__('The new operation has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'view', $this->request->data['ticket_id']]);
             }
             $this->Flash->error(__('The new operation could not be saved. Please, try again.'));
         }
 		$newOperation->ticket_id = $id;
 		$this->set('newOperation', $newOperation);
 	}
+
+    /**
+     * @param null $operation_id
+     * @return \Cake\Network\Response|null
+     */
+    public function editOperation($operation_id = null) {
+
+        $this->loadModel('Operations');
+        $operation = $this->Operations->get($operation_id, [
+            'contain' => []
+        ]);
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $datetimeStart = Time::parseDateTime($this->request->data['start']);
+            $datetimeEnd = Time::parseDateTime($this->request->data['end']);
+            $operation->ticket_id = $this->request->data['ticket_id'];
+            $operation->description = $this->request->data['description'];
+            $operation->start = $datetimeStart;var_dump(Time::parseDateTime($this->request->data['start']));
+            $operation->end = $datetimeEnd;
+            if ($this->Operations->save($operation)) {
+                $this->Flash->success(__('The operation has been saved.'));
+
+                return $this->redirect(['action' => 'view', $this->request->data['ticket_id']]);
+            }
+            $this->Flash->error(__('The operation could not be saved. Please, try again.'));
+        }
+        $this->set(compact('operation'));
+        $this->set('_serialize', ['operation']);
+    }
+
+
 }
