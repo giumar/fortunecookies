@@ -130,19 +130,13 @@ class TicketsController extends AppController
 			$newOperation->end = $datetimeEnd;
             if ($this->Operations->save($newOperation)) {
                 $this->Flash->success(__('The new operation has been saved.'));
-
-<<<<<<< .merge_file_a17844
                 return $this->redirect(['action' => 'view', $this->request->data['ticket_id']]);
-=======
-                return $this->redirect(['action' => 'view', $id]);
->>>>>>> .merge_file_a08112
             }
             $this->Flash->error(__('The new operation could not be saved. Please, try again.'));
         }
 		$newOperation->ticket_id = $id;
 		$this->set('newOperation', $newOperation);
 	}
-<<<<<<< .merge_file_a17844
 
     /**
      * @param null $operation_id
@@ -172,9 +166,6 @@ class TicketsController extends AppController
         $this->set('_serialize', ['operation']);
     }
 
-
-=======
-	
 	public function editOperation($id = null) { 
 	
 		$this->loadModel('Operations');
@@ -225,5 +216,4 @@ class TicketsController extends AppController
 
         return $this->redirect(['action' => 'view', $operation->ticket_id]);
 	}
->>>>>>> .merge_file_a08112
 }

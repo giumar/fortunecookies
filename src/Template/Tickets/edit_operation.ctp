@@ -6,16 +6,13 @@ use Cake\I18n\I18n;
 ?>
 <div class="col-xs-12">
     <?= $this->Form->create($operation, ['templates'=>'bs4form']) ?>
-<<<<<<< HEAD
 	<?= $this->Form->hidden('ticket_id', ['value' => $operation->ticket_id]); ?>
-=======
 	<?php
 		echo $this->Form->input('ticket_id', ['options' => $tickets]);
 		/*echo $this->Form->input('start');
 		echo $this->Form->input('end');
 		*/
 	?>
->>>>>>> cdd63adabbce4d5f2cf5eabf35f138f974ed23ef
 	<div class='col-xs-3'>
 		<div class="form-group">
 			<div class='input-group date' id='date-start'>
@@ -36,7 +33,6 @@ use Cake\I18n\I18n;
 			</div>
 		</div>
 	</div>
-<<<<<<< HEAD
 	<div class="col-xs-12"><?php echo $this->Form->input('description'); ?></div>
 	<div class="col-xs-12"><?= $this->Form->submit(__('Submit')) ?></div>
 	<?= $this->Form->end() ?>
@@ -47,17 +43,9 @@ use Cake\I18n\I18n;
 		});
 	</script>
 </div>
-=======
-	<?php
-		echo $this->Form->input('description');
-	?>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
-</div>
 <script type="text/javascript">
 	$(function () {
 		$('#date-start').datetimepicker({ locale: '<?= I18n::locale() ?>'});
 		$('#date-end').datetimepicker({ locale: '<?= I18n::locale() ?>' });
 	});
 </script>
->>>>>>> cdd63adabbce4d5f2cf5eabf35f138f974ed23ef

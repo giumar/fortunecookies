@@ -7,8 +7,5 @@ config/app_local.php
 config/Migrations/schema-dump-default.lock
 test.bat
 web.config
-<<<<<<< HEAD
 .idea/
-=======
 *.sqlite
->>>>>>> cdd63adabbce4d5f2cf5eabf35f138f974ed23ef
