@@ -131,13 +131,18 @@ class TicketsController extends AppController
             if ($this->Operations->save($newOperation)) {
                 $this->Flash->success(__('The new operation has been saved.'));
 
+<<<<<<< .merge_file_a17844
                 return $this->redirect(['action' => 'view', $this->request->data['ticket_id']]);
+=======
+                return $this->redirect(['action' => 'view', $id]);
+>>>>>>> .merge_file_a08112
             }
             $this->Flash->error(__('The new operation could not be saved. Please, try again.'));
         }
 		$newOperation->ticket_id = $id;
 		$this->set('newOperation', $newOperation);
 	}
+<<<<<<< .merge_file_a17844
 
     /**
      * @param null $operation_id
@@ -168,4 +173,57 @@ class TicketsController extends AppController
     }
 
 
+=======
+	
+	public function editOperation($id = null) { 
+	
+		$this->loadModel('Operations');
+	
+		$operation = $this->Operations->get($id, [
+            'contain' => ['Tickets']
+        ]);
+        if ($this->request->is(['patch', 'post', 'put'])) {
+			$this->request->data['start'] = Time::parseDateTime($this->request->data['start']);
+			$this->request->data['end'] = Time::parseDateTime($this->request->data['end']);
+            $operation = $this->Operations->patchEntity($operation, $this->request->data);
+            if ($this->Operations->save($operation)) {
+                $this->Flash->success(__('The operation has been saved.'));
+
+                return $this->redirect(['action' => 'view', $operation->ticket_id]);
+            }
+            $this->Flash->error(__('The operation could not be saved. Please, try again.'));
+        }
+        $tickets = $this->Operations->Tickets->find('list', ['limit' => 200]);
+        $this->set(compact('operation', 'tickets'));
+        $this->set('_serialize', ['operation']);
+	}
+	
+	public function viewOperation($id = null) {
+		
+		$this->loadModel('Operations');
+		$operation = $this->Operations->get($id, [
+			'contain' => ['Tickets']
+		]);
+
+		$this->set('operation', $operation);
+		$this->set('_serialize', ['operation']);
+	}
+	
+	public function deleteOperation($id = null) {
+		
+		$this->loadModel('Operations');
+		$this->request->allowMethod(['post', 'delete']);
+        $operation = $this->Operations->get($id, [
+			'contain' => ['Tickets']
+		]
+		);
+        if ($this->Operations->delete($operation)) {
+            $this->Flash->success(__('The operation has been deleted.'));
+        } else {
+            $this->Flash->error(__('The operation could not be deleted. Please, try again.'));
+        }
+
+        return $this->redirect(['action' => 'view', $operation->ticket_id]);
+	}
+>>>>>>> .merge_file_a08112
 }
