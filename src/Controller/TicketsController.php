@@ -57,7 +57,7 @@ class TicketsController extends AppController
             if ($this->Tickets->save($ticket)) {
                 $this->Flash->success(__('The ticket has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['prefix'=>false, 'controller'=>'Tickets', 'action' => 'index']);
             }
             $this->Flash->error(__('The ticket could not be saved. Please, try again.'));
         }
@@ -84,7 +84,7 @@ class TicketsController extends AppController
             if ($this->Tickets->save($ticket)) {
                 $this->Flash->success(__('The ticket has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['prefix'=>false, 'controller'=>'Tickets', 'action' => 'index']);
             }
             $this->Flash->error(__('The ticket could not be saved. Please, try again.'));
         }
@@ -111,7 +111,7 @@ class TicketsController extends AppController
             $this->Flash->error(__('The ticket could not be deleted. Please, try again.'));
         }
 
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect(['prefix'=>false, 'controller'=>'Tickets', 'action' => 'index']);
     }
 	
 	public function addOperation($id = null) {
@@ -130,7 +130,7 @@ class TicketsController extends AppController
 			$newOperation->end = $datetimeEnd;
             if ($this->Operations->save($newOperation)) {
                 $this->Flash->success(__('The new operation has been saved.'));
-                return $this->redirect(['action' => 'view', $this->request->data['ticket_id']]);
+                return $this->redirect(['prefix'=>false, 'controller'=>'Tickets', 'action' => 'view', $this->request->data['ticket_id']]);
             }
             $this->Flash->error(__('The new operation could not be saved. Please, try again.'));
         }
@@ -156,7 +156,7 @@ class TicketsController extends AppController
             if ($this->Operations->save($operation)) {
                 $this->Flash->success(__('The operation has been saved.'));
 
-                return $this->redirect(['action' => 'view', $this->request->data['ticket_id']]);
+                return $this->redirect(['prefix'=>false, 'controller'=>'Tickets', 'action' => 'view', $this->request->data['ticket_id']]);
             }
             $this->Flash->error(__('The operation could not be saved. Please, try again.'));
         }
@@ -189,6 +189,6 @@ class TicketsController extends AppController
             $this->Flash->error(__('The operation could not be deleted. Please, try again.'));
         }
 
-        return $this->redirect(['action' => 'view', $operation->ticket_id]);
+        return $this->redirect(['prefix'=>false, 'controller'=>'Tickets', 'action' => 'view', $operation->ticket_id]);
 	}
 }
