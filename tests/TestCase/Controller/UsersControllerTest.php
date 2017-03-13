@@ -55,7 +55,7 @@ class UsersControllerTest extends IntegrationTestCase
      */
     public function testIndex()
     {
-        $this->get('/users');
+        $this->get('/admin/users');
 		$this->assertResponseOk();
     }
 
@@ -66,9 +66,9 @@ class UsersControllerTest extends IntegrationTestCase
      */
     public function testView()
     {
-        $this->get('/users/view/1');
+        $this->get('/admin/users/view/1');
 		$this->assertResponseOk();
-		$this->assertResponseContains('<title>Users</title>');
+		$this->assertResponseContains('<title>Admin\Users</title>');
 		$this->assertResponseContains('info@example.com');
     }
 
@@ -87,10 +87,10 @@ class UsersControllerTest extends IntegrationTestCase
             'password' => 'new-password'
         ];
 		
-		$this->post('/users/add', $data);
+		$this->post('/admin/users/add', $data);
 
         $this->assertResponseSuccess();
-		$this->assertRedirect(['controller'=>'users', 'action' => 'index']);
+		$this->assertRedirect(['prefix'=>'admin', 'controller'=>'users', 'action' => 'index']);
     }
 	
 	/**
@@ -108,7 +108,7 @@ class UsersControllerTest extends IntegrationTestCase
             'password' => 'new-password'
         ];
 		
-		$this->post('/users/add', $data);
+		$this->post('/admin/users/add', $data);
 
         $this->assertResponseOk();
 		$this->assertResponseContains('The user could not be saved. Please, try again.');
@@ -129,7 +129,7 @@ class UsersControllerTest extends IntegrationTestCase
             'password' => ''
         ];
 		
-		$this->post('/users/add', $data);
+		$this->post('/admin/users/add', $data);
 
         $this->assertResponseOk();
 		$this->assertResponseContains('The user could not be saved. Please, try again.');
@@ -146,19 +146,19 @@ class UsersControllerTest extends IntegrationTestCase
         $this->enableCsrfToken();
 		$this->enableSecurityToken();
 		
-		$this->get('/users/edit/1');
+		$this->get('/admin/users/edit/1');
 		$this->assertResponseOk();
-		$this->assertResponseContains('<title>Users</title>');
+		$this->assertResponseContains('<title>Admin\Users</title>');
 		$this->assertResponseContains('info@example.com');
 		
 		$data = [
             'email' => 'new-info@example.com',
             'password' => 'new-password'
         ];
-        $this->post('/users/edit/1', $data);
+        $this->post('/admin/users/edit/1', $data);
 
         $this->assertResponseSuccess();
-		$this->assertRedirect(['controller'=>'users', 'action' => 'index']);
+		$this->assertRedirect(['prefix'=>'admin', 'controller'=>'users', 'action' => 'index']);
 		
     }
 
@@ -172,19 +172,19 @@ class UsersControllerTest extends IntegrationTestCase
         $this->enableCsrfToken();
 		$this->enableSecurityToken();
 		
-		$this->get('/users/edit/1');
+		$this->get('/admin/users/edit/1');
 		$this->assertResponseOk();
-		$this->assertResponseContains('<title>Users</title>');
+		$this->assertResponseContains('<title>Admin\Users</title>');
 		$this->assertResponseContains('info@example.com');
 		
 		$data = [
             'email' => 'new-info@example.com',
             'password' => ''
         ];
-        $this->post('/users/edit/1', $data);
+        $this->post('/admin/users/edit/1', $data);
 
 		$this->assertResponseOk();
-		$this->assertResponseContains('<title>Users</title>');		
+		$this->assertResponseContains('<title>Admin\Users</title>');		
 		$this->assertResponseContains('The user could not be saved. Please, try again.');
 		
     }
@@ -199,19 +199,19 @@ class UsersControllerTest extends IntegrationTestCase
         $this->enableCsrfToken();
 		$this->enableSecurityToken();
 		
-		$this->get('/users/edit/1');
+		$this->get('/admin/users/edit/1');
 		$this->assertResponseOk();
-		$this->assertResponseContains('<title>Users</title>');
+		$this->assertResponseContains('<title>Admin\Users</title>');
 		$this->assertResponseContains('info@example.com');
 		
 		$data = [
             'email' => 'new-info@.com',
             'password' => 'new-password'
         ];
-        $this->post('/users/edit/1', $data);
+        $this->post('/admin/users/edit/1', $data);
 
 		$this->assertResponseOk();
-		$this->assertResponseContains('<title>Users</title>');		
+		$this->assertResponseContains('<title>Admin\Users</title>');		
 		$this->assertResponseContains('The user could not be saved. Please, try again.');
 		
     }	
@@ -227,7 +227,7 @@ class UsersControllerTest extends IntegrationTestCase
 		$this->enableCsrfToken();
 		$this->enableSecurityToken();
 		
-		$this->delete('/users/delete/1');
+		$this->delete('/admin/users/delete/1');
 		$this->assertRedirect();
     }
 	
@@ -238,7 +238,7 @@ class UsersControllerTest extends IntegrationTestCase
      */
     public function testLogout()
     {
-        $this->get('/users/logout');
-		$this->assertRedirect(['controller' => 'Users', 'action' => 'login']);
+        $this->get('/admin/users/logout');
+		$this->assertRedirect(['prefix'=>'admin', 'controller' => 'Users', 'action' => 'login']);
     }
 }

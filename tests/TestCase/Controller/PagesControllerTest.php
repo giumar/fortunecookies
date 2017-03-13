@@ -30,7 +30,7 @@ class PagesControllerTest extends IntegrationTestCase
     public function testDisplayEmptyUnauthenticated()
     {
         $this->get('/pages/');
-		$this->assertRedirect(['controller' => 'Users', 'action' => 'login']);
+		$this->assertRedirect(['prefix'=>'admin', 'controller' => 'Users', 'action' => 'login']);
     }
 	public function testDisplayEmptyAuthenticated()
     {
@@ -44,7 +44,7 @@ class PagesControllerTest extends IntegrationTestCase
 		]);
 		
 		$this->get('/pages/');
-		$this->assertRedirect(['controller' => 'Dashboard', 'action' => 'index']);
+		$this->assertRedirect(['prefix'=> false, 'controller' => 'Dashboard', 'action' => 'index']);
     }
 	
 	
@@ -56,9 +56,9 @@ class PagesControllerTest extends IntegrationTestCase
     public function testMultipleGetUnauthenticated()
     {
         $this->get('/pages/home.ctp');
-		$this->assertRedirect(['controller' => 'Users', 'action' => 'login']);
+		$this->assertRedirect(['prefix'=>'admin', 'controller' => 'Users', 'action' => 'login']);
         $this->get('/pages/home.ctp');
-		$this->assertRedirect(['controller' => 'Users', 'action' => 'login']);
+		$this->assertRedirect(['prefix'=>'admin', 'controller' => 'Users', 'action' => 'login']);
     }
 
 	public function testMultipleGetAuthenticated()
@@ -85,7 +85,7 @@ class PagesControllerTest extends IntegrationTestCase
     public function testDisplayUnauthenticated()
     {
         $this->get('/pages/home');
-		$this->assertRedirect(['controller' => 'Users', 'action' => 'login']);
+		$this->assertRedirect(['prefix'=>'admin', 'controller' => 'Users', 'action' => 'login']);
     }
 
 	public function testDisplayAuthenticated()
@@ -108,7 +108,7 @@ class PagesControllerTest extends IntegrationTestCase
     {
 		Configure::write('debug', false);
         $this->get('/pages/not_existing');
-		$this->assertRedirect(['controller' => 'Users', 'action' => 'login']);
+		$this->assertRedirect(['prefix'=>'admin', 'controller' => 'Users', 'action' => 'login']);
     }
 	
     /**
@@ -161,7 +161,7 @@ class PagesControllerTest extends IntegrationTestCase
     {
         Configure::write('debug', true);
         $this->get('/pages/not_existing');
-		$this->assertRedirect(['controller' => 'Users', 'action' => 'login']);
+		$this->assertRedirect(['prefix'=>'admin', 'controller' => 'Users', 'action' => 'login']);
     }
 
     /**
@@ -172,7 +172,7 @@ class PagesControllerTest extends IntegrationTestCase
     public function testDirectoryTraversalProtectionUnauthenticated()
     {
         $this->get('/pages/../Layout/ajax');
-		$this->assertRedirect(['controller' => 'Users', 'action' => 'login']);
+		$this->assertRedirect(['prefix'=>'admin', 'controller' => 'Users', 'action' => 'login']);
     }
 	
 	public function testDirectoryTraversalProtectionAuthenticated()

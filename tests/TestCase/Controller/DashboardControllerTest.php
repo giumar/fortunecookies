@@ -26,7 +26,7 @@ class DashboardControllerTest extends IntegrationTestCase
     {
         $this->get('/dashboard');
 
-        $this->assertRedirect(['controller' => 'Users', 'action' => 'login']);
+        $this->assertRedirect(['prefix'=>'admin', 'controller' => 'Users', 'action' => 'login']);
     }
 	
 	public function testIndexAuthenticaded()
