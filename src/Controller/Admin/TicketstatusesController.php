@@ -1,5 +1,5 @@
 <?php
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Controller\AppController;
 
@@ -54,7 +54,7 @@ class TicketstatusesController extends AppController
             if ($this->Ticketstatuses->save($ticketstatus)) {
                 $this->Flash->success(__('The ticketstatus has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['prefix'=>false, 'controller'=>'Ticketstatuses', 'action' => 'index']);
             }
             $this->Flash->error(__('The ticketstatus could not be saved. Please, try again.'));
         }
@@ -79,7 +79,7 @@ class TicketstatusesController extends AppController
             if ($this->Ticketstatuses->save($ticketstatus)) {
                 $this->Flash->success(__('The ticketstatus has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['prefix'=>false, 'controller'=>'Ticketstatuses', 'action' => 'index']);
             }
             $this->Flash->error(__('The ticketstatus could not be saved. Please, try again.'));
         }
@@ -104,6 +104,6 @@ class TicketstatusesController extends AppController
             $this->Flash->error(__('The ticketstatus could not be deleted. Please, try again.'));
         }
 
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect(['prefix'=>false, 'controller'=>'Ticketstatuses', 'action' => 'index']);
     }
 }
