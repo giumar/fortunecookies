@@ -53,7 +53,7 @@ class TickettypesControllerTest extends IntegrationTestCase
      */
     public function testIndex()
     {
-        $this->get('/tickettypes');
+        $this->get('/admin/tickettypes');
 		$this->assertResponseOk();
     }
 
@@ -64,9 +64,9 @@ class TickettypesControllerTest extends IntegrationTestCase
      */
     public function testView()
     {
-        $this->get('/tickettypes/view/1');
+        $this->get('/admin/tickettypes/view/1');
 		$this->assertResponseOk();
-		$this->assertResponseContains('<title>Tickettypes</title>');
+		$this->assertResponseContains('<title>Admin\Tickettypes</title>');
 		$this->assertResponseContains('Lorem ipsum dolor sit amet');
     }
 
@@ -84,7 +84,7 @@ class TickettypesControllerTest extends IntegrationTestCase
             'name' => 'New Ticketype'
         ];
 		
-		$this->post('/tickettypes/add', $data);
+		$this->post('/admin/tickettypes/add', $data);
 
         $this->assertResponseSuccess();
     }
@@ -100,15 +100,15 @@ class TickettypesControllerTest extends IntegrationTestCase
 		$this->enableCsrfToken();
 		$this->enableSecurityToken();
 		
-		$this->get('/tickettypes/edit/1');
+		$this->get('/admin/tickettypes/edit/1');
 		$this->assertResponseOk();
-		$this->assertResponseContains('<title>Tickettypes</title>');
+		$this->assertResponseContains('<title>Admin\Tickettypes</title>');
 		$this->assertResponseContains('Lorem ipsum dolor sit amet');
 		
 		$data = [
             'name' => 'Again Lorem ipsum dolor sit amet'
         ];
-        $this->post('/tickettypes/edit/1', $data);
+        $this->post('/admin/tickettypes/edit/1', $data);
 
         $this->assertResponseSuccess();
     }
@@ -120,12 +120,10 @@ class TickettypesControllerTest extends IntegrationTestCase
      */
     public function testDelete()
     {
-        $this->markTestIncomplete('Not implemented yet.');
-
 		$this->enableCsrfToken();
 		$this->enableSecurityToken();
 		
-		$this->delete('/tickettypes/delete/1');
+		$this->delete('/admin/tickettypes/delete/1');
 		$this->assertRedirect();
     }
 }
