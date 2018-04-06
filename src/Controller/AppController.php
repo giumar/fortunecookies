@@ -65,7 +65,7 @@ class AppController extends Controller
             ],
 			'unauthorizedRedirect' => $this->referer()
 		]);
-		$this->Auth->deny();
+		$this->Auth->allow();
     }
 
 	public function isAuthorized($user)
@@ -78,8 +78,8 @@ class AppController extends Controller
 		// Default permit
 		return true;
 	}
-	
-	
+
+
     /**
      * Before render callback.
      *

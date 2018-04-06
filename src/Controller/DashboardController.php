@@ -9,6 +9,14 @@ use App\Controller\AppController;
  */
 class DashboardController extends AppController
 {
+
+    public function initialize()
+    {
+        parent::initialize();
+
+        $this->Auth->allow(['index']);
+    }
+
     public function index()
     {
     }
