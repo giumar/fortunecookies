@@ -21,9 +21,11 @@
 </head>
 <body>
 	<div class="container-fluid">
-        <?= $this->element('navbar'); ?>
-
-
+		
+		<!-- THE Navbar -->
+		<?= $this->element('navbar'); ?>
+		<!-- THE Navbar -->
+		
         <!-- main content with column -->
         <div class="row">
             <div class="col-2 bg-dark rounded-bottom p-2">
