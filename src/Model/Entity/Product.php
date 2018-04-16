@@ -10,6 +10,11 @@ use Cake\ORM\Entity;
  * @property string $name
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
+ * @property string $description
+ * @property string $asin
+ * @property string $sku
+ * @property string $ean
+ * @property string $upc
  */
 class Product extends Entity
 {
@@ -26,6 +31,11 @@ class Product extends Entity
     protected $_accessible = [
         'name' => true,
         'created' => true,
-        'modified' => true
+        'modified' => true,
+        'description' => true,
+        'asin' => true,
+        'sku' => true,
+        'ean' => true,
+        'upc' => true
     ];
 }

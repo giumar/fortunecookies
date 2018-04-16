@@ -57,6 +57,34 @@ class ContactsTable extends Table
             ->requirePresence('name', 'create')
             ->notEmpty('name');
 
+        $validator
+            ->scalar('description')
+            ->allowEmpty('description');
+
+        $validator
+            ->scalar('phone')
+            ->maxLength('phone', 255)
+            ->allowEmpty('phone');
+
+        $validator
+            ->scalar('mobile')
+            ->maxLength('mobile', 255)
+            ->allowEmpty('mobile');
+
+        $validator
+            ->scalar('email_primary')
+            ->maxLength('email_primary', 255)
+            ->allowEmpty('email_primary');
+
+        $validator
+            ->date('birth_date')
+            ->allowEmpty('birth_date');
+
+        $validator
+            ->scalar('surname')
+            ->maxLength('surname', 255)
+            ->allowEmpty('surname');
+
         return $validator;
     }
 }

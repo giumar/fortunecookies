@@ -57,6 +57,30 @@ class ProductsTable extends Table
             ->requirePresence('name', 'create')
             ->notEmpty('name');
 
+        $validator
+            ->scalar('description')
+            ->allowEmpty('description');
+
+        $validator
+            ->scalar('asin')
+            ->maxLength('asin', 255)
+            ->allowEmpty('asin');
+
+        $validator
+            ->scalar('sku')
+            ->maxLength('sku', 255)
+            ->allowEmpty('sku');
+
+        $validator
+            ->scalar('ean')
+            ->maxLength('ean', 255)
+            ->allowEmpty('ean');
+
+        $validator
+            ->scalar('upc')
+            ->maxLength('upc', 255)
+            ->allowEmpty('upc');
+
         return $validator;
     }
 }

@@ -10,6 +10,12 @@ use Cake\ORM\Entity;
  * @property string $name
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
+ * @property string $description
+ * @property string $phone
+ * @property string $mobile
+ * @property string $email_primary
+ * @property \Cake\I18n\FrozenDate $birth_date
+ * @property string $surname
  */
 class Contact extends Entity
 {
@@ -26,6 +32,12 @@ class Contact extends Entity
     protected $_accessible = [
         'name' => true,
         'created' => true,
-        'modified' => true
+        'modified' => true,
+        'description' => true,
+        'phone' => true,
+        'mobile' => true,
+        'email_primary' => true,
+        'birth_date' => true,
+        'surname' => true
     ];
 }
