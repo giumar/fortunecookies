@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
@@ -12,6 +13,7 @@
  * @since         1.2.0
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace App\Test\TestCase\Controller;
 
 use App\Controller\PagesController;
@@ -25,124 +27,111 @@ use Cake\View\Exception\MissingTemplateException;
 /**
  * PagesControllerTest class
  */
-class PagesControllerTest extends IntegrationTestCase
-{
-    public function testDisplayEmptyUnauthenticated()
-    {
+class PagesControllerTest extends IntegrationTestCase {
+
+    public function testDisplayEmptyUnauthenticated() {
         $this->get('/pages/');
-		$this->assertRedirect(['prefix' => 'admin', 'controller' => 'Users', 'action' => 'login']);
+        $this->assertRedirect(['prefix' => 'admin', 'controller' => 'Users', 'action' => 'login']);
     }
 
-	public function testDisplayEmptyAuthenticated()
-    {
+    public function testDisplayEmptyAuthenticated() {
         $this->session([
-			'Auth' => [
-				'User' => [
-					'id' => 1,
-					'username' => 'admin',
-				]
-			]
-		]);
-		
-		$this->get('/pages/');
-		$this->assertRedirect(['prefix'=> false, 'controller' => 'Dashboard', 'action' => 'index']);
+            'Auth' => [
+                'User' => [
+                    'id' => 1,
+                    'username' => 'admin',
+                ]
+            ]
+        ]);
+
+        $this->get('/pages/');
+        $this->assertRedirect(['prefix' => false, 'controller' => 'Dashboard', 'action' => 'index']);
     }
-	
-	
-	/**
+
+    /**
      * testMultipleGet method
      *
      * @return void
      */
-    public function testMultipleGetUnauthenticated()
-    {
+    public function testMultipleGetUnauthenticated() {
         $this->get('/pages/home.ctp');
-<<<<<<< HEAD
-		$this->assertRedirect(['prefix' => 'admin', 'controller' => 'Users', 'action' => 'login']);
+        $this->assertRedirect(['prefix' => 'admin', 'controller' => 'Users', 'action' => 'login']);
         $this->get('/pages/home.ctp');
-		$this->assertRedirect(['prefix' => 'admin', 'controller' => 'Users', 'action' => 'login']);
-=======
-		$this->assertRedirect(['prefix'=>'admin', 'controller' => 'Users', 'action' => 'login']);
+        $this->assertRedirect(['prefix' => 'admin', 'controller' => 'Users', 'action' => 'login']);
+
+        $this->assertRedirect(['prefix' => 'admin', 'controller' => 'Users', 'action' => 'login']);
         $this->get('/pages/home.ctp');
-		$this->assertRedirect(['prefix'=>'admin', 'controller' => 'Users', 'action' => 'login']);
->>>>>>> cd9224aab79d85049822471c2d028cc92d39fdd2
+        $this->assertRedirect(['prefix' => 'admin', 'controller' => 'Users', 'action' => 'login']);
     }
 
-	public function testMultipleGetAuthenticated()
-	{
-		$this->session([
-			'Auth' => [
-				'User' => [
-					'id' => 1,
-					'username' => 'admin',
-				]
-			]
-		]);
-		$this->get('/pages/home');
+    public function testMultipleGetAuthenticated() {
+        $this->session([
+            'Auth' => [
+                'User' => [
+                    'id' => 1,
+                    'username' => 'admin',
+                ]
+            ]
+        ]);
+        $this->get('/pages/home');
         $this->assertResponseOk();
-		$this->get('/pages/home');
+        $this->get('/pages/home');
         $this->assertResponseOk();
-	}
-	
+    }
+
     /**
      * testDisplay method
      *
      * @return void
      */
-    public function testDisplayUnauthenticated()
-    {
+    public function testDisplayUnauthenticated() {
         $this->get('/pages/home');
-<<<<<<< HEAD
-		$this->assertRedirect(['prefix' => 'admin', 'controller' => 'Users', 'action' => 'login']);
-=======
-		$this->assertRedirect(['prefix'=>'admin', 'controller' => 'Users', 'action' => 'login']);
->>>>>>> cd9224aab79d85049822471c2d028cc92d39fdd2
+
+        $this->assertRedirect(['prefix' => 'admin', 'controller' => 'Users', 'action' => 'login']);
+
+        $this->assertRedirect(['prefix' => 'admin', 'controller' => 'Users', 'action' => 'login']);
     }
 
-	public function testDisplayAuthenticated()
-    {
+    public function testDisplayAuthenticated() {
         $this->session([
-			'Auth' => [
-				'User' => [
-					'id' => 1,
-					'username' => 'admin',
-				]
-			]
-		]);
-		$this->get('/pages/home');
+            'Auth' => [
+                'User' => [
+                    'id' => 1,
+                    'username' => 'admin',
+                ]
+            ]
+        ]);
+        $this->get('/pages/home');
         $this->assertResponseOk();
         $this->assertResponseContains('CakePHP');
         $this->assertResponseContains('<html>');
     }
-	
-	public function testMissingTemplateUnauthenticated()
-    {
-		Configure::write('debug', false);
+
+    public function testMissingTemplateUnauthenticated() {
+        Configure::write('debug', false);
         $this->get('/pages/not_existing');
-<<<<<<< HEAD
-		$this->assertRedirect(['prefix' => 'admin', 'controller' => 'Users', 'action' => 'login']);
-=======
-		$this->assertRedirect(['prefix'=>'admin', 'controller' => 'Users', 'action' => 'login']);
->>>>>>> cd9224aab79d85049822471c2d028cc92d39fdd2
+
+        $this->assertRedirect(['prefix' => 'admin', 'controller' => 'Users', 'action' => 'login']);
+
+        $this->assertRedirect(['prefix' => 'admin', 'controller' => 'Users', 'action' => 'login']);
     }
-	
+
     /**
      * Test that missing template renders 404 page in production
      *
      * @return void
      */
-    public function testMissingTemplateAuthenticated()
-    {
+    public function testMissingTemplateAuthenticated() {
         $this->session([
-			'Auth' => [
-				'User' => [
-					'id' => 1,
-					'username' => 'admin',
-				]
-			]
-		]);
-		
-		Configure::write('debug', false);
+            'Auth' => [
+                'User' => [
+                    'id' => 1,
+                    'username' => 'admin',
+                ]
+            ]
+        ]);
+
+        Configure::write('debug', false);
         $this->get('/pages/not_existing');
         $this->assertResponseError();
         $this->assertResponseContains('Error');
@@ -153,34 +142,31 @@ class PagesControllerTest extends IntegrationTestCase
      *
      * @return void
      */
-    public function testMissingTemplateInDebugAuthenticated()
-    {
+    public function testMissingTemplateInDebugAuthenticated() {
         $this->session([
-			'Auth' => [
-				'User' => [
-					'id' => 1,
-					'username' => 'admin',
-				]
-			]
-		]);
-		
-		Configure::write('debug', true);
+            'Auth' => [
+                'User' => [
+                    'id' => 1,
+                    'username' => 'admin',
+                ]
+            ]
+        ]);
+
+        Configure::write('debug', true);
         $this->get('/pages/not_existing');
         $this->assertResponseFailure();
         $this->assertResponseContains('Missing Template');
         $this->assertResponseContains('Stacktrace');
         $this->assertResponseContains('not_existing.ctp');
     }
-	
-	public function testMissingTemplateInDebugUnauthenticated()
-    {
+
+    public function testMissingTemplateInDebugUnauthenticated() {
         Configure::write('debug', true);
         $this->get('/pages/not_existing');
-<<<<<<< HEAD
-		$this->assertRedirect(['prefix' => 'admin', 'controller' => 'Users', 'action' => 'login']);
-=======
-		$this->assertRedirect(['prefix'=>'admin', 'controller' => 'Users', 'action' => 'login']);
->>>>>>> cd9224aab79d85049822471c2d028cc92d39fdd2
+
+        $this->assertRedirect(['prefix' => 'admin', 'controller' => 'Users', 'action' => 'login']);
+
+        $this->assertRedirect(['prefix' => 'admin', 'controller' => 'Users', 'action' => 'login']);
     }
 
     /**
@@ -188,29 +174,27 @@ class PagesControllerTest extends IntegrationTestCase
      *
      * @return void
      */
-    public function testDirectoryTraversalProtectionUnauthenticated()
-    {
+    public function testDirectoryTraversalProtectionUnauthenticated() {
         $this->get('/pages/../Layout/ajax');
-<<<<<<< HEAD
-		$this->assertRedirect(['prefix' => 'admin', 'controller' => 'Users', 'action' => 'login']);
-=======
-		$this->assertRedirect(['prefix'=>'admin', 'controller' => 'Users', 'action' => 'login']);
->>>>>>> cd9224aab79d85049822471c2d028cc92d39fdd2
+
+        $this->assertRedirect(['prefix' => 'admin', 'controller' => 'Users', 'action' => 'login']);
+
+        $this->assertRedirect(['prefix' => 'admin', 'controller' => 'Users', 'action' => 'login']);
     }
-	
-	public function testDirectoryTraversalProtectionAuthenticated()
-    {
+
+    public function testDirectoryTraversalProtectionAuthenticated() {
         $this->session([
-			'Auth' => [
-				'User' => [
-					'id' => 1,
-					'username' => 'admin',
-				]
-			]
-		]);
-		
-		$this->get('/pages/../Layout/ajax');
+            'Auth' => [
+                'User' => [
+                    'id' => 1,
+                    'username' => 'admin',
+                ]
+            ]
+        ]);
+
+        $this->get('/pages/../Layout/ajax');
         $this->assertResponseCode(403);
-        $this->assertResponseContains('Forbidden');		
+        $this->assertResponseContains('Forbidden');
     }
+
 }
