@@ -6,12 +6,7 @@ use Cake\I18n\I18n;
 ?>
 <div class="col-xs-12">
     <?= $this->Form->create($operation, ['templates'=>'bs4form']) ?>
-	<?php
-		echo $this->Form->input('ticket_id', ['options' => $tickets]);
-		/*echo $this->Form->input('start');
-		echo $this->Form->input('end');
-		*/
-	?>
+	<?= $this->Form->hidden('ticket_id', ['value' => $operation->ticket_id]); ?>
 	<div class='col-xs-3'>
 		<div class="form-group">
 			<div class='input-group date' id='date-start'>
@@ -32,11 +27,9 @@ use Cake\I18n\I18n;
 			</div>
 		</div>
 	</div>
-	<?php
-		echo $this->Form->input('description');
-	?>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
+	<div class="col-xs-12"><?php echo $this->Form->input('description'); ?></div>
+	<div class="col-xs-12"><?= $this->Form->submit(__('Submit')) ?></div>
+	<?= $this->Form->end() ?>
 </div>
 <script type="text/javascript">
 	$(function () {

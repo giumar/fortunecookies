@@ -56,10 +56,12 @@ class AppController extends Controller
                 ]
             ],
             'loginAction' => [
+				'prefix' => 'admin',
                 'controller' => 'Users',
                 'action' => 'login'
             ],
 			'logoutAction' => [
+				'prefix' => 'admin',
                 'controller' => 'Users',
                 'action' => 'login'
             ],

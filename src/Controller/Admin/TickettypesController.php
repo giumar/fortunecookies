@@ -1,5 +1,5 @@
 <?php
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Controller\AppController;
 
@@ -56,7 +56,7 @@ class TickettypesController extends AppController
             if ($this->Tickettypes->save($tickettype)) {
                 $this->Flash->success(__('The tickettype has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['prefix'=>false, 'controller'=>'Tickettypes', 'action' => 'index']);
             }
             $this->Flash->error(__('The tickettype could not be saved. Please, try again.'));
         }
@@ -81,7 +81,7 @@ class TickettypesController extends AppController
             if ($this->Tickettypes->save($tickettype)) {
                 $this->Flash->success(__('The tickettype has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['prefix'=>false, 'controller'=>'Tickettypes', 'action' => 'index']);
             }
             $this->Flash->error(__('The tickettype could not be saved. Please, try again.'));
         }
@@ -106,6 +106,6 @@ class TickettypesController extends AppController
             $this->Flash->error(__('The tickettype could not be deleted. Please, try again.'));
         }
 
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect(['prefix'=>false, 'controller'=>'Tickettypes', 'action' => 'index']);
     }
 }

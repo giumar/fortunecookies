@@ -21,48 +21,84 @@
 </head>
 <body>
 	<div class="container-fluid">
-		
-		<!-- THE Navbar -->
-		<?= $this->element('navbar'); ?>
-		<!-- THE Navbar -->
-		
-        <!-- main content with column -->
-        <div class="row">
-            <div class="col-2 bg-dark rounded-bottom p-2">
-            <ul class="nav nav-pills flex-column">
-                <li class="nav-item">
-                    <a class="nav-link active" href="#">Active</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Disabled</a>
-                </li>
-            </ul>
+		<?php if($this->request->session()->check('Auth.User')) { ?>
+		<div class="row">
+			<nav class="navbar navbar-default navbar-fixed-top">
+				<div class="container-fluid">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<?= $this->Html->link('FC Home', ['prefix'=>false, 'controller'=>'dashboard', 'action'=>'index'],['class'=>'navbar-brand']); ?>
+					</div>
 
-            </div>
-            <div class="col-10">
-                <h1><?= $this->fetch('title') ?></h1>
-                <?php if($this->Flash) : ?>
-                <div class="row">
-                    <div class="col-xs-12">
-                        <?= $this->Flash->render() ?>
-                    </div>
-                </div>
-                <?php endif; ?>
-                <div class="row">
-                    <?= $this->fetch('content') ?>
-                </div>
-                <div class="row">
-                    <footer>
-                    </footer>
-                </div>
-            </div>
-        </div>
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+						<ul class="nav navbar-nav">
+							<li><?= $this->Html->link('Tickets', ['prefix'=>false, 'controller'=>'tickets', 'action'=>'index']); ?></li>							
+						</ul>
+						<form class="navbar-form navbar-left">
+							<div class="form-group">
+								<input type="text" class="form-control" placeholder="Search">
+							</div>
+							<button type="submit" class="btn btn-default">Submit</button>
+						</form>
+						<ul class="nav navbar-nav navbar-right">
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+									<?php if($this->request->session()->check('Auth.User')) {
+										echo $this->request->session()->read('Auth.User.email');
+									} else {
+										echo "User profile ";
+									}
+									?>
+									<span class="caret"></span>
+								</a>
+								<ul class="dropdown-menu">
+									<li><a href="#">Options</a></li>
+									<li><a href="#">My Profile</a></li>
+								</ul>
+							</li>
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cogs" aria-hidden="true"></i> Administration <span class="caret"></span></a>
+								<ul class="dropdown-menu">
+									<li><?= $this->Html->link('Users', ['prefix'=>'admin', 'controller'=>'users', 'action'=>'index']); ?></li>
+									<li><?= $this->Html->link('Types', ['prefix'=>'admin', 'controller'=>'tickettypes', 'action'=>'index']); ?></li>
+									<li><?= $this->Html->link('Statuses', ['prefix'=>'admin', 'controller'=>'ticketstatuses', 'action'=>'index']); ?></li>
+									<li role="separator" class="divider"></li>
+									<li><a href="#">Separated link</a></li>
+								</ul>
+							</li>
+							<li><?= $this->Html->link('<i class="fa fa-sign-out" aria-hidden="true"></i> Logout', ['prefix'=>'admin', 'controller'=>'users', 'action'=>'logout'], ['class'=>'','escape'=>false]);?></li>
+						</ul>						
+					</div><!-- /.navbar-collapse -->
+				</div><!-- /.container-fluid -->
+			</nav>
+		</div>
+		<div class="page-header">
+			<h1><?= $this->fetch('title') ?></h1>
+		</div>
+		<?php } ?>
+		<?php if($this->Flash) : ?>
+		<div class="row">
+			<div class="col-xs-12">
+				<?= $this->Flash->render() ?>
+			</div>
+		</div>
+		<?php endif; ?>
+		<div class="row">
+			<?= $this->fetch('content') ?>
+		</div>
+		<?php if($this->request->session()->check('Auth.User')) { ?>
+		<div class="row">
+			<footer>
+			</footer>
+		</div>
+		<?php } ?>
 	</div>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
