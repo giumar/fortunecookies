@@ -116,7 +116,7 @@ jobs:
       - run: "sed -i -e 's/localhost/127.0.0.1/g' config/app_local.php"
       - run: "sed -i -e 's/E_ALL/E_ALL \\& ~E_USER_DEPRECATED/g' config/app_local.php"
       - run: "sed -i -e 's/test_myapp/test_my_app/g' config/app_local.php"
-      - run: "php bin/cake.php migrations migrate"
+      #- run: "php bin/cake.php migrations migrate"
 
       - save_cache:
           key: v1-dependencies-{{ checksum "composer.json" }}
