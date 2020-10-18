@@ -17,7 +17,7 @@ jobs:
       # - image: circleci/mysql:5.7-ram
       #
       # - image: redis:2.8.19
-      - image: circleci/mysql:8.0.4-alpine-ram
+      - image: circleci/mysql:latest-ram
         environment:
           MYSQL_ROOT_PASSWORD: secret
           MYSQL_DATABASE: test_myapp
