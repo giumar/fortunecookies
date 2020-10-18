@@ -25,9 +25,10 @@ jobs:
       #- run: sudo docker-php-ext-install zip
       - run: apk update
       - run: "apk add php7 
-                php7-dev php7-pear
+                php7-dev 
+                php7-pear
                 php7-phar
-                php7-tideways_xhprof php7-apache2
+                php7-apache2
                 php7-bcmath
                 php7-bz2
                 php7-calendar
@@ -43,7 +44,6 @@ jobs:
                 php7-embed
                 php7-enchant
                 php7-exif
-                php7-ffi
                 php7-fileinfo
                 php7-fpm
                 php7-ftp
