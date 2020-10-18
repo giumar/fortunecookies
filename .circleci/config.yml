@@ -112,6 +112,7 @@ jobs:
             - v1-dependencies-
 
       - run: composer install -n --prefer-dist
+      - run: "cp config/app.default.php config/app_local.php"
       - run: "php bin/cake.php migrations migrate"
 
       - save_cache:
