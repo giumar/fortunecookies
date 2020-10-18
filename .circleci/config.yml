@@ -112,7 +112,7 @@ jobs:
             - v1-dependencies-
 
       - run: composer install -n --prefer-dist
-      - run: "bin/cake migrations migrate"
+      - run: "bin/cake.php migrations migrate"
 
       - save_cache:
           key: v1-dependencies-{{ checksum "composer.json" }}
