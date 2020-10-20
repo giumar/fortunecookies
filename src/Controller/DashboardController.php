@@ -10,7 +10,7 @@ use App\Controller\AppController;
 class DashboardController extends AppController
 {
 
-    public function initialize()
+    public function initialize() : void
     {
         parent::initialize();
 
