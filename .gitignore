@@ -43,3 +43,5 @@ nbproject/*
 .sass-cache/
 *.sqlite
 config/Migrations/schema-dump-default.lock
+# Composer
+composer.lock
