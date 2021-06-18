@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller;
 
 use App\Controller\AppController;
@@ -7,17 +8,16 @@ use App\Controller\AppController;
  * Dashboard Controller
  *
  */
-class DashboardController extends AppController
-{
+class DashboardController extends AppController {
 
-    public function initialize() : void
-    {
+    public function initialize(): void {
         parent::initialize();
 
         $this->Auth->allow(['index']);
     }
 
-    public function index()
-    {
+    public function index() {
+        
     }
+
 }
