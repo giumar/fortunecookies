@@ -33,7 +33,7 @@ class UseroptionsTableTest extends TestCase
      *
      * @return void
      */
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
         $config = TableRegistry::exists('Useroptions') ? [] : ['className' => 'App\Model\Table\UseroptionsTable'];
@@ -45,7 +45,7 @@ class UseroptionsTableTest extends TestCase
      *
      * @return void
      */
-    public function tearDown()
+    public function tearDown() : void
     {
         unset($this->Useroptions);
 

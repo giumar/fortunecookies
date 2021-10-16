@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Test\TestCase\Controller;
 
 use App\Controller\TicketsController;
@@ -7,8 +8,7 @@ use Cake\TestSuite\IntegrationTestCase;
 /**
  * App\Controller\TicketsController Test Case
  */
-class TicketsControllerTest extends IntegrationTestCase
-{
+class TicketsControllerTest extends IntegrationTestCase {
 
     /**
      * Fixtures
@@ -16,25 +16,23 @@ class TicketsControllerTest extends IntegrationTestCase
      * @var array
      */
     public $fixtures = [
-		'app.ticketstatuses',
+        'app.ticketstatuses',
         'app.tickettypes',
         'app.tickets',
-        'app.operations',        
+        'app.operations',
     ];
 
-	public function setUp()
-    {
+    public function setUp() : void {
         parent::setUp();
 
-		$this->session([
-			'Auth' => [
-				'User' => [
-					'id' => 1,
-					'username' => 'admin',
-				]
-			]
-		]);
-		
+        $this->session([
+            'Auth' => [
+                'User' => [
+                    'id' => 1,
+                    'username' => 'admin',
+                ]
+            ]
+        ]);
     }
 
     /**
@@ -42,22 +40,20 @@ class TicketsControllerTest extends IntegrationTestCase
      *
      * @return void
      */
-    public function tearDown()
-    {
-		unset($this->session);	
-	
+    public function tearDown() : void {
+        unset($this->session);
+
         parent::tearDown();
-    }	
-	
+    }
+
     /**
      * Test index method
      *
      * @return void
      */
-    public function testIndex()
-    {
+    public function testIndex() {
         $this->get('/tickets/index');
-		$this->assertResponseOk();
+        $this->assertResponseOk();
     }
 
     /**
@@ -65,16 +61,15 @@ class TicketsControllerTest extends IntegrationTestCase
      *
      * @return void
      */
-    public function testView()
-    {
+    public function testView() {
         $this->get('/tickets/view/1');
-		$this->assertResponseOk();
-		$this->assertResponseContains('<title>Tickets</title>');
-		
-		//Test header as <h3> and Ticket ID inside a badge class. See https://github.com/giumar/fortunecookies/issues/21
-		//
-		$this->assertResponseContains('<div class="panel-heading"><h3><span class="label label-default">#1</span> ');
-		$this->assertResponseContains('Lorem ipsum dolor sit amet');
+        $this->assertResponseOk();
+        $this->assertResponseContains('<title>Tickets</title>');
+
+        //Test header as <h3> and Ticket ID inside a badge class. See https://github.com/giumar/fortunecookies/issues/21
+        //
+        $this->assertResponseContains('<div class="panel-heading"><h3><span class="label label-default">#1</span> ');
+        $this->assertResponseContains('Lorem ipsum dolor sit amet');
     }
 
     /**
@@ -82,21 +77,20 @@ class TicketsControllerTest extends IntegrationTestCase
      *
      * @return void
      */
-    public function testAdd()
-    {
-		$this->enableCsrfToken();
-		$this->enableSecurityToken();
+    public function testAdd() {
+        $this->enableCsrfToken();
+        $this->enableSecurityToken();
 
-		$this->get('/tickets/add/');
-		$this->assertResponseOk();
-		
-		$data = [
+        $this->get('/tickets/add/');
+        $this->assertResponseOk();
+
+        $data = [
             'title' => 'New ticket',
-			'ticketstatus_id'=>1,
-			'tickettype_id'=>1,
+            'ticketstatus_id' => 1,
+            'tickettype_id' => 1,
         ];
-		
-		$this->post('/tickets/add', $data);
+
+        $this->post('/tickets/add', $data);
 
         $this->assertResponseSuccess();
     }
@@ -106,17 +100,16 @@ class TicketsControllerTest extends IntegrationTestCase
      *
      * @return void
      */
-    public function testEdit()
-    {
-		$this->enableCsrfToken();
-		$this->enableSecurityToken();
-		
-		$this->get('/tickets/edit/1');
-		$this->assertResponseOk();
-		$this->assertResponseContains('<title>Tickets</title>');
-		$this->assertResponseContains('Lorem ipsum dolor sit amet');
-		
-		$data = [
+    public function testEdit() {
+        $this->enableCsrfToken();
+        $this->enableSecurityToken();
+
+        $this->get('/tickets/edit/1');
+        $this->assertResponseOk();
+        $this->assertResponseContains('<title>Tickets</title>');
+        $this->assertResponseContains('Lorem ipsum dolor sit amet');
+
+        $data = [
             'email' => 'Again Lorem ipsum dolor sit amet'
         ];
         $this->post('/tickets/edit/1', $data);
@@ -129,38 +122,36 @@ class TicketsControllerTest extends IntegrationTestCase
      *
      * @return void
      */
-    public function testDelete()
-    {
+    public function testDelete() {
         $this->enableCsrfToken();
-		$this->enableSecurityToken();
-		
-		$this->delete('/tickets/delete/1');
-		$this->assertRedirect();
+        $this->enableSecurityToken();
+
+        $this->delete('/tickets/delete/1');
+        $this->assertRedirect();
     }
-	
-	/**
+
+    /**
      * Test addOperation method
      *
      * @return void
      */
-    public function testAddOperation()
-    {
+    public function testAddOperation() {
 
-		$this->enableCsrfToken();
-		$this->enableSecurityToken();
-		
-		$this->get('/tickets/addoperation/1');
-		$this->assertResponseOk();
-		$this->assertResponseContains('<title>Tickets</title>');
-		
-		$data = [
+        $this->enableCsrfToken();
+        $this->enableSecurityToken();
+
+        $this->get('/tickets/addoperation/1');
+        $this->assertResponseOk();
+        $this->assertResponseContains('<title>Tickets</title>');
+
+        $data = [
             'start' => '2017-01-01 00:01',
             'end' => '2017-01-01 01:01',
-			'ticket_id' => null,
+            'ticket_id' => null,
             'description' => 'New description',
         ];
-		
-		$this->post('/tickets/addoperation/1', $data);
+
+        $this->post('/tickets/addoperation/1', $data);
         $this->assertResponseSuccess();
     }
 
@@ -169,8 +160,7 @@ class TicketsControllerTest extends IntegrationTestCase
      *
      * @return void
      */
-    public function testEditOperation()
-    {
+    public function testEditOperation() {
 
         $this->enableCsrfToken();
         $this->enableSecurityToken();
@@ -187,7 +177,8 @@ class TicketsControllerTest extends IntegrationTestCase
         ];
 
         $this->post('/tickets/edit-operation/1', $data);
-		//echo $this->_response->body();
+        //echo $this->_response->body();
         $this->assertResponseSuccess();
     }
+
 }

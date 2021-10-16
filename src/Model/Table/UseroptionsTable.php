@@ -34,9 +34,9 @@ class UseroptionsTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('useroptions');
-        $this->displayField('name');
-        $this->primaryKey('id');
+        $this->setTable('useroptions');
+        $this->setDisplayField('name');
+        $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
 

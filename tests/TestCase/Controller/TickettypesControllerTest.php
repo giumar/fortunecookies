@@ -19,7 +19,7 @@ class TickettypesControllerTest extends IntegrationTestCase
         'app.tickettypes'
     ];
 
-	public function setUp()
+	public function setUp() : void
     {
         parent::setUp();
 
@@ -39,7 +39,7 @@ class TickettypesControllerTest extends IntegrationTestCase
      *
      * @return void
      */
-    public function tearDown()
+    public function tearDown() : void
     {
 		unset($this->session);	
 	

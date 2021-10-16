@@ -32,7 +32,7 @@ class TickettypesTableTest extends TestCase
      *
      * @return void
      */
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
         $config = TableRegistry::exists('Tickettypes') ? [] : ['className' => 'App\Model\Table\TickettypesTable'];
@@ -44,7 +44,7 @@ class TickettypesTableTest extends TestCase
      *
      * @return void
      */
-    public function tearDown()
+    public function tearDown() : void
     {
         unset($this->Tickettypes);
 

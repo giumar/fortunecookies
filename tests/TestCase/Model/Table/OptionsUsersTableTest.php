@@ -24,7 +24,7 @@ class OptionsUsersTableTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'app.options_users'
+        'app.optionsusers'
     ];
 
     /**
@@ -32,7 +32,7 @@ class OptionsUsersTableTest extends TestCase
      *
      * @return void
      */
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
         $config = TableRegistry::exists('OptionsUsers') ? [] : ['className' => OptionsUsersTable::class];
@@ -44,7 +44,7 @@ class OptionsUsersTableTest extends TestCase
      *
      * @return void
      */
-    public function tearDown()
+    public function tearDown() : void
     {
         unset($this->OptionsUsers);
 
