@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model\Table;
 
 use Cake\ORM\Query;
@@ -19,8 +20,7 @@ use Cake\Validation\Validator;
  *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
-class TickettypesTable extends Table
-{
+class TickettypesTable extends Table {
 
     /**
      * Initialize method
@@ -28,8 +28,7 @@ class TickettypesTable extends Table
      * @param array $config The configuration for the Table.
      * @return void
      */
-    public function initialize(array $config) : void
-    {
+    public function initialize(array $config): void {
         parent::initialize($config);
 
         $this->setTable('tickettypes');
@@ -37,11 +36,10 @@ class TickettypesTable extends Table
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
-		
-		$this->hasMany('Tickets', [
+
+        $this->hasMany('Tickets', [
             'foreignKey' => 'tickettype_id'
         ]);
-		
     }
 
     /**
@@ -50,16 +48,16 @@ class TickettypesTable extends Table
      * @param \Cake\Validation\Validator $validator Validator instance.
      * @return \Cake\Validation\Validator
      */
-    public function validationDefault(Validator $validator) : Validator
-    {
+    public function validationDefault(Validator $validator): Validator {
         $validator
-            ->integer('id')
-            ->allowEmpty('id', 'create');
+                ->integer('id')
+                ->allowEmpty('id', 'create');
 
         $validator
-            ->requirePresence('name', 'create')
-            ->notEmpty('name');
+                ->requirePresence('name', 'create')
+                ->notEmpty('name');
 
         return $validator;
     }
+
 }

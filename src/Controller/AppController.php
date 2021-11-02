@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 /**
  * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
@@ -13,6 +14,7 @@ declare(strict_types=1);
  * @since     0.2.9
  * @license   https://opensource.org/licenses/mit-license.php MIT License
  */
+
 namespace App\Controller;
 
 use Cake\Controller\Controller;
@@ -26,8 +28,7 @@ use Cake\Event\EventInterface;
  *
  * @link https://book.cakephp.org/4/en/controllers.html#the-app-controller
  */
-class AppController extends Controller
-{
+class AppController extends Controller {
 
     /**
      * Initialization hook method.
@@ -38,15 +39,14 @@ class AppController extends Controller
      *
      * @return void
      */
-    public function initialize(): void
-    {
+    public function initialize(): void {
         parent::initialize();
 
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
         $this->loadComponent('Security');
-		$this->loadComponent('Auth', [
-			'authorize' => ['Controller'],
+        $this->loadComponent('Auth', [
+            'authorize' => ['Controller'],
             'authenticate' => [
                 'Form' => [
                     'fields' => [
@@ -56,31 +56,31 @@ class AppController extends Controller
                 ]
             ],
             'loginAction' => [
-				'prefix' => 'admin',
+                'prefix' => 'Admin',
                 'controller' => 'Users',
-                'action' => 'login'
+                'action' => 'login',
+                'plugin' => null,
+                '_ext' => null,
             ],
-			'logoutAction' => [
-				'prefix' => 'admin',
+            'logoutAction' => [
+                'prefix' => 'Admin',
                 'controller' => 'Users',
-                'action' => 'login'
+                'action' => 'logout'
             ],
-			'unauthorizedRedirect' => $this->referer()
-		]);
-		$this->Auth->allow();
+            'unauthorizedRedirect' => $this->referer()
+        ]);
+        $this->Auth->allow();
     }
 
-	public function isAuthorized($user)
-	{
-		// Admin can access every action
-		if (isset($user['role']) && $user['role'] === 'admin') {
-			return true;
-		}
+    public function isAuthorized($user) {
+        // Admin can access every action
+        if (isset($user['role']) && $user['role'] === 'admin') {
+            return true;
+        }
 
-		// Default permit
-		return true;
-	}
-
+        // Default permit
+        return true;
+    }
 
     /**
      * Before render callback.
@@ -88,12 +88,12 @@ class AppController extends Controller
      * @param \Cake\Event\Event $event The beforeRender event.
      * @return \Cake\Network\Response|null|void
      */
-    public function beforeRender(EventInterface $event)
-    {        
+    public function beforeRender(EventInterface $event) {
         if (!array_key_exists('_serialize', $this->viewBuilder()->getVars()) &&
-            in_array($this->response->getType(), ['application/json', 'application/xml'])
+                in_array($this->response->getType(), ['application/json', 'application/xml'])
         ) {
             $this->set('_serialize', true);
         }
     }
+
 }

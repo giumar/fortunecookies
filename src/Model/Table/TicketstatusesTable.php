@@ -32,9 +32,9 @@ class TicketstatusesTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('ticketstatuses');
-        $this->displayField('name');
-        $this->primaryKey('id');
+        $this->setTable('ticketstatuses');
+        $this->setDisplayField('name');
+        $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
     }

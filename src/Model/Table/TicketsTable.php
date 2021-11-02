@@ -34,9 +34,9 @@ class TicketsTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('tickets');
-        $this->displayField('title');
-        $this->primaryKey('id');
+        $this->setTable('tickets');
+        $this->setDisplayField('title');
+        $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
 

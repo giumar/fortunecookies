@@ -1,6 +1,5 @@
-<?php 
-
-$isUserLoggedIn = $this->request->getSession()->read('Auth.user');
+<?php
+$isUserLoggedIn = $this->getRequest()->getSession()->read('Auth.User.id');
 ?>
 <!DOCTYPE html>
 <html>
@@ -47,7 +46,7 @@ $isUserLoggedIn = $this->request->getSession()->read('Auth.user');
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                             <?php
                                             if ($isUserLoggedIn) {
-                                                echo $this->request->session()->read('Auth.User.email');
+                                                echo $this->getRequest()->getSession()->read('Auth.User.email');
                                             } else {
                                                 echo "User profile ";
                                             }
@@ -62,14 +61,14 @@ $isUserLoggedIn = $this->request->getSession()->read('Auth.user');
                                     <li class="dropdown">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cogs" aria-hidden="true"></i> Administration <span class="caret"></span></a>
                                         <ul class="dropdown-menu">
-                                            <li><?= $this->Html->link('Users', ['prefix' => 'admin', 'controller' => 'users', 'action' => 'index']); ?></li>
-                                            <li><?= $this->Html->link('Types', ['prefix' => 'admin', 'controller' => 'tickettypes', 'action' => 'index']); ?></li>
-                                            <li><?= $this->Html->link('Statuses', ['prefix' => 'admin', 'controller' => 'ticketstatuses', 'action' => 'index']); ?></li>
+                                            <li><?= $this->Html->link('Users', ['prefix' => 'Admin', 'controller' => 'Users', 'action' => 'index']); ?></li>
+                                            <li><?= $this->Html->link('Types', ['prefix' => 'Admin', 'controller' => 'tickettypes', 'action' => 'index']); ?></li>
+                                            <li><?= $this->Html->link('Statuses', ['prefix' => 'Admin', 'controller' => 'ticketstatuses', 'action' => 'index']); ?></li>
                                             <li role="separator" class="divider"></li>
                                             <li><a href="#">Separated link</a></li>
                                         </ul>
                                     </li>
-                                    <li><?= $this->Html->link('<i class="fa fa-sign-out" aria-hidden="true"></i> Logout', ['prefix' => 'admin', 'controller' => 'users', 'action' => 'logout'], ['class' => '', 'escape' => false]); ?></li>
+                                    <li><?= $this->Html->link('<i class="fa fa-sign-out" aria-hidden="true"></i> Logout', ['prefix' => 'Admin', 'controller' => 'Users', 'action' => 'logout'], ['class' => '', 'escape' => false]); ?></li>
                                 </ul>						
                             </div><!-- /.navbar-collapse -->
                         </div><!-- /.container-fluid -->

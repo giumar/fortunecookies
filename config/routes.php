@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Routes configuration.
  *
@@ -20,9 +21,9 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-
 use Cake\Routing\Route\DashedRoute;
 use Cake\Routing\RouteBuilder;
+
 /*
  * The default class to use for all routes
  *
@@ -41,21 +42,23 @@ use Cake\Routing\RouteBuilder;
  * `:action` markers.
  */
 /** @var \Cake\Routing\RouteBuilder $routes */
-
 $routes->setRouteClass(DashedRoute::class);
 
 $routes->scope('/', function (RouteBuilder $builder) {
 
-	$builder->prefix('admin', function($routes) {
-		$routes->connect('/', ['controller' => 'Users', 'action' => 'index']);
-		$routes->fallbacks(DashedRoute::class);
-	});
+    $builder->prefix('admin', function($routes) {
+        $routes->connect('/', ['controller' => 'Users', 'action' => 'index']);
+        $routes->connect('/users/index', ['controller' => 'Users', 'action' => 'index']);
+        $routes->connect('/users/login', ['controller' => 'Users', 'action' => 'login']);
+        $routes->connect('/users/logout', ['controller' => 'Users', 'action' => 'logout']);
+        $routes->fallbacks(DashedRoute::class);
+    });
 
-	$builder->prefix('profile', function($routes) {
-		$routes->fallbacks(DashedRoute::class);
-	});	
-	
-	
+    $builder->prefix('profile', function($routes) {
+        $routes->fallbacks(DashedRoute::class);
+    });
+
+
     $builder->connect('/', ['controller' => 'dashboard', 'action' => 'index']);
     $builder->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']);
     $builder->fallbacks();
