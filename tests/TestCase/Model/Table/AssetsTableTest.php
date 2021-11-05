@@ -1,8 +1,9 @@
 <?php
+declare(strict_types=1);
+
 namespace App\Test\TestCase\Model\Table;
 
 use App\Model\Table\AssetsTable;
-use Cake\ORM\TableRegistry;
 use Cake\TestSuite\TestCase;
 
 /**
@@ -10,21 +11,20 @@ use Cake\TestSuite\TestCase;
  */
 class AssetsTableTest extends TestCase
 {
-
     /**
      * Test subject
      *
      * @var \App\Model\Table\AssetsTable
      */
-    public $Assets;
+    protected $Assets;
 
     /**
      * Fixtures
      *
      * @var array
      */
-    public $fixtures = [
-        'app.assets'
+    protected $fixtures = [
+        'app.Assets',
     ];
 
     /**
@@ -32,11 +32,11 @@ class AssetsTableTest extends TestCase
      *
      * @return void
      */
-    public function setUp() : void
+    public function setUp(): void
     {
         parent::setUp();
-        $config = TableRegistry::exists('Assets') ? [] : ['className' => AssetsTable::class];
-        $this->Assets = TableRegistry::get('Assets', $config);
+        $config = $this->getTableLocator()->exists('Assets') ? [] : ['className' => AssetsTable::class];
+        $this->Assets = $this->getTableLocator()->get('Assets', $config);
     }
 
     /**
@@ -44,7 +44,7 @@ class AssetsTableTest extends TestCase
      *
      * @return void
      */
-    public function tearDown() : void
+    public function tearDown(): void
     {
         unset($this->Assets);
 
@@ -52,21 +52,12 @@ class AssetsTableTest extends TestCase
     }
 
     /**
-     * Test initialize method
-     *
-     * @return void
-     */
-    public function testInitialize()
-    {
-        $this->markTestIncomplete('Not implemented yet.');
-    }
-
-    /**
      * Test validationDefault method
      *
      * @return void
+     * @uses \App\Model\Table\AssetsTable::validationDefault()
      */
-    public function testValidationDefault()
+    public function testValidationDefault(): void
     {
         $this->markTestIncomplete('Not implemented yet.');
     }

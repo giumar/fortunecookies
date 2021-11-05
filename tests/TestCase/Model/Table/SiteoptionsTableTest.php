@@ -24,7 +24,7 @@ class SiteoptionsTableTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'app.siteoptions'
+        'app.Siteoptions'
     ];
 
     /**
@@ -35,8 +35,8 @@ class SiteoptionsTableTest extends TestCase
     public function setUp() : void
     {
         parent::setUp();
-        $config = TableRegistry::exists('Siteoptions') ? [] : ['className' => 'App\Model\Table\SiteoptionsTable'];
-        $this->Siteoptions = TableRegistry::get('Siteoptions', $config);
+        $config = $this->getTableLocator()->exists('Siteoptions') ? [] : ['className' => 'App\Model\Table\SiteoptionsTable'];
+        $this->Siteoptions = $this->getTableLocator()->get('Siteoptions', $config);
     }
 
     /**

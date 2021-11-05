@@ -24,8 +24,8 @@ class UseroptionsTableTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'app.useroptions',
-        'app.users'
+        'app.Useroptions',
+        'app.Users'
     ];
 
     /**
@@ -36,8 +36,8 @@ class UseroptionsTableTest extends TestCase
     public function setUp() : void
     {
         parent::setUp();
-        $config = TableRegistry::exists('Useroptions') ? [] : ['className' => 'App\Model\Table\UseroptionsTable'];
-        $this->Useroptions = TableRegistry::get('Useroptions', $config);
+        $config = $this->getTableLocator()->exists('Useroptions') ? [] : ['className' => 'App\Model\Table\UseroptionsTable'];
+        $this->Useroptions = $this->getTableLocator()->get('Useroptions', $config);
     }
 
     /**

@@ -32,9 +32,9 @@ class SiteoptionsTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('siteoptions');
-        $this->displayField('name');
-        $this->primaryKey('id');
+        $this->setTable('siteoptions');
+        $this->setDisplayField('name');
+        $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
     }

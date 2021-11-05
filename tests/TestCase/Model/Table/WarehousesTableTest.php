@@ -24,7 +24,7 @@ class WarehousesTableTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'app.warehouses'
+        'app.Warehouses'
     ];
 
     /**
@@ -35,8 +35,8 @@ class WarehousesTableTest extends TestCase
     public function setUp() : void
     {
         parent::setUp();
-        $config = TableRegistry::exists('Warehouses') ? [] : ['className' => WarehousesTable::class];
-        $this->Warehouses = TableRegistry::get('Warehouses', $config);
+        $config = $this->getTableLocator()->exists('Warehouses') ? [] : ['className' => WarehousesTable::class];
+        $this->Warehouses = $this->getTableLocator()->get('Warehouses', $config);
     }
 
     /**

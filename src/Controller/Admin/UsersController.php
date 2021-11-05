@@ -81,7 +81,7 @@ class UsersController extends AppController {
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('The user has been saved.'));
 
-                return $this->redirect(['prefix' => 'admin', 'controller' => 'Users', 'action' => 'index']);
+                return $this->redirect(['prefix' => 'Admin', 'controller' => 'Users', 'action' => 'index']);
             }
             $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
@@ -105,7 +105,7 @@ class UsersController extends AppController {
             $this->Flash->error(__('The user could not be deleted. Please, try again.'));
         }
 
-        return $this->redirect(['prefix' => 'admin', 'controller' => 'Users', 'action' => 'index']);
+        return $this->redirect(['prefix' => 'Admin', 'controller' => 'Users', 'action' => 'index']);
     }
 
     public function login() {

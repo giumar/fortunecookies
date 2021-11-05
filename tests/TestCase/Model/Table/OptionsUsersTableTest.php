@@ -24,7 +24,7 @@ class OptionsUsersTableTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'app.optionsusers'
+        'app.OptionsUsers'
     ];
 
     /**
@@ -35,8 +35,8 @@ class OptionsUsersTableTest extends TestCase
     public function setUp() : void
     {
         parent::setUp();
-        $config = TableRegistry::exists('OptionsUsers') ? [] : ['className' => OptionsUsersTable::class];
-        $this->OptionsUsers = TableRegistry::get('OptionsUsers', $config);
+        $config = $this->getTableLocator()->exists('OptionsUsers') ? [] : ['className' => OptionsUsersTable::class];
+        $this->OptionsUsers = $this->getTableLocator()->get('OptionsUsers', $config);
     }
 
     /**

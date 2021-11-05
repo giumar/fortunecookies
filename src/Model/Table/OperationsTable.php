@@ -34,9 +34,9 @@ class OperationsTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('operations');
-        $this->displayField('id');
-        $this->primaryKey('id');
+        $this->setTable('operations');
+        $this->setDisplayField('id');
+        $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
 
@@ -56,7 +56,7 @@ class OperationsTable extends Table
     {
         $validator
             ->integer('id')
-            ->allowEmpty('id', 'create');
+            ->allowEmptyFor('id', 'create');
 
         $validator
             ->dateTime('start')
@@ -69,7 +69,7 @@ class OperationsTable extends Table
             ->notEmpty('end');
 
         $validator
-            ->allowEmpty('description', 'create');
+            ->allowEmptyString('description', 'create');
 			
         return $validator;
     }
