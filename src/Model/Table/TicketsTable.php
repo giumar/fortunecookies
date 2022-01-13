@@ -63,7 +63,7 @@ class TicketsTable extends Table {
 
         $validator
                 ->requirePresence('title', 'create')
-                ->notEmpty('title');
+                ->notEmptyString('title');
 
         $validator
                 ->allowEmptyString('title', 'create');
