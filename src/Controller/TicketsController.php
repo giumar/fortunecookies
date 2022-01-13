@@ -48,9 +48,9 @@ class TicketsController extends AppController {
      * @return \Cake\Network\Response|null Redirects on successful add, renders view otherwise.
      */
     public function add() {
-        $ticket = $this->Tickets->newEntity();
+        $ticket = $this->Tickets->newEmptyEntity();
         if ($this->request->is('post')) {
-            $ticket = $this->Tickets->patchEntity($ticket, $this->request->data);
+            $ticket = $this->Tickets->patchEntity($ticket, $this->getRequest()->getData());
             if ($this->Tickets->save($ticket)) {
                 $this->Flash->success(__('The ticket has been saved.'));
 

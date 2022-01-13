@@ -57,9 +57,9 @@ class TicketsTable extends Table {
      * @return \Cake\Validation\Validator
      */
     public function validationDefault(Validator $validator): Validator {
-        $validator
-                ->integer('id')
-                ->allowEmptyFor('id', 'create');
+        //$validator
+        //        ->integer('id')
+        //        ->allowEmptyFor('id', 'create');
 
         $validator
                 ->requirePresence('title', 'create')

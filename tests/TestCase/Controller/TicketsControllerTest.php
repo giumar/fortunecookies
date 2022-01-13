@@ -16,9 +16,9 @@ class TicketsControllerTest extends IntegrationTestCase {
      * @var array
      */
     public $fixtures = [
+        'app.Tickets',
         'app.Ticketstatuses',
         'app.Tickettypes',
-        'app.Tickets',
         'app.Operations',
     ];
 
@@ -78,8 +78,8 @@ class TicketsControllerTest extends IntegrationTestCase {
      * @return void
      */
     public function testAdd() {
-        $this->markTestIncomplete('Not implemented yet.');
-        /*
+        //$this->markTestIncomplete('Not implemented yet.');
+        
           $this->enableCsrfToken();
           $this->enableSecurityToken();
 
@@ -95,8 +95,6 @@ class TicketsControllerTest extends IntegrationTestCase {
           $this->post('/tickets/add', $data);
 
           $this->assertResponseSuccess();
-         * 
-         */
     }
 
     /**

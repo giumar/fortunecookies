@@ -50,13 +50,13 @@ class TickettypesController extends AppController
      */
     public function add()
     {
-        $tickettype = $this->Tickettypes->newEntity();
+        $tickettype = $this->Tickettypes->newEmptyEntity();
         if ($this->request->is('post')) {
-            $tickettype = $this->Tickettypes->patchEntity($tickettype, $this->request->data);
+            $tickettype = $this->Tickettypes->patchEntity($tickettype, $this->getRequest()->getData());
             if ($this->Tickettypes->save($tickettype)) {
                 $this->Flash->success(__('The tickettype has been saved.'));
 
-                return $this->redirect(['prefix'=>false, 'controller'=>'Tickettypes', 'action' => 'index']);
+                return $this->redirect(['prefix'=>'Admin', 'controller'=>'Tickettypes', 'action' => 'index']);
             }
             $this->Flash->error(__('The tickettype could not be saved. Please, try again.'));
         }
