@@ -16,7 +16,7 @@ class OptionsUsersControllerTest extends IntegrationTestCase
      * @var array
      */
     public $fixtures = [
-        'app.optionsusers'
+        'app.OptionsUsers'
     ];
 
     /**

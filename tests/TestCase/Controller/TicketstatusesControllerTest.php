@@ -16,7 +16,7 @@ class TicketstatusesControllerTest extends IntegrationTestCase
      * @var array
      */
     public $fixtures = [
-        'app.ticketstatuses'
+        'app.Ticketstatuses'
     ];
 
 	public function setUp() : void

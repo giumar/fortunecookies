@@ -16,7 +16,7 @@ class DocumentsControllerTest extends IntegrationTestCase
      * @var array
      */
     public $fixtures = [
-        'app.documents'
+        'app.Documents'
     ];
 
     /**
