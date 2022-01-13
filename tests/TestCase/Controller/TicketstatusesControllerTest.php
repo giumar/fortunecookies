@@ -16,10 +16,10 @@ class TicketstatusesControllerTest extends IntegrationTestCase
      * @var array
      */
     public $fixtures = [
-        'app.ticketstatuses'
+        'app.Ticketstatuses'
     ];
 
-	public function setUp()
+	public function setUp() : void
     {
         parent::setUp();
 
@@ -39,7 +39,7 @@ class TicketstatusesControllerTest extends IntegrationTestCase
      *
      * @return void
      */
-    public function tearDown()
+    public function tearDown() : void
     {
 		unset($this->session);	
 	

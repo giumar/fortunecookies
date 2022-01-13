@@ -24,7 +24,7 @@ class OptionsSystemsTableTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'app.options_systems'
+        'app.OptionsSystems'
     ];
 
     /**
@@ -32,11 +32,11 @@ class OptionsSystemsTableTest extends TestCase
      *
      * @return void
      */
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
-        $config = TableRegistry::exists('OptionsSystems') ? [] : ['className' => OptionsSystemsTable::class];
-        $this->OptionsSystems = TableRegistry::get('OptionsSystems', $config);
+        $config = $this->getTableLocator()->exists('OptionsSystems') ? [] : ['className' => OptionsSystemsTable::class];
+        $this->OptionsSystems = $this->getTableLocator()->get('OptionsSystems', $config);
     }
 
     /**
@@ -44,7 +44,7 @@ class OptionsSystemsTableTest extends TestCase
      *
      * @return void
      */
-    public function tearDown()
+    public function tearDown() : void
     {
         unset($this->OptionsSystems);
 

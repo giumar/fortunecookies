@@ -1,83 +1,44 @@
 <?php
+declare(strict_types=1);
 
 /**
- * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
+ * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
  *
  * Licensed under The MIT License
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice
  *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @link          http://cakephp.org CakePHP(tm) Project
+ * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
+ * @link          https://cakephp.org CakePHP(tm) Project
  * @since         1.2.0
- * @license       http://www.opensource.org/licenses/mit-license.php MIT License
+ * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-
 namespace App\Test\TestCase\Controller;
 
-use App\Controller\PagesController;
-use Cake\Core\App;
 use Cake\Core\Configure;
-use Cake\Network\Request;
-use Cake\Network\Response;
-use Cake\TestSuite\IntegrationTestCase;
-use Cake\View\Exception\MissingTemplateException;
+use Cake\TestSuite\IntegrationTestTrait;
+use Cake\TestSuite\TestCase;
 
 /**
  * PagesControllerTest class
+ *
+ * @uses \App\Controller\PagesController
  */
-class PagesControllerTest extends IntegrationTestCase {
-
-    public function testDisplayEmptyUnauthenticated() {
-        // $this->get('/pages/');
-        // $this->assertRedirect(['prefix' => 'admin', 'controller' => 'Users', 'action' => 'login']);
-		$this->markTestIncomplete('Not implemented yet.');
-    }
-
-    public function testDisplayEmptyAuthenticated() {
-        $this->session([
-            'Auth' => [
-                'User' => [
-                    'id' => 1,
-                    'username' => 'admin',
-                ]
-            ]
-        ]);
-
-        $this->get('/pages/');
-        $this->assertRedirect(['prefix' => false, 'controller' => 'Dashboard', 'action' => 'index']);
-    }
+class PagesControllerTest extends TestCase
+{
+    use IntegrationTestTrait;
 
     /**
      * testMultipleGet method
      *
      * @return void
      */
-    public function testMultipleGetUnauthenticated() {
-        // $this->get('/pages/home.ctp');
-        // $this->assertRedirect(['prefix' => 'admin', 'controller' => 'Users', 'action' => 'login']);
-        // $this->get('/pages/home.ctp');
-        // $this->assertRedirect(['prefix' => 'admin', 'controller' => 'Users', 'action' => 'login']);
-
-        // $this->assertRedirect(['prefix' => 'admin', 'controller' => 'Users', 'action' => 'login']);
-        // $this->get('/pages/home.ctp');
-        // $this->assertRedirect(['prefix' => 'admin', 'controller' => 'Users', 'action' => 'login']);
-		$this->markTestIncomplete('Not implemented yet.');
-    }
-
-    public function testMultipleGetAuthenticated() {
-        $this->session([
-            'Auth' => [
-                'User' => [
-                    'id' => 1,
-                    'username' => 'admin',
-                ]
-            ]
-        ]);
-        $this->get('/pages/home');
+    public function testMultipleGet()
+    {
+        $this->get('/');
         $this->assertResponseOk();
-        $this->get('/pages/home');
+        $this->get('/');
         $this->assertResponseOk();
     }
 
@@ -86,38 +47,12 @@ class PagesControllerTest extends IntegrationTestCase {
      *
      * @return void
      */
-    public function testDisplayUnauthenticated() {
-        //$this->get('/pages/home');
-
-        //$this->assertRedirect(['prefix' => 'admin', 'controller' => 'Users', 'action' => 'login']);
-
-        //$this->assertRedirect(['prefix' => 'admin', 'controller' => 'Users', 'action' => 'login']);
-		$this->markTestIncomplete('Not implemented yet.');
-    }
-
-    public function testDisplayAuthenticated() {
-        $this->session([
-            'Auth' => [
-                'User' => [
-                    'id' => 1,
-                    'username' => 'admin',
-                ]
-            ]
-        ]);
+    public function testDisplay()
+    {
         $this->get('/pages/home');
         $this->assertResponseOk();
         $this->assertResponseContains('CakePHP');
         $this->assertResponseContains('<html>');
-    }
-
-    public function testMissingTemplateUnauthenticated() {
-        // Configure::write('debug', false);
-        // $this->get('/pages/not_existing');
-
-        // $this->assertRedirect(['prefix' => 'admin', 'controller' => 'Users', 'action' => 'login']);
-
-        // $this->assertRedirect(['prefix' => 'admin', 'controller' => 'Users', 'action' => 'login']);
-		$this->markTestIncomplete('Not implemented yet.');
     }
 
     /**
@@ -125,18 +60,11 @@ class PagesControllerTest extends IntegrationTestCase {
      *
      * @return void
      */
-    public function testMissingTemplateAuthenticated() {
-        $this->session([
-            'Auth' => [
-                'User' => [
-                    'id' => 1,
-                    'username' => 'admin',
-                ]
-            ]
-        ]);
-
+    public function testMissingTemplate()
+    {
         Configure::write('debug', false);
         $this->get('/pages/not_existing');
+
         $this->assertResponseError();
         $this->assertResponseContains('Error');
     }
@@ -146,32 +74,15 @@ class PagesControllerTest extends IntegrationTestCase {
      *
      * @return void
      */
-    public function testMissingTemplateInDebugAuthenticated() {
-        $this->session([
-            'Auth' => [
-                'User' => [
-                    'id' => 1,
-                    'username' => 'admin',
-                ]
-            ]
-        ]);
-
+    public function testMissingTemplateInDebug()
+    {
         Configure::write('debug', true);
         $this->get('/pages/not_existing');
+
         $this->assertResponseFailure();
         $this->assertResponseContains('Missing Template');
         $this->assertResponseContains('Stacktrace');
-        $this->assertResponseContains('not_existing.ctp');
-    }
-
-    public function testMissingTemplateInDebugUnauthenticated() {
-        // Configure::write('debug', true);
-        // $this->get('/pages/not_existing');
-
-        // $this->assertRedirect(['prefix' => 'admin', 'controller' => 'Users', 'action' => 'login']);
-
-        // $this->assertRedirect(['prefix' => 'admin', 'controller' => 'Users', 'action' => 'login']);
-		$this->markTestIncomplete('Not implemented yet.');
+        $this->assertResponseContains('not_existing.php');
     }
 
     /**
@@ -179,28 +90,42 @@ class PagesControllerTest extends IntegrationTestCase {
      *
      * @return void
      */
-    public function testDirectoryTraversalProtectionUnauthenticated() {
-        // $this->get('/pages/../Layout/ajax');
-
-        // $this->assertRedirect(['prefix' => 'admin', 'controller' => 'Users', 'action' => 'login']);
-
-        // $this->assertRedirect(['prefix' => 'admin', 'controller' => 'Users', 'action' => 'login']);
-		$this->markTestIncomplete('Not implemented yet.');
-    }
-
-    public function testDirectoryTraversalProtectionAuthenticated() {
-        $this->session([
-            'Auth' => [
-                'User' => [
-                    'id' => 1,
-                    'username' => 'admin',
-                ]
-            ]
-        ]);
-
+    public function testDirectoryTraversalProtection()
+    {
         $this->get('/pages/../Layout/ajax');
         $this->assertResponseCode(403);
         $this->assertResponseContains('Forbidden');
     }
 
+    /**
+     * Test that CSRF protection is applied to page rendering.
+     *
+     * @return void
+     */
+    public function testCsrfAppliedError()
+    {
+        $this->post('/pages/home', ['hello' => 'world']);
+
+        $this->assertResponseCode(403);
+        $this->assertResponseContains('CSRF');
+    }
+
+    /**
+     * Test that CSRF protection is applied to page rendering.
+     *
+     * @return void
+     */
+    public function testCsrfAppliedOk()
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+        /*
+
+        $this->enableCsrfToken();
+        $this->post('/pages/home', ['hello' => 'world']);
+
+        $this->assertResponseCode(200);
+        $this->assertResponseContains('CakePHP');
+         * 
+         */
+    }
 }

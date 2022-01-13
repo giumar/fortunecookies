@@ -1,8 +1,9 @@
 <?php
+declare(strict_types=1);
+
 namespace App\Test\TestCase\Model\Table;
 
 use App\Model\Table\ContactsTable;
-use Cake\ORM\TableRegistry;
 use Cake\TestSuite\TestCase;
 
 /**
@@ -16,15 +17,15 @@ class ContactsTableTest extends TestCase
      *
      * @var \App\Model\Table\ContactsTable
      */
-    public $Contacts;
+    protected $Contacts;
 
     /**
      * Fixtures
      *
      * @var array
      */
-    public $fixtures = [
-        'app.contacts'
+    protected $fixtures = [
+        'app.Contacts'
     ];
 
     /**
@@ -32,11 +33,11 @@ class ContactsTableTest extends TestCase
      *
      * @return void
      */
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
-        $config = TableRegistry::exists('Contacts') ? [] : ['className' => ContactsTable::class];
-        $this->Contacts = TableRegistry::get('Contacts', $config);
+        $config = $this->getTableLocator()->exists('Contacts') ? [] : ['className' => ContactsTable::class];
+        $this->Contacts = $this->getTableLocator()->get('Contacts', $config);
     }
 
     /**
@@ -44,7 +45,7 @@ class ContactsTableTest extends TestCase
      *
      * @return void
      */
-    public function tearDown()
+    public function tearDown() : void
     {
         unset($this->Contacts);
 

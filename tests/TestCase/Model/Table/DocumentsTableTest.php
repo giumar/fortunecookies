@@ -2,7 +2,6 @@
 namespace App\Test\TestCase\Model\Table;
 
 use App\Model\Table\DocumentsTable;
-use Cake\ORM\TableRegistry;
 use Cake\TestSuite\TestCase;
 
 /**
@@ -24,7 +23,7 @@ class DocumentsTableTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'app.documents'
+        'app.Documents'
     ];
 
     /**
@@ -32,11 +31,11 @@ class DocumentsTableTest extends TestCase
      *
      * @return void
      */
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
-        $config = TableRegistry::exists('Documents') ? [] : ['className' => DocumentsTable::class];
-        $this->Documents = TableRegistry::get('Documents', $config);
+        $config = $this->getTableLocator()->exists('Documents') ? [] : ['className' => DocumentsTable::class];
+        $this->Documents = $this->getTableLocator()->get('Documents', $config);
     }
 
     /**
@@ -44,7 +43,7 @@ class DocumentsTableTest extends TestCase
      *
      * @return void
      */
-    public function tearDown()
+    public function tearDown() : void
     {
         unset($this->Documents);
 

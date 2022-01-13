@@ -16,7 +16,7 @@ class SiteoptionsControllerTest extends IntegrationTestCase
      * @var array
      */
     public $fixtures = [
-        'app.siteoptions'
+        'app.Siteoptions'
     ];
 
     /**

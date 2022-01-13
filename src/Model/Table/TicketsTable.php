@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model\Table;
 
 use Cake\ORM\Query;
@@ -21,8 +22,7 @@ use Cake\Validation\Validator;
  *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
-class TicketsTable extends Table
-{
+class TicketsTable extends Table {
 
     /**
      * Initialize method
@@ -30,23 +30,22 @@ class TicketsTable extends Table
      * @param array $config The configuration for the Table.
      * @return void
      */
-    public function initialize(array $config)
-    {
+    public function initialize(array $config): void {
         parent::initialize($config);
 
-        $this->table('tickets');
-        $this->displayField('title');
-        $this->primaryKey('id');
+        $this->setTable('tickets');
+        $this->setDisplayField('title');
+        $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
 
         $this->hasMany('Operations', [
             'foreignKey' => 'ticket_id'
         ]);
-		$this->belongsTo('Tickettypes', [
+        $this->belongsTo('Tickettypes', [
             'foreignKey' => 'tickettype_id'
         ]);
-		$this->belongsTo('Ticketstatuses', [
+        $this->belongsTo('Ticketstatuses', [
             'foreignKey' => 'ticketstatus_id'
         ]);
     }
@@ -57,19 +56,19 @@ class TicketsTable extends Table
      * @param \Cake\Validation\Validator $validator Validator instance.
      * @return \Cake\Validation\Validator
      */
-    public function validationDefault(Validator $validator)
-    {
-        $validator
-            ->integer('id')
-            ->allowEmpty('id', 'create');
+    public function validationDefault(Validator $validator): Validator {
+        //$validator
+        //        ->integer('id')
+        //        ->allowEmptyFor('id', 'create');
 
         $validator
-            ->requirePresence('title', 'create')
-            ->notEmpty('title');
+                ->requirePresence('title', 'create')
+                ->notEmptyString('title');
 
         $validator
-            ->allowEmpty('title', 'create');			
-			
+                ->allowEmptyString('title', 'create');
+
         return $validator;
     }
+
 }

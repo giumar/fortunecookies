@@ -28,13 +28,13 @@ class TicketstatusesTable extends Table
      * @param array $config The configuration for the Table.
      * @return void
      */
-    public function initialize(array $config)
+    public function initialize(array $config) : void
     {
         parent::initialize($config);
 
-        $this->table('ticketstatuses');
-        $this->displayField('name');
-        $this->primaryKey('id');
+        $this->setTable('ticketstatuses');
+        $this->setDisplayField('name');
+        $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
     }
@@ -45,7 +45,7 @@ class TicketstatusesTable extends Table
      * @param \Cake\Validation\Validator $validator Validator instance.
      * @return \Cake\Validation\Validator
      */
-    public function validationDefault(Validator $validator)
+    public function validationDefault(Validator $validator) : Validator
     {
         $validator
             ->integer('id')

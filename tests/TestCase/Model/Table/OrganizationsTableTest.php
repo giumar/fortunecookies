@@ -24,8 +24,8 @@ class OrganizationsTableTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'app.organizations',
-        'app.users'
+        'app.Organizations',
+        'app.Users'
     ];
 
     /**
@@ -33,11 +33,11 @@ class OrganizationsTableTest extends TestCase
      *
      * @return void
      */
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
-        $config = TableRegistry::exists('Organizations') ? [] : ['className' => OrganizationsTable::class];
-        $this->Organizations = TableRegistry::get('Organizations', $config);
+        $config = $this->getTableLocator()->exists('Organizations') ? [] : ['className' => OrganizationsTable::class];
+        $this->Organizations = $this->getTableLocator()->get('Organizations', $config);
     }
 
     /**
@@ -45,7 +45,7 @@ class OrganizationsTableTest extends TestCase
      *
      * @return void
      */
-    public function tearDown()
+    public function tearDown() : void
     {
         unset($this->Organizations);
 
