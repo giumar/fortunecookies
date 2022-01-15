@@ -14,7 +14,8 @@ class UsersController extends AppController {
 
     public function beforeFilter(EventInterface $event) {
         parent::beforeFilter($event);
-        $this->Auth->allow('add','login','logout');
+        //$this->Auth->allow('add','login','logout');
+        $this->Authentication->addUnauthenticatedActions(['add','index','edit']);
     }
 
     /**
@@ -57,7 +58,7 @@ class UsersController extends AppController {
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('The user has been saved.'));
 
-                return $this->redirect(['prefix' => 'admin', 'controller' => 'users', 'action' => 'index']);
+                return $this->redirect(['prefix' => 'Admin', 'controller' => 'Users', 'action' => 'index']);
             }
             $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
@@ -77,7 +78,7 @@ class UsersController extends AppController {
             'contain' => []
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $user = $this->Users->patchEntity($user, $this->request->data);
+            $user = $this->Users->patchEntity($user, $this->getRequest()->getData());
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('The user has been saved.'));
 
@@ -109,19 +110,32 @@ class UsersController extends AppController {
     }
 
     public function login() {
-        if ($this->request->is('post')) {
-            $user = $this->Auth->identify();
-            $this->set('lu', $user);
-            if ($user) {
-                $this->Auth->setUser($user);
-                return $this->redirect($this->Auth->redirectUrl());
-            }
-            $this->Flash->error(__('Invalid username or password, try again'));
+        /*
+          if ($this->request->is('post')) {
+          //$user = $this->Auth->identify();
+          $user = $this->Authentication->getResult();
+          $this->set('lu', $user);
+          if ($user) {
+          //$this->Auth->setUser($user);
+          return $this->redirect($this->Authentication->getLoginRedirect());
+          }
+          $this->Flash->error(__('Invalid username or password, try again'));
+          }
+         */
+        $result = $this->Authentication->getResult();
+        // If the user is logged in send them away.
+        if ($result->isValid()) {
+            $target = $this->Authentication->getLoginRedirect() ?? '/home';
+            return $this->redirect($target);
+        }
+        if ($this->request->is('post') && !$result->isValid()) {
+            $this->Flash->error('Invalid username or password');
         }
     }
 
     public function logout() {
-        return $this->redirect($this->Auth->logout());
+        $this->Authentication->logout();
+        return $this->redirect(['prefix' => 'Admin', 'controller' => 'Users', 'action' => 'login']);
     }
 
 }

@@ -13,7 +13,7 @@ class DashboardController extends AppController {
     public function initialize(): void {
         parent::initialize();
 
-        $this->Auth->allow(['']);
+        //$this->Auth->allow(['']);
     }
 
     public function index() {

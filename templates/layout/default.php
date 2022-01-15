@@ -1,5 +1,6 @@
 <?php
 $isUserLoggedIn = $this->getRequest()->getSession()->read('Auth.User.id');
+$isUserLoggedIn = true;
 ?>
 <!DOCTYPE html>
 <html>

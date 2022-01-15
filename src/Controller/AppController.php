@@ -45,31 +45,8 @@ class AppController extends Controller {
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
         $this->loadComponent('Security');
-        $this->loadComponent('Auth', [
-            'authorize' => ['Controller'],
-            'authenticate' => [
-                'Form' => [
-                    'fields' => [
-                        'username' => 'email',
-                        'password' => 'password'
-                    ]
-                ]
-            ],
-            'loginAction' => [
-                'prefix' => 'Admin',
-                'controller' => 'Users',
-                'action' => 'login',
-                'plugin' => null,
-                '_ext' => null,
-            ],
-            'logoutAction' => [
-                'prefix' => 'Admin',
-                'controller' => 'Users',
-                'action' => 'logout'
-            ],
-            'unauthorizedRedirect' => $this->referer()
-        ]);
-        $this->Auth->allow();
+        $this->loadComponent('Authentication.Authentication');
+        $this->Authentication->allowUnauthenticated(['login', 'logout']);
     }
 
     public function isAuthorized($user) {
