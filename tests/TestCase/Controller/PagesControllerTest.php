@@ -126,14 +126,13 @@ class PagesControllerTest extends TestCase {
      */
     public function testCsrfAppliedOk() {
         $this->markTestIncomplete('Not implemented yet.');
-        /*
 
+        /*
           $this->enableCsrfToken();
           $this->post('/pages/home', ['hello' => 'world']);
 
           $this->assertResponseCode(200);
           $this->assertResponseContains('CakePHP');
-         * 
          */
     }
 
