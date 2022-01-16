@@ -1,5 +1,6 @@
 language: 
   - php
+  - node_js
   
 dist: xenial
 
@@ -34,6 +35,7 @@ addons:
 
 
 before_script:
+  - npm install
   - composer selfupdate
   - composer install --prefer-dist --no-suggest --no-interaction
   - cp ./.travis_app_local_mysql.txt ./config/app_local.php
