@@ -1,6 +1,6 @@
 language: php
 
-dist: trusty
+dist: xenial
 
 sudo: true
 
@@ -26,7 +26,7 @@ addons:
     code_climate:
         repo_token: 0b3e8b1e905bbea0d9d991090bf84a74404b256065bac4216a89890741416b31
     sonarcloud:
-        organization: "sonarcloud"
+        organization: "giumar"
         token:
           secure: $SONAR_TOKEN
 
