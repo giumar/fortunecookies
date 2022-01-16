@@ -126,24 +126,21 @@ class TicketsControllerTest extends IntegrationTestCase {
      * @return void
      */
     public function testEdit() {
-        $this->markTestIncomplete('Not implemented yet.');
-        /*
-          $this->enableCsrfToken();
-          $this->enableSecurityToken();
 
-          $this->get('/tickets/edit/1');
-          $this->assertResponseOk();
-          $this->assertResponseContains('<title>Tickets</title>');
-          $this->assertResponseContains('Lorem ipsum dolor sit amet');
+        $this->enableCsrfToken();
+        $this->enableSecurityToken();
 
-          $data = [
-          'email' => 'Again Lorem ipsum dolor sit amet'
-          ];
-          $this->post('/tickets/edit/1', $data);
+        $this->get('/tickets/edit/1');
+        $this->assertResponseOk();
+        $this->assertResponseContains('<title>Tickets</title>');
+        $this->assertResponseContains('Lorem ipsum dolor sit amet');
 
-          $this->assertResponseSuccess();
-         * 
-         */
+        $data = [
+            'email' => 'Again Lorem ipsum dolor sit amet'
+        ];
+        $this->post('/tickets/edit/1', $data);
+
+        $this->assertResponseSuccess();
     }
 
     /**

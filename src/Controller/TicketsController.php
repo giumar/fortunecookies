@@ -76,7 +76,7 @@ class TicketsController extends AppController {
             'contain' => ['Tickettypes']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $ticket = $this->Tickets->patchEntity($ticket, $this->request->data);
+            $ticket = $this->Tickets->patchEntity($ticket, $this->getRequest()->getData());
             if ($this->Tickets->save($ticket)) {
                 $this->Flash->success(__('The ticket has been saved.'));
 
