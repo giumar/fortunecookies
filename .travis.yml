@@ -1,5 +1,7 @@
-language: php
-
+language: 
+  - php
+  - node_js
+  
 dist: xenial
 
 sudo: true
