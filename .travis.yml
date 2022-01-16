@@ -1,6 +1,5 @@
 language: 
   - php
-  - node_js
   
 dist: xenial
 
@@ -9,9 +8,8 @@ sudo: true
 php:
   - 7.4
   
-node_js:
-  - "10"
-
+node_js: 12  
+  
 env:
   - DB=mysql
 #  - DB=sqlite
