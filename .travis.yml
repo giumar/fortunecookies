@@ -41,7 +41,7 @@ before_install:
 
 script:
   - vendor/bin/phpunit --coverage-clover=coverage.xml --log-junit=phpunit.xml --color=auto
-  - sonar-scanner
+#  - sonar-scanner
 
 after_success:
     - bash <(curl -s https://codecov.io/bash)
