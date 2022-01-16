@@ -78,23 +78,46 @@ class TicketsControllerTest extends IntegrationTestCase {
      * @return void
      */
     public function testAdd() {
-        //$this->markTestIncomplete('Not implemented yet.');
-        
-          $this->enableCsrfToken();
-          $this->enableSecurityToken();
 
-          $this->get('/tickets/add/');
-          $this->assertResponseOk();
+        $this->enableCsrfToken();
+        $this->enableSecurityToken();
 
-          $data = [
-          'title' => 'New ticket',
-          'ticketstatus_id' => 1,
-          'tickettype_id' => 1,
-          ];
+        $this->get('/tickets/add/');
+        $this->assertResponseOk();
 
-          $this->post('/tickets/add', $data);
+        $data = [
+            'title' => 'New ticket',
+            'ticketstatus_id' => 1,
+            'tickettype_id' => 1,
+        ];
 
-          $this->assertResponseSuccess();
+        $this->post('/tickets/add', $data);
+
+        $this->assertResponseSuccess();
+    }
+
+    /**
+     * Test add with an empty title
+     *
+     * @return void
+     */
+    public function testAddWithEmptyTitle() {
+
+        $this->enableCsrfToken();
+        $this->enableSecurityToken();
+
+        $this->get('/tickets/add/');
+        $this->assertResponseOk();
+
+        $data = [
+            'title' => '',
+            'ticketstatus_id' => 1,
+            'tickettype_id' => 1,
+        ];
+
+        $this->post('/tickets/add', $data);
+
+        $this->assertResponseSuccess();
     }
 
     /**
