@@ -15,7 +15,7 @@ return [
         'formGroup' => '{{label}}{{input}}',
         'hiddenBlock' => '<div style="display:none;">{{content}}</div>',
         'input' => '<input class="form-control" type="{{type}}" name="{{name}}"{{attrs}}/>',
-        'inputSubmit' => '<input type="{{type}}"{{attrs}} class="btn btn-default"/>',
+        'inputSubmit' => '<input type="{{type}}"{{attrs}} class="btn btn-primary"/>',
         'inputContainer' => '<div class="form-group {{type}}{{required}}">{{content}}</div>',
         'inputContainerError' => '<div class="input {{type}}{{required}} error">{{content}}{{error}}</div>',
         'label' => '<label{{attrs}}>{{text}}</label>',

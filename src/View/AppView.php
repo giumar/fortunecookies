@@ -37,5 +37,7 @@ class AppView extends View
      */
     public function initialize(): void
     {
+        //Paginator in stile Bootstrap
+        $this->loadHelper('Paginator', ['templates' => 'paginator-templates']);
     }
 }
