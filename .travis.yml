@@ -40,6 +40,11 @@ before_script:
 
 before_install:
   - mysql -e 'CREATE DATABASE IF NOT EXISTS test_fc;'
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS fc;'
+  - nvm install node
+
+install:
+  - npm install
 
 script:
   - vendor/bin/phpunit --coverage-clover=coverage.xml --log-junit=phpunit.xml --color=auto
