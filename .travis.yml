@@ -35,7 +35,7 @@ addons:
 
 
 before_script:
-  #- npm install
+  - env XDEBUG_MODE=coverage
   - composer selfupdate
   - composer install --prefer-dist --no-suggest --no-interaction
   - cp ./.travis_app_local_mysql.txt ./config/app_local.php
