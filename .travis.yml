@@ -25,7 +25,7 @@ mysql:
   username: root
   encoding: utf8  
   
-matrix:
+jobs:
   fast_finish: true
 
 addons:
@@ -51,7 +51,7 @@ install:
   #- npm install
 
 script:
-  - vendor/bin/phpunit --coverage-clover=$MY_REPORTS_PATH/coverage.xml --log-junit=$MY_REPORTS_PATH/phpunit.xml --color=auto
+  - vendor/bin/phpunit --coverage-clover=${MY_REPORTS_PATH}/phpunit-coverage.xml --log-junit=${MY_REPORTS_PATH}/phpunit-tests.xml --color=auto
   - sonar-scanner
 
 after_success:
