@@ -1,1 +1,43 @@
+version: v1.0
+name: FortuneCookies Semaphore CI/CD
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+    
+global_job_config:
+  prologue:
+    commands:
+      - sem-version php 7.4
+blocks:
+  - name: "Install Dependencies"
+    task:
+      env_vars:
+        - name: APP_ENV
+          value: prod
+      jobs:
+        - name: checkout
+          commands:
+            - checkout       
+        - name: composer
+          commands:
+            - cache restore
+            - composer install
+            - cache store
+        - name: phpmd
+          commands:
+            # Run the PHP Mess Detector from our project dependency binary
+            - php vendor/bin/phpmd app/ text phpmd_ruleset.xml
+        - name: phpcs
+          commands:
+            # Run the PHP Code Sniffer from our project dependency binary
+            - php vendor/bin/phpcs app --report-full --standard=PSR2
+        - name: phpcpd
+          commands:
+            # Run the PHP Copy Paste Detector from online repository.
+            - curl -L https://phar.phpunit.de/phpcpd.phar -o phpcpd.phar
+            - php phpcpd.phar app/ --min-lines=50
+        - name: phpunit
+          commands:
+            - ./vendor/bin/phpunit
 
