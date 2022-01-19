@@ -3,9 +3,10 @@ $isUserLoggedIn = $this->getRequest()->getSession()->read('Auth.User.id');
 $isUserLoggedIn = true;
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <?= $this->Html->charset() ?>
+        
         <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
         <title><?= $this->fetch('title') ?></title>
         <?= $this->Html->meta('icon') ?>
