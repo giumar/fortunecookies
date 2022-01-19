@@ -4,25 +4,25 @@ agent:
   machine:
     type: e1-standard-2
     os_image: ubuntu1804
-    
 global_job_config:
   prologue:
     commands:
       - sem-version php 7.4
 blocks:
-  - name: "Install Dependencies"
+  - name: Install Dependencies
     task:
       jobs:
         - name: checkout
           commands:
-            - checkout       
+            - checkout
         - name: composer
           commands:
-            - checkout 
             - cache restore
             - composer install --prefer-dist --no-suggest --no-interaction
             - cache store
-        - name: phpunit
+  - name: PHPUnit
+    task:
+      jobs:
+        - name: 'Job #1'
           commands:
-            - ./vendor/bin/phpunit
-
+            - vendor/bin/phpunit
