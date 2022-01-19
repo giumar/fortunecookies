@@ -12,9 +12,10 @@ php:
   - 7.4
   
 env:
-  - DB=mysql
-  - XDEBUG_MODE=coverage
-  - MY_REPORTS_PATH=/home/travis/build/giumar/fortunecookies
+    global:
+      - DB=mysql
+      - XDEBUG_MODE=coverage
+      - MY_REPORTS_PATH=/home/travis/build/giumar/fortunecookies
 
 services:
   - mysql
