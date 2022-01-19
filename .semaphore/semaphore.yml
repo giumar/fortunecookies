@@ -15,12 +15,8 @@ blocks:
         - name: checkout
           commands:
             - checkout
-            - echo SEMAPHORE_GIT_DIR
-            - ls -la
-        - name: composer
-          commands:
             - cache restore
-            - composer install --prefer-dist --no-suggest --no-interaction
+            - composer install --prefer-dist --no-interaction
             - cache store
   - name: PHPUnit
     task:
