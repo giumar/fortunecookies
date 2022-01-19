@@ -44,7 +44,7 @@ before_script:
 before_install:
   - mysql -e 'CREATE DATABASE IF NOT EXISTS test_fc;'
   - mysql -e 'CREATE DATABASE IF NOT EXISTS fc;'
-  - nvm install node
+  - nvm install --lts node
 
 install:
   #- npm install
