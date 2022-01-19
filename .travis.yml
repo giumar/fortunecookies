@@ -13,7 +13,8 @@ php:
   
 env:
   - DB=mysql
-#  - DB=sqlite
+  - XDEBUG_MODE=coverage
+  - MY_REPORTS_PATH=/home/travis/build/giumar/fortunecookies
 
 services:
   - mysql
@@ -35,8 +36,6 @@ addons:
 
 
 before_script:
-  - env XDEBUG_MODE=coverage
-  - env MY_REPORTS_PATH=/home/travis/build/giumar/fortunecookies
   - composer selfupdate
   - composer install --prefer-dist --no-suggest --no-interaction
   - cp ./.travis_app_local_mysql.txt ./config/app_local.php
