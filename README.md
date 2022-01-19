@@ -1,6 +1,6 @@
 Service      | Build Status | QA | Coverage | Code issues
 -------------|--------------|----|----------|-------------
-Semaphore    | [![Build Status](https://semaphoreci.com/api/v1/giumar/fortunecookies/branches/master/badge.svg)](https://semaphoreci.com/giumar/fortunecookies) | | |
+Semaphore    | [![Build Status](https://giumar.semaphoreci.com/badges/fortunecookies/branches/master.svg)](https://giumar.semaphoreci.com/projects/fortunecookies) | | |
 Travis       | [![Build Status](https://travis-ci.org/giumar/fortunecookies.svg?branch=master)](https://travis-ci.org/giumar/fortunecookies) | | |
 Code Climate | | [![Code Climate](https://codeclimate.com/github/giumar/fortunecookies/badges/gpa.svg)](https://codeclimate.com/github/giumar/fortunecookies) | [![Test Coverage](https://codeclimate.com/github/giumar/fortunecookies/badges/coverage.svg)](https://codeclimate.com/github/giumar/fortunecookies/coverage) | [![Issue Count](https://codeclimate.com/github/giumar/fortunecookies/badges/issue_count.svg)](https://codeclimate.com/github/giumar/fortunecookies)
 CircleCI     | [![CircleCI](https://circleci.com/gh/giumar/fortunecookies.svg?style=svg)](https://circleci.com/gh/giumar/fortunecookies)
