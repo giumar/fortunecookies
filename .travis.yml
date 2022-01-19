@@ -36,6 +36,7 @@ addons:
 
 before_script:
   - env XDEBUG_MODE=coverage
+  - env MY_REPORTS_PATH=/home/travis/build/giumar/fortunecookies
   - composer selfupdate
   - composer install --prefer-dist --no-suggest --no-interaction
   - cp ./.travis_app_local_mysql.txt ./config/app_local.php
@@ -50,7 +51,7 @@ install:
   #- npm install
 
 script:
-  - vendor/bin/phpunit --coverage-clover=./coverage.xml --log-junit=./phpunit.xml --color=auto
+  - vendor/bin/phpunit --coverage-clover=$MY_REPORTS_PATH/coverage.xml --log-junit=$MY_REPORTS_PATH/phpunit.xml --color=auto
   - sonar-scanner
 
 after_success:
