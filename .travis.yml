@@ -16,7 +16,7 @@ env:
       - DB=mysql
       - XDEBUG_MODE=coverage
       - MY_REPORTS_PATH=/home/travis/build/giumar/fortunecookies
-      - CC_TEST_REPORTER_ID=ABC123
+      - CC_TEST_REPORTER_ID=0b3e8b1e905bbea0d9d991090bf84a74404b256065bac4216a89890741416b31
 
 services:
   - mysql
@@ -60,7 +60,7 @@ script:
 
 after_success:
     - bash <(curl -s https://codecov.io/bash)
-    - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+    - ./cc-test-reporter after-build -t clover --exit-code $TRAVIS_TEST_RESULT
 
 cache:
   directories:
