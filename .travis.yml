@@ -5,6 +5,9 @@ dist: xenial
 
 sudo: true
 
+git:
+  depth: false
+
 php:
   - 7.4
   
