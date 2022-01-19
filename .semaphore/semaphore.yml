@@ -22,7 +22,7 @@ blocks:
       epilogue:
         always:
           commands:
-            - '''[[ -f report.xml ]] && test-results publish phpunit-tests.xml'''
+            - test-results publish phpunit-tests.xml
 after_pipeline:
   task:
     jobs:
