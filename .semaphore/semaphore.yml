@@ -18,9 +18,14 @@ blocks:
             - cache restore
             - composer install --prefer-dist --no-interaction
             - cache store
-  - name: PHPUnit
-    task:
-      jobs:
-        - name: 'Job #1'
+            - vendor/bin/phpunit --coverage-clover=phpunit-coverage.xml --log-junit=phpunit-tests.xml --color=auto
+      epilogue:
+        always:
           commands:
-            - vendor/bin/phpunit
+            - '''[[ -f report.xml ]] && test-results publish phpunit-tests.xml'''
+after_pipeline:
+  task:
+    jobs:
+      - name: Publish Results
+        commands:
+          - test-results gen-pipeline-report
