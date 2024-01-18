@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 /**
@@ -14,7 +15,6 @@ declare(strict_types=1);
  * @since         0.10.8
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-
 /*
  * Configure paths required to find CakePHP + general filepath constants
  */
@@ -35,14 +35,14 @@ use Cake\Cache\Cache;
 use Cake\Core\Configure;
 use Cake\Core\Configure\Engine\PhpConfig;
 use Cake\Datasource\ConnectionManager;
-use Cake\Error\ConsoleErrorHandler;
-use Cake\Error\ErrorHandler;
 use Cake\Http\ServerRequest;
 use Cake\Log\Log;
 use Cake\Mailer\Mailer;
 use Cake\Mailer\TransportFactory;
 use Cake\Routing\Router;
 use Cake\Utility\Security;
+use Cake\Error\ErrorTrap;
+use Cake\Error\ExceptionTrap;
 
 /*
  * See https://github.com/josegonzalez/php-dotenv for API details.
@@ -57,7 +57,7 @@ use Cake\Utility\Security;
  * If you use .env files, be careful to not commit them to source control to avoid
  * security risks. See https://github.com/josegonzalez/php-dotenv#general-security-information
  * for more information for recommended practices.
-*/
+ */
 // if (!env('APP_NAME') && file_exists(CONFIG . '.env')) {
 //     $dotenv = new \josegonzalez\Dotenv\Loader([CONFIG . '.env']);
 //     $dotenv->parse()
@@ -122,9 +122,11 @@ ini_set('intl.default_locale', Configure::read('App.defaultLocale'));
  */
 $isCli = PHP_SAPI === 'cli';
 if ($isCli) {
-    (new ConsoleErrorHandler(Configure::read('Error')))->register();
+    (new ErrorTrap(Configure::read('Error')))->register();
+    (new ExceptionTrap(Configure::read('Error')))->register();
 } else {
-    (new ErrorHandler(Configure::read('Error')))->register();
+    (new ErrorTrap(Configure::read('Error')))->register();
+    (new ExceptionTrap(Configure::read('Error')))->register();
 }
 
 /*
