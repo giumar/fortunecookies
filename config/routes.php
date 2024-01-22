@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Routes configuration.
  *
@@ -21,45 +20,50 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
+
 use Cake\Routing\Route\DashedRoute;
 use Cake\Routing\RouteBuilder;
 
 /*
- * The default class to use for all routes
- *
- * The following route classes are supplied with CakePHP and are appropriate
- * to set as the default:
- *
- * - Route
- * - InflectedRoute
- * - DashedRoute
- *
- * If no call is made to `Router::defaultRouteClass()`, the class used is
- * `Route` (`Cake\Routing\Route\Route`)
- *
- * Note that `Route` does not do any inflections on URLs which will result in
- * inconsistently cased URLs when used with `:plugin`, `:controller` and
- * `:action` markers.
+ * This file is loaded in the context of the `Application` class.
+  * So you can use  `$this` to reference the application class instance
+  * if required.
  */
-/** @var \Cake\Routing\RouteBuilder $routes */
-$routes->setRouteClass(DashedRoute::class);
+return function (RouteBuilder $routes): void {
+    /*
+     * The default class to use for all routes
+     *
+     * The following route classes are supplied with CakePHP and are appropriate
+     * to set as the default:
+     *
+     * - Route
+     * - InflectedRoute
+     * - DashedRoute
+     *
+     * If no call is made to `Router::defaultRouteClass()`, the class used is
+     * `Route` (`Cake\Routing\Route\Route`)
+     *
+     * Note that `Route` does not do any inflections on URLs which will result in
+     * inconsistently cased URLs when used with `{plugin}`, `{controller}` and
+     * `{action}` markers.
+     */
+    $routes->setRouteClass(DashedRoute::class);
 
-$routes->scope('/', function (RouteBuilder $builder) {
+    $routes->scope('/', function (RouteBuilder $builder): void {
 
-    $builder->prefix('admin', function($routes) {
-        $routes->connect('/', ['controller' => 'Users', 'action' => 'index']);
-        $routes->connect('/users/index', ['controller' => 'Users', 'action' => 'index']);
-        $routes->connect('/users/login', ['controller' => 'Users', 'action' => 'login']);
-        $routes->connect('/users/logout', ['controller' => 'Users', 'action' => 'logout']);
-        $routes->fallbacks(DashedRoute::class);
+        $builder->prefix('admin', function ($routes) {
+            $routes->connect('/', ['controller' => 'Users', 'action' => 'index']);
+            $routes->connect('/users/index', ['controller' => 'Users', 'action' => 'index']);
+            $routes->connect('/users/login', ['controller' => 'Users', 'action' => 'login']);
+            $routes->connect('/users/logout', ['controller' => 'Users', 'action' => 'logout']);
+            $routes->fallbacks(DashedRoute::class);
+        });
+
+        $builder->prefix('profile', function ($routes) {
+            $routes->fallbacks(DashedRoute::class);
+        });
+        $builder->connect('/', ['controller' => 'dashboard', 'action' => 'index']);
+        $builder->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']);
+        $builder->fallbacks();
     });
-
-    $builder->prefix('profile', function($routes) {
-        $routes->fallbacks(DashedRoute::class);
-    });
-
-
-    $builder->connect('/', ['controller' => 'dashboard', 'action' => 'index']);
-    $builder->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']);
-    $builder->fallbacks();
-});
+};

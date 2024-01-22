@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 /**
@@ -15,10 +14,10 @@ declare(strict_types=1);
  * @since         1.2.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
-
 namespace App\Test\TestCase\Controller;
 
 use Cake\Core\Configure;
+use Cake\TestSuite\Constraint\Response\StatusCode;
 use Cake\TestSuite\IntegrationTestTrait;
 use Cake\TestSuite\TestCase;
 
@@ -27,41 +26,18 @@ use Cake\TestSuite\TestCase;
  *
  * @uses \App\Controller\PagesController
  */
-class PagesControllerTest extends TestCase {
-
+class PagesControllerTest extends TestCase
+{
     use IntegrationTestTrait;
-
-    public function setUp(): void {
-        parent::setUp();
-
-        $this->session([
-            'Auth' => [
-                'User' => [
-                    'id' => 1,
-                    'username' => 'admin',
-                ]
-            ]
-        ]);
-    }
-
-    /**
-     * testMultipleGet method
-     *
-     * @return void
-     */
-    public function testMultipleGet() {
-        $this->get('/');
-        $this->assertResponseOk();
-        $this->get('/');
-        $this->assertResponseOk();
-    }
 
     /**
      * testDisplay method
      *
      * @return void
      */
-    public function testDisplay() {
+    public function testDisplay()
+    {
+        Configure::write('debug', true);
         $this->get('/pages/home');
         $this->assertResponseOk();
         $this->assertResponseContains('CakePHP');
@@ -73,7 +49,8 @@ class PagesControllerTest extends TestCase {
      *
      * @return void
      */
-    public function testMissingTemplate() {
+    public function testMissingTemplate()
+    {
         Configure::write('debug', false);
         $this->get('/pages/not_existing');
 
@@ -86,7 +63,8 @@ class PagesControllerTest extends TestCase {
      *
      * @return void
      */
-    public function testMissingTemplateInDebug() {
+    public function testMissingTemplateInDebug()
+    {
         Configure::write('debug', true);
         $this->get('/pages/not_existing');
 
@@ -101,7 +79,8 @@ class PagesControllerTest extends TestCase {
      *
      * @return void
      */
-    public function testDirectoryTraversalProtection() {
+    public function testDirectoryTraversalProtection()
+    {
         $this->get('/pages/../Layout/ajax');
         $this->assertResponseCode(403);
         $this->assertResponseContains('Forbidden');
@@ -112,7 +91,8 @@ class PagesControllerTest extends TestCase {
      *
      * @return void
      */
-    public function testCsrfAppliedError() {
+    public function testCsrfAppliedError()
+    {
         $this->post('/pages/home', ['hello' => 'world']);
 
         $this->assertResponseCode(403);
@@ -124,16 +104,12 @@ class PagesControllerTest extends TestCase {
      *
      * @return void
      */
-    public function testCsrfAppliedOk() {
-        $this->markTestIncomplete('Not implemented yet.');
+    public function testCsrfAppliedOk()
+    {
+        $this->enableCsrfToken();
+        $this->post('/pages/home', ['hello' => 'world']);
 
-        /*
-          $this->enableCsrfToken();
-          $this->post('/pages/home', ['hello' => 'world']);
-
-          $this->assertResponseCode(200);
-          $this->assertResponseContains('CakePHP');
-         */
+        $this->assertThat(403, $this->logicalNot(new StatusCode($this->_response)));
+        $this->assertResponseNotContains('CSRF');
     }
-
 }

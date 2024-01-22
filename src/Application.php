@@ -19,12 +19,14 @@ declare(strict_types=1);
 namespace App;
 
 use Cake\Core\Configure;
-use Cake\Core\Exception\MissingPluginException;
+use Cake\Core\ContainerInterface;
+use Cake\Datasource\FactoryLocator;
 use Cake\Error\Middleware\ErrorHandlerMiddleware;
 use Cake\Http\BaseApplication;
 use Cake\Http\Middleware\BodyParserMiddleware;
 use Cake\Http\Middleware\CsrfProtectionMiddleware;
 use Cake\Http\MiddlewareQueue;
+use Cake\ORM\Locator\TableLocator;
 use Cake\Routing\Middleware\AssetMiddleware;
 use Cake\Routing\Middleware\RoutingMiddleware;
 use Authentication\AuthenticationService;
@@ -32,7 +34,6 @@ use Authentication\AuthenticationServiceInterface;
 use Authentication\AuthenticationServiceProviderInterface;
 use Authentication\Identifier\IdentifierInterface;
 use Authentication\Middleware\AuthenticationMiddleware;
-#use Cake\Http\MiddlewareQueue;
 use Cake\Routing\Router;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -55,6 +56,11 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
 
         if (PHP_SAPI === 'cli') {
             $this->bootstrapCli();
+        } else {
+            FactoryLocator::add(
+                    'Table',
+                    (new TableLocator())->allowFallbackClass(false)
+            );
         }
 
         /*
@@ -79,7 +85,7 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
         $middlewareQueue
                 // Catch any exceptions in the lower layers,
                 // and make an error page/response
-                ->add(new ErrorHandlerMiddleware(Configure::read('Error')))
+                ->add(new ErrorHandlerMiddleware(Configure::read('Error'), $this))
 
                 // Handle plugin/theme assets like CakePHP normally does.
                 ->add(new AssetMiddleware([
@@ -88,10 +94,8 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
 
                 // Add routing middleware.
                 // If you have a large number of routes connected, turning on routes
-                // caching in production could improve performance. For that when
-                // creating the middleware instance specify the cache config name by
-                // using it's second constructor argument:
-                // `new RoutingMiddleware($this, '_cake_routes_')`
+                // caching in production could improve performance.
+                // See https://github.com/CakeDC/cakephp-cached-routing
                 ->add(new RoutingMiddleware($this))
 
                 // Parse various types of encoded request bodies so that they are
@@ -110,6 +114,17 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
     }
 
     /**
+     * Register application container services.
+     *
+     * @param \Cake\Core\ContainerInterface $container The Container to update.
+     * @return void
+     * @link https://book.cakephp.org/4/en/development/dependency-injection.html#dependency-injection
+     */
+    public function services(ContainerInterface $container): void {
+        
+    }
+
+    /**
      * Bootrapping for CLI application.
      *
      * That is when running commands.
@@ -117,11 +132,7 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
      * @return void
      */
     protected function bootstrapCli(): void {
-        try {
-            $this->addPlugin('Bake');
-        } catch (MissingPluginException $e) {
-            // Do not halt if the plugin is missing
-        }
+        $this->addOptionalPlugin('Bake');
 
         $this->addPlugin('Migrations');
 
@@ -154,6 +165,10 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
         ];
         // Load the authenticators. Session should be first.
         $service->loadAuthenticator('Authentication.Session');
+
+        // Load identifiers
+        $service->loadIdentifier('Authentication.Password', compact('fields'));
+
         $service->loadAuthenticator('Authentication.Form', [
             'fields' => $fields,
             'loginUrl' => Router::url([
@@ -164,10 +179,6 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
             ]),
         ]);
 
-        // Load identifiers
-        $service->loadIdentifier('Authentication.Password', compact('fields'));
-
         return $service;
     }
-
 }
