@@ -17,7 +17,7 @@
         "cakephp/cakephp-codesniffer": "^5.1",
         "cakephp/debug_kit": "^4.9",
         "josegonzalez/dotenv": "^4.0",
-        "phpunit/phpunit": "^9.6",
+        "phpunit/phpunit": "^10.5",
         "psy/psysh": "@stable",
         "phpstan/phpstan": "@stable"
     },
