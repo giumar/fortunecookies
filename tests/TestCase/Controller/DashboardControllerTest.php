@@ -2,6 +2,7 @@
 
 namespace App\Test\TestCase\Controller;
 
+use Cake\Core\Configure;
 use App\Controller\DashboardController;
 use Cake\TestSuite\IntegrationTestCase;
 
@@ -47,6 +48,19 @@ class DashboardControllerTest extends IntegrationTestCase {
         $this->get('/dashboard');
 
         $this->assertResponseOk();
+    }
+    
+    public function testBootstrapLoadedFromWebroot() {
+        
+        Configure::write('debug', true);
+        $this->get('/');
+        $this->assertResponseContains('bootstrap.css');
+        $this->assertResponseContains('bootstrap.bundle.js');
+        Configure::write('debug', false);
+        $this->get('/');
+        $this->assertResponseContains('bootstrap.min.css');
+        $this->assertResponseContains('bootstrap.bundle.min.js');
+        
     }
 
 }
