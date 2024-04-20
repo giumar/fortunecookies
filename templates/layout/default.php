@@ -1,8 +1,7 @@
 <?php
 use Cake\Core\Configure;
 
-$isUserLoggedIn = $this->getRequest()->getSession()->read('Auth.User.id');
-$isUserLoggedIn = true;
+$isUserLoggedIn = $this->getRequest()->getSession()->read('Auth.id');
 ?>
 <!DOCTYPE html>
 <html lang="en">
