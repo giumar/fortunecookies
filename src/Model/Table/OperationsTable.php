@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace App\Model\Table;
 
 use Cake\ORM\Query;
@@ -9,28 +11,33 @@ use Cake\Validation\Validator;
 /**
  * Operations Model
  *
- * @property \Cake\ORM\Association\BelongsTo $Tickets
+ * @property \App\Model\Table\TicketsTable&\Cake\ORM\Association\BelongsTo $Tickets
  *
- * @method \App\Model\Entity\Operation get($primaryKey, $options = [])
- * @method \App\Model\Entity\Operation newEntity($data = null, array $options = [])
+ * @method \App\Model\Entity\Operation newEmptyEntity()
+ * @method \App\Model\Entity\Operation newEntity(array $data, array $options = [])
  * @method \App\Model\Entity\Operation[] newEntities(array $data, array $options = [])
- * @method \App\Model\Entity\Operation|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\Operation get($primaryKey, $options = [])
+ * @method \App\Model\Entity\Operation findOrCreate($search, ?callable $callback = null, $options = [])
  * @method \App\Model\Entity\Operation patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\Operation[] patchEntities($entities, array $data, array $options = [])
- * @method \App\Model\Entity\Operation findOrCreate($search, callable $callback = null, $options = [])
+ * @method \App\Model\Entity\Operation[] patchEntities(iterable $entities, array $data, array $options = [])
+ * @method \App\Model\Entity\Operation|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\Operation saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\Operation[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
+ * @method \App\Model\Entity\Operation[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
+ * @method \App\Model\Entity\Operation[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
+ * @method \App\Model\Entity\Operation[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
  *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
 class OperationsTable extends Table
 {
-
     /**
      * Initialize method
      *
      * @param array $config The configuration for the Table.
      * @return void
      */
-    public function initialize(array $config) : void
+    public function initialize(array $config): void
     {
         parent::initialize($config);
 
@@ -42,7 +49,7 @@ class OperationsTable extends Table
 
         $this->belongsTo('Tickets', [
             'foreignKey' => 'ticket_id',
-            'joinType' => 'INNER'
+            'joinType' => 'INNER',
         ]);
     }
 
@@ -52,25 +59,26 @@ class OperationsTable extends Table
      * @param \Cake\Validation\Validator $validator Validator instance.
      * @return \Cake\Validation\Validator
      */
-    public function validationDefault(Validator $validator) : Validator
+    public function validationDefault(Validator $validator): Validator
     {
         $validator
-            ->integer('id')
-            ->allowEmptyFor('id', 'create');
+            ->integer('ticket_id')
+            ->notEmptyString('ticket_id');
 
         $validator
             ->dateTime('start')
             ->requirePresence('start', 'create')
-            ->notEmpty('start');
+            ->notEmptyDateTime('start');
 
         $validator
             ->dateTime('end')
             ->requirePresence('end', 'create')
-            ->notEmpty('end');
+            ->notEmptyDateTime('end');
 
         $validator
-            ->allowEmptyString('description', 'create');
-			
+            ->scalar('description')
+            ->allowEmptyString('description');
+
         return $validator;
     }
 
@@ -81,9 +89,9 @@ class OperationsTable extends Table
      * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
      * @return \Cake\ORM\RulesChecker
      */
-    public function buildRules(RulesChecker $rules) : RulesChecker
+    public function buildRules(RulesChecker $rules): RulesChecker
     {
-        $rules->add($rules->existsIn(['ticket_id'], 'Tickets'));
+        $rules->add($rules->existsIn('ticket_id', 'Tickets'), ['errorField' => 'ticket_id']);
 
         return $rules;
     }

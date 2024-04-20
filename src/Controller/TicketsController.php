@@ -115,17 +115,19 @@ class TicketsController extends AppController {
         ]);
 
         $this->loadModel('Operations');
-        $newOperation = $this->Operations->newEntity();
+        $newOperation = $this->Operations->newEmptyEntity();
         if ($this->request->is('post')) {
-            $datetimeStart = Time::parseDateTime($this->request->data['start']);
-            $datetimeEnd = Time::parseDateTime($this->request->data['end']);
-            $newOperation->ticket_id = $this->request->data['ticket_id'];
-            $newOperation->description = $this->request->data['description'];
+            //$datetimeStart = Time::parseDateTime($this->request->getData('start'));
+            //$datetimeEnd = Time::parseDateTime($this->request->getData('end'));
+            $datetimeStart = $this->request->getData('start');
+            $datetimeEnd = $this->request->getData('end');
+            $newOperation->ticket_id = $this->request->getData('ticket_id');
+            $newOperation->description = $this->request->getData('description');
             $newOperation->start = $datetimeStart;
             $newOperation->end = $datetimeEnd;
             if ($this->Operations->save($newOperation)) {
                 $this->Flash->success(__('The new operation has been saved.'));
-                return $this->redirect(['prefix' => false, 'controller' => 'Tickets', 'action' => 'view', $this->request->data['ticket_id']]);
+                return $this->redirect(['prefix' => false, 'controller' => 'Tickets', 'action' => 'view', $this->request->getData('ticket_id')]);
             }
             $this->Flash->error(__('The new operation could not be saved. Please, try again.'));
         }
@@ -186,5 +188,4 @@ class TicketsController extends AppController {
 
         return $this->redirect(['prefix' => false, 'controller' => 'Tickets', 'action' => 'view', $operation->ticket_id]);
     }
-
 }

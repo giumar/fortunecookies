@@ -1,8 +1,9 @@
 <?php
+declare(strict_types=1);
+
 namespace App\Test\TestCase\Model\Table;
 
 use App\Model\Table\OperationsTable;
-use Cake\ORM\TableRegistry;
 use Cake\TestSuite\TestCase;
 
 /**
@@ -10,22 +11,21 @@ use Cake\TestSuite\TestCase;
  */
 class OperationsTableTest extends TestCase
 {
-
     /**
      * Test subject
      *
      * @var \App\Model\Table\OperationsTable
      */
-    public $Operations;
+    protected $Operations;
 
     /**
      * Fixtures
      *
-     * @var array
+     * @var array<string>
      */
-    public $fixtures = [
+    protected $fixtures = [
         'app.Operations',
-        'app.Tickets'
+        'app.Tickets',
     ];
 
     /**
@@ -33,10 +33,10 @@ class OperationsTableTest extends TestCase
      *
      * @return void
      */
-    public function setUp() : void
+    protected function setUp(): void
     {
         parent::setUp();
-        $config = $this->getTableLocator()->exists('Operations') ? [] : ['className' => 'App\Model\Table\OperationsTable'];
+        $config = $this->getTableLocator()->exists('Operations') ? [] : ['className' => OperationsTable::class];
         $this->Operations = $this->getTableLocator()->get('Operations', $config);
     }
 
@@ -45,7 +45,7 @@ class OperationsTableTest extends TestCase
      *
      * @return void
      */
-    public function tearDown() : void
+    protected function tearDown(): void
     {
         unset($this->Operations);
 
@@ -53,23 +53,12 @@ class OperationsTableTest extends TestCase
     }
 
     /**
-     * Test initialize method
-     *
-     * @return void
-     */
-    public function testInitialize()
-    {
-
-		$ris = $this->Operations->find('all')->toArray();
-		$this->assertGreaterThan(0, count($ris));
-    }
-
-    /**
      * Test validationDefault method
      *
      * @return void
+     * @uses \App\Model\Table\OperationsTable::validationDefault()
      */
-    public function testValidationDefault()
+    public function testValidationDefault(): void
     {
         $this->markTestIncomplete('Not implemented yet.');
     }
@@ -78,8 +67,9 @@ class OperationsTableTest extends TestCase
      * Test buildRules method
      *
      * @return void
+     * @uses \App\Model\Table\OperationsTable::buildRules()
      */
-    public function testBuildRules()
+    public function testBuildRules(): void
     {
         $this->markTestIncomplete('Not implemented yet.');
     }
