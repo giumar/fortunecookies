@@ -50,7 +50,7 @@ class SiteoptionsController extends AppController
     {
         $siteoption = $this->Siteoptions->newEntity();
         if ($this->request->is('post')) {
-            $siteoption = $this->Siteoptions->patchEntity($siteoption, $this->request->data);
+            $siteoption = $this->Siteoptions->patchEntity($siteoption, $this->getRequest()->getData());
             if ($this->Siteoptions->save($siteoption)) {
                 $this->Flash->success(__('The siteoption has been saved.'));
 
@@ -75,7 +75,7 @@ class SiteoptionsController extends AppController
             'contain' => []
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $siteoption = $this->Siteoptions->patchEntity($siteoption, $this->request->data);
+            $siteoption = $this->Siteoptions->patchEntity($siteoption, $this->getRequest()->getData());
             if ($this->Siteoptions->save($siteoption)) {
                 $this->Flash->success(__('The siteoption has been saved.'));
 

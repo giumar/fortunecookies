@@ -47,43 +47,43 @@ class ContactsTable extends Table
      */
     public function validationDefault(Validator $validator) : Validator
     {
-        $validator
-            ->integer('id')
-            ->allowEmpty('id', 'create');
+        //$validator
+        //    ->integer('id')
+        //    ->allowEmpty('id', 'create');
 
         $validator
             ->scalar('name')
             ->maxLength('name', 255)
             ->requirePresence('name', 'create')
-            ->notEmpty('name');
+            ->notEmptyString('name');
 
         $validator
             ->scalar('description')
-            ->allowEmpty('description');
+            ->allowEmptyString('description');
 
         $validator
             ->scalar('phone')
             ->maxLength('phone', 255)
-            ->allowEmpty('phone');
+            ->allowEmptyString('phone');
 
         $validator
             ->scalar('mobile')
             ->maxLength('mobile', 255)
-            ->allowEmpty('mobile');
+            ->allowEmptyString('mobile');
 
         $validator
             ->scalar('email_primary')
             ->maxLength('email_primary', 255)
-            ->allowEmpty('email_primary');
+            ->allowEmptyString('email_primary');
 
         $validator
             ->date('birth_date')
-            ->allowEmpty('birth_date');
+            ->allowEmptyDate('birth_date');
 
         $validator
             ->scalar('surname')
             ->maxLength('surname', 255)
-            ->allowEmpty('surname');
+            ->allowEmptyString('surname');
 
         return $validator;
     }

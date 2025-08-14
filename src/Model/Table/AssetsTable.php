@@ -47,15 +47,15 @@ class AssetsTable extends Table
      */
     public function validationDefault(Validator $validator) : Validator
     {
-        $validator
-            ->integer('id')
-            ->allowEmpty('id', 'create');
+        //$validator
+        //    ->integer('id')
+        //    ->allowEmpty('id', 'create');
 
         $validator
             ->scalar('name')
             ->maxLength('name', 255)
             ->requirePresence('name', 'create')
-            ->notEmpty('name');
+            ->notEmptyString('name');
 
         return $validator;
     }
