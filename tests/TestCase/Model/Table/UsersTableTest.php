@@ -23,7 +23,7 @@ class UsersTableTest extends TestCase
      *
      * @var array
      */
-    public $fixtures = [
+    protected array $fixtures = [
         'app.Users'
     ];
 

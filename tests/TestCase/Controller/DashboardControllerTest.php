@@ -4,19 +4,21 @@ namespace App\Test\TestCase\Controller;
 
 use Cake\Core\Configure;
 use App\Controller\DashboardController;
-use Cake\TestSuite\IntegrationTestCase;
+use Cake\TestSuite\IntegrationTestTrait;
+use Cake\TestSuite\TestCase;
 
 /**
  * App\Controller\OperationsController Test Case
  */
-class DashboardControllerTest extends IntegrationTestCase {
+class DashboardControllerTest extends TestCase {
 
+    use IntegrationTestTrait;
     /**
      * Fixtures
      *
      * @var array
      */
-    public $fixtures = [];
+    protected array $fixtures = [];
 
     public function setUp(): void {
         parent::setUp();

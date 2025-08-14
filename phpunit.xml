@@ -1,20 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit
-    colors="true"
-    processIsolation="false"
-    stopOnFailure="false"
-    bootstrap="tests/bootstrap.php"
-    >
-    <coverage>
-        <include>
-            <directory suffix=".php">./src/</directory>
-            <directory suffix=".php">./plugins/*/src/</directory>
-        </include>
-    </coverage>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         colors="true"
+         processIsolation="false"
+         stopOnFailure="false"
+         bootstrap="tests/bootstrap.php"
+         cacheDirectory=".phpunit.cache"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.1/phpunit.xsd">
     <php>
         <ini name="memory_limit" value="-1"/>
         <ini name="apc.enable_cli" value="1"/>
     </php>
+    
     <!-- Add any additional test suites you want to run here -->
     <testsuites>
         <testsuite name="app">
@@ -22,9 +18,23 @@
         </testsuite>
         <!-- Add plugin test suites here. -->
     </testsuites>
-
+    
     <!-- Load extension for fixtures -->
     <extensions>
-        <extension class="Cake\TestSuite\Fixture\PHPUnitExtension"/>
+        <bootstrap class="Cake\TestSuite\Fixture\Extension\PHPUnitExtension"/>
     </extensions>
+    
+    <coverage>
+    </coverage>
+    
+    <!-- Ignore vendor tests in code coverage reports -->
+    <source>
+        <include>
+            <directory suffix=".php">src/</directory>
+            <directory suffix=".php">plugins/*/src/</directory>
+        </include>
+        <exclude>
+            <file>src/Console/Installer.php</file>
+        </exclude>
+    </source>
 </phpunit>

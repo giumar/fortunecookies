@@ -2,20 +2,22 @@
 namespace App\Test\TestCase\Controller;
 
 use App\Controller\ProductsController;
-use Cake\TestSuite\IntegrationTestCase;
+use Cake\TestSuite\IntegrationTestTrait;
+use Cake\TestSuite\TestCase;
 
 /**
  * App\Controller\ProductsController Test Case
  */
-class ProductsControllerTest extends IntegrationTestCase
+class ProductsControllerTest extends TestCase
 {
 
+    use IntegrationTestTrait;
     /**
      * Fixtures
      *
      * @var array
      */
-    public $fixtures = [
+    protected array $fixtures = [
         'app.Products'
     ];
 
