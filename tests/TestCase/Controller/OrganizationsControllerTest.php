@@ -2,20 +2,23 @@
 namespace App\Test\TestCase\Controller;
 
 use App\Controller\OrganizationsController;
-use Cake\TestSuite\IntegrationTestCase;
+use Cake\TestSuite\IntegrationTestTrait;
+use Cake\TestSuite\TestCase;
 
 /**
  * App\Controller\OrganizationsController Test Case
  */
-class OrganizationsControllerTest extends IntegrationTestCase
+class OrganizationsControllerTest extends TestCase
 {
 
+    use IntegrationTestTrait;
+    
     /**
      * Fixtures
      *
      * @var array
      */
-    public $fixtures = [
+    protected array $fixtures = [
         'app.Organizations',
         'app.Users'
     ];

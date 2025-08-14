@@ -53,7 +53,7 @@ class UseroptionsController extends AppController
     {
         $useroption = $this->Useroptions->newEntity();
         if ($this->request->is('post')) {
-            $useroption = $this->Useroptions->patchEntity($useroption, $this->request->data);
+            $useroption = $this->Useroptions->patchEntity($useroption, $this->getRequest()->getData());
             if ($this->Useroptions->save($useroption)) {
                 $this->Flash->success(__('The useroption has been saved.'));
 
@@ -79,7 +79,7 @@ class UseroptionsController extends AppController
             'contain' => []
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $useroption = $this->Useroptions->patchEntity($useroption, $this->request->data);
+            $useroption = $this->Useroptions->patchEntity($useroption, $this->getRequest()->getData());
             if ($this->Useroptions->save($useroption)) {
                 $this->Flash->success(__('The useroption has been saved.'));
 

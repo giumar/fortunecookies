@@ -23,7 +23,7 @@ class TicketsTableTest extends TestCase
      *
      * @var array
      */
-    public $fixtures = [
+    protected array $fixtures = [
         'app.Tickets',
         'app.Operations'
     ];

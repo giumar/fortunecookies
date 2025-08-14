@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller\Admin;
 
 use App\Controller\AppController;
@@ -8,19 +9,17 @@ use App\Controller\AppController;
  *
  * @property \App\Model\Table\TickettypesTable $Tickettypes
  */
-class TickettypesController extends AppController
-{
+class TickettypesController extends AppController {
 
     /**
      * Index method
      *
      * @return \Cake\Network\Response|null
      */
-    public function index()
-    {
+    public function index() {
         $tickettypes = $this->paginate($this->Tickettypes);
-		
-		$title = "Type of ticket";
+
+        $title = "Type of ticket";
 
         $this->set(compact(['tickettypes', 'title']));
         $this->set('_serialize', ['tickettypes']);
@@ -33,8 +32,7 @@ class TickettypesController extends AppController
      * @return \Cake\Network\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($id = null)
-    {
+    public function view($id = null) {
         $tickettype = $this->Tickettypes->get($id, [
             'contain' => []
         ]);
@@ -48,15 +46,14 @@ class TickettypesController extends AppController
      *
      * @return \Cake\Network\Response|null Redirects on successful add, renders view otherwise.
      */
-    public function add()
-    {
+    public function add() {
         $tickettype = $this->Tickettypes->newEmptyEntity();
         if ($this->request->is('post')) {
             $tickettype = $this->Tickettypes->patchEntity($tickettype, $this->getRequest()->getData());
             if ($this->Tickettypes->save($tickettype)) {
                 $this->Flash->success(__('The tickettype has been saved.'));
 
-                return $this->redirect(['prefix'=>'Admin', 'controller'=>'Tickettypes', 'action' => 'index']);
+                return $this->redirect(['prefix' => 'Admin', 'controller' => 'Tickettypes', 'action' => 'index']);
             }
             $this->Flash->error(__('The tickettype could not be saved. Please, try again.'));
         }
@@ -71,17 +68,16 @@ class TickettypesController extends AppController
      * @return \Cake\Network\Response|null Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
-    public function edit($id = null)
-    {
+    public function edit($id = null) {
         $tickettype = $this->Tickettypes->get($id, [
             'contain' => []
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $tickettype = $this->Tickettypes->patchEntity($tickettype, $this->request->data);
+            $tickettype = $this->Tickettypes->patchEntity($tickettype, $this->getRequest()->getData());
             if ($this->Tickettypes->save($tickettype)) {
                 $this->Flash->success(__('The tickettype has been saved.'));
 
-                return $this->redirect(['prefix'=>false, 'controller'=>'Tickettypes', 'action' => 'index']);
+                return $this->redirect(['prefix' => 'Admin', 'controller' => 'Tickettypes', 'action' => 'index']);
             }
             $this->Flash->error(__('The tickettype could not be saved. Please, try again.'));
         }
@@ -96,8 +92,7 @@ class TickettypesController extends AppController
      * @return \Cake\Network\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function delete($id = null)
-    {
+    public function delete($id = null) {
         $this->request->allowMethod(['post', 'delete']);
         $tickettype = $this->Tickettypes->get($id);
         if ($this->Tickettypes->delete($tickettype)) {
@@ -106,6 +101,6 @@ class TickettypesController extends AppController
             $this->Flash->error(__('The tickettype could not be deleted. Please, try again.'));
         }
 
-        return $this->redirect(['prefix'=>false, 'controller'=>'Tickettypes', 'action' => 'index']);
+        return $this->redirect(['prefix' => 'Admin', 'controller' => 'Tickettypes', 'action' => 'index']);
     }
 }

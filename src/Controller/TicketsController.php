@@ -148,7 +148,7 @@ class TicketsController extends AppController {
         if ($this->request->is(['patch', 'post', 'put'])) {
             $this->request->data['start'] = Time::parseDateTime($this->request->data['start']);
             $this->request->data['end'] = Time::parseDateTime($this->request->data['end']);
-            $operation = $this->Operations->patchEntity($operation, $this->request->data);
+            $operation = $this->Operations->patchEntity($operation, $this->getRequest()->getData());
 
             if ($this->Operations->save($operation)) {
                 $this->Flash->success(__('The operation has been saved.'));

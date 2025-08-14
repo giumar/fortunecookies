@@ -39,5 +39,6 @@ class AppView extends View
     {
         //Paginator in stile Bootstrap
         $this->loadHelper('Paginator', ['templates' => 'paginator-templates']);
+        $this->loadHelper('Authentication.Identity');
     }
 }

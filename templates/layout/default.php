@@ -42,7 +42,7 @@ $isUserLoggedIn = $this->getRequest()->getSession()->read('Auth.id');
                                         <ul class="dropdown-menu" aria-labelledby="navbarUserItems">
                                             <li><?=
                                                 $this->Html->link(
-                                                        $this->getRequest()->getSession()->read('Auth.User.email'),
+                                                        $this->Identity->get("email"),
                                                         ['prefix' => null, 'controller' => 'Dashboard', 'action' => 'index'],
                                                         ['class' => 'dropdown-item']
                                                 );

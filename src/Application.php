@@ -29,9 +29,13 @@ use Cake\Http\MiddlewareQueue;
 use Cake\ORM\Locator\TableLocator;
 use Cake\Routing\Middleware\AssetMiddleware;
 use Cake\Routing\Middleware\RoutingMiddleware;
+
+//Authentication plugin
+//
 use Authentication\AuthenticationService;
 use Authentication\AuthenticationServiceInterface;
 use Authentication\AuthenticationServiceProviderInterface;
+use Authentication\Identifier\AbstractIdentifier;
 use Authentication\Identifier\IdentifierInterface;
 use Authentication\Middleware\AuthenticationMiddleware;
 use Cake\Routing\Router;
@@ -146,6 +150,7 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
      * @return \Authentication\AuthenticationServiceInterface
      */
     public function getAuthenticationService(ServerRequestInterface $request): AuthenticationServiceInterface {
+
         $service = new AuthenticationService();
 
         // Define where users should be redirected to when they are not authenticated
@@ -160,16 +165,22 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
         ]);
 
         $fields = [
-            IdentifierInterface::CREDENTIAL_USERNAME => 'email',
-            IdentifierInterface::CREDENTIAL_PASSWORD => 'password'
+            AbstractIdentifier::CREDENTIAL_USERNAME => 'email',
+            AbstractIdentifier::CREDENTIAL_PASSWORD => 'password'
+        ];
+
+        $passwordIdentifier = [
+            'Authentication.Password' => [
+                'fields' => $fields,
+            ],
         ];
         // Load the authenticators. Session should be first.
-        $service->loadAuthenticator('Authentication.Session');
-
-        // Load identifiers
-        $service->loadIdentifier('Authentication.Password', compact('fields'));
+        $service->loadAuthenticator('Authentication.Session', [
+            'identifier' => $passwordIdentifier,
+        ]);
 
         $service->loadAuthenticator('Authentication.Form', [
+            'identifier' => $passwordIdentifier,
             'fields' => $fields,
             'loginUrl' => Router::url([
                 'prefix' => 'Admin',

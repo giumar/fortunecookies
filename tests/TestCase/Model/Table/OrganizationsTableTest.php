@@ -23,7 +23,7 @@ class OrganizationsTableTest extends TestCase
      *
      * @var array
      */
-    public $fixtures = [
+    protected array $fixtures = [
         'app.Organizations',
         'app.Users'
     ];
