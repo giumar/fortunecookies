@@ -1,28 +1,24 @@
 <?php
 /**
-  * @var \App\View\AppView $this
-  */
+ * @var \App\View\AppView $this
+ */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Ticketstatus'), ['action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="col-xs-12">
-    <h3><?= __('Ticketstatuses') ?></h3>
-    <table cellpadding="0" cellspacing="0" class="table">
-        <thead>
-            <tr>
-                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('name') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('created') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($ticketstatuses as $ticketstatus): ?>
+<ul class="h-menu">
+    <li><?= $this->Html->link(__('New Ticketstatus'), ['action' => 'add']) ?></li>
+</ul>
+<h3><?= __('Ticketstatuses') ?></h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th><?= $this->Paginator->sort('id') ?></th>
+            <th><?= $this->Paginator->sort('name') ?></th>
+            <th><?= $this->Paginator->sort('created') ?></th>
+            <th><?= $this->Paginator->sort('modified') ?></th>
+            <th scope="col" class="actions"><?= __('Actions') ?></th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($ticketstatuses as $ticketstatus): ?>
             <tr>
                 <td><?= $this->Number->format($ticketstatus->id) ?></td>
                 <td><?= h($ticketstatus->name) ?></td>
@@ -34,17 +30,16 @@
                     <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $ticketstatus->id], ['confirm' => __('Are you sure you want to delete # {0}?', $ticketstatus->id)]) ?>
                 </td>
             </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
-        </ul>
-        <p><?= $this->Paginator->counter('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total') ?></p>
-    </div>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+<div class="paginator">
+    <ul class="pagination">
+        <?= $this->Paginator->first('<< ' . __('first')) ?>
+        <?= $this->Paginator->prev('< ' . __('previous')) ?>
+        <?= $this->Paginator->numbers() ?>
+        <?= $this->Paginator->next(__('next') . ' >') ?>
+        <?= $this->Paginator->last(__('last') . ' >>') ?>
+    </ul>
+    <p><?= $this->Paginator->counter('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total') ?></p>
 </div>
