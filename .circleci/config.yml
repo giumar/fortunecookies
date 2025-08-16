@@ -17,7 +17,7 @@ jobs:
       # - image: circleci/mysql:5.7-ram
       #
       # - image: redis:2.8.19
-      - image: cimg/mysql:5.7
+      - image: cimg/mysql:8.0
         environment:
           MYSQL_ROOT_PASSWORD: secret
           MYSQL_DATABASE: test_my_app
@@ -44,6 +44,7 @@ jobs:
       - run: "sed -i -e 's/E_ALL/E_ALL \\& ~E_USER_DEPRECATED \\& ~E_DEPRECATED/g' config/app_local.php"
       - run: "sed -i -e 's/test_myapp/test_my_app/g' config/app_local.php"
       - run: "sed -i -e 's/__SALT__/0123456789/g' config/app_local.php"
+      - run: "less config/app_local.php"
       #- run: "php bin/cake.php migrations migrate"
 
       - save_cache:
