@@ -114,7 +114,7 @@ class TicketsController extends AppController {
             'contain' => []
         ]);
 
-        $this->loadModel('Operations');
+        $this->Operations = $this->fetchTable('Operations');
         $newOperation = $this->Operations->newEmptyEntity();
         if ($this->request->is('post')) {
             //$datetimeStart = Time::parseDateTime($this->request->getData('start'));
