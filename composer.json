@@ -18,7 +18,7 @@
         "cakephp/debug_kit": "^5.0",
         "josegonzalez/dotenv": "^4.0",
         "phpstan/phpstan": "^2.0",
-        "phpunit/phpunit": "^10.0",
+        "phpunit/phpunit": "^12.0",
         "psy/psysh": "@stable"
     },
     "suggest": {
