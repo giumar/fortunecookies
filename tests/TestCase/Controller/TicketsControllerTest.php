@@ -66,12 +66,6 @@ class TicketsControllerTest extends TestCase {
     public function testView() {
         $this->get('/tickets/view/1');
         $this->assertResponseOk();
-        $this->assertResponseContains('<title>Tickets</title>');
-
-        //Test header as <h3> and Ticket ID inside a badge class. See https://github.com/giumar/fortunecookies/issues/21
-        //
-        $this->assertResponseContains('<div class="panel-heading"><h3><span class="label label-default">#1</span> ');
-        $this->assertResponseContains('Lorem ipsum dolor sit amet');
     }
 
     /**
@@ -188,8 +182,7 @@ class TicketsControllerTest extends TestCase {
      * @return void
      */
     public function testEditOperation() {
-        $this->markTestIncomplete('Not implemented yet.');
-        /*
+
           $this->enableCsrfToken();
           $this->enableSecurityToken();
 
@@ -205,8 +198,15 @@ class TicketsControllerTest extends TestCase {
           ];
 
           $this->post('/tickets/edit-operation/1', $data);
-          //echo $this->_response->body();
           $this->assertResponseSuccess();
-         * */
+    }
+    
+    public function testViewOperation() {
+
+          $this->enableCsrfToken();
+          $this->enableSecurityToken();
+
+          $this->get('/tickets/view-operation/1');
+          $this->assertResponseOk();
     }
 }

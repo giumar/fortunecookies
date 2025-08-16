@@ -117,14 +117,10 @@ class TicketsController extends AppController {
         $this->Operations = $this->fetchTable('Operations');
         $newOperation = $this->Operations->newEmptyEntity();
         if ($this->request->is('post')) {
-            //$datetimeStart = Time::parseDateTime($this->request->getData('start'));
-            //$datetimeEnd = Time::parseDateTime($this->request->getData('end'));
-            $datetimeStart = $this->request->getData('start');
-            $datetimeEnd = $this->request->getData('end');
-            $newOperation->ticket_id = $this->request->getData('ticket_id');
-            $newOperation->description = $this->request->getData('description');
-            $newOperation->start = $datetimeStart;
-            $newOperation->end = $datetimeEnd;
+            $newOperation->ticket_id = $this->getRequest()->getData('ticket_id');
+            $newOperation->description = $this->getRequest()->getData('description');
+            $newOperation->start = $this->getRequest()->getData('start');
+            $newOperation->end = $this->getRequest()->getData('end');
             if ($this->Operations->save($newOperation)) {
                 $this->Flash->success(__('The new operation has been saved.'));
                 return $this->redirect(['prefix' => false, 'controller' => 'Tickets', 'action' => 'view', $this->request->getData('ticket_id')]);
@@ -141,19 +137,17 @@ class TicketsController extends AppController {
      */
     public function editOperation($operation_id = null) {
 
-        $this->loadModel('Operations');
+        $this->Operations = $this->fetchTable('Operations');
         $operation = $this->Operations->get($operation_id, [
             'contain' => ['Tickets']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $this->request->data['start'] = Time::parseDateTime($this->request->data['start']);
-            $this->request->data['end'] = Time::parseDateTime($this->request->data['end']);
             $operation = $this->Operations->patchEntity($operation, $this->getRequest()->getData());
 
             if ($this->Operations->save($operation)) {
                 $this->Flash->success(__('The operation has been saved.'));
 
-                return $this->redirect(['prefix' => false, 'controller' => 'Tickets', 'action' => 'view', $this->request->data['ticket_id']]);
+                return $this->redirect(['prefix' => false, 'controller' => 'Tickets', 'action' => 'view', $this->request->GetData('ticket_id')]);
             }
             $this->Flash->error(__('The operation could not be saved. Please, try again.'));
         }
@@ -163,7 +157,7 @@ class TicketsController extends AppController {
 
     public function viewOperation($id = null) {
 
-        $this->loadModel('Operations');
+        $this->Operations = $this->fetchTable('Operations');
         $operation = $this->Operations->get($id, [
             'contain' => ['Tickets']
         ]);
@@ -174,7 +168,7 @@ class TicketsController extends AppController {
 
     public function deleteOperation($id = null) {
 
-        $this->loadModel('Operations');
+        $this->Operations = $this->fetchTable('Operations');
         $this->request->allowMethod(['post', 'delete']);
         $operation = $this->Operations->get($id, [
             'contain' => ['Tickets']
