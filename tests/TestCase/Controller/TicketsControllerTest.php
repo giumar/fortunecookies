@@ -12,6 +12,7 @@ use Cake\TestSuite\TestCase;
 class TicketsControllerTest extends TestCase {
 
     use IntegrationTestTrait;
+
     /**
      * Fixtures
      *
@@ -163,26 +164,22 @@ class TicketsControllerTest extends TestCase {
      * @return void
      */
     public function testAddOperation() {
-        $this->markTestIncomplete('Not implemented yet.');
-        /*
-          $this->enableCsrfToken();
-          $this->enableSecurityToken();
+        $this->enableCsrfToken();
+        $this->enableSecurityToken();
 
-          $this->get('/tickets/add_operation/1');
-          $this->assertResponseOk();
-          $this->assertResponseContains('<title>Tickets</title>');
+        $this->get('/tickets/add_operation/1');
+        $this->assertResponseOk();
+        $this->assertResponseContains('<title>Tickets</title>');
 
-          $data = [
-          'start' => '2017-01-01 00:01',
-          'end' => '2017-01-01 01:01',
-          'ticket_id' => null,
-          'description' => 'New description',
-          ];
+        $data = [
+            'start' => '2017-01-01 00:01',
+            'end' => '2017-01-01 01:01',
+            'ticket_id' => null,
+            'description' => 'New description',
+        ];
 
-          $this->post('/tickets/add_operation/1', $data);
-          $this->assertResponseSuccess();
-         * 
-         */
+        $this->post('/tickets/add_operation/1', $data);
+        $this->assertResponseSuccess();
     }
 
     /**
@@ -212,5 +209,4 @@ class TicketsControllerTest extends TestCase {
           $this->assertResponseSuccess();
          * */
     }
-
 }
