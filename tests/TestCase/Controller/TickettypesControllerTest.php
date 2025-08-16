@@ -26,10 +26,9 @@ class TickettypesControllerTest extends TestCase {
 
         $this->session([
             'Auth' => [
-                'User' => [
-                    'id' => 1,
-                    'username' => 'admin',
-                ]
+                'id' => 1,
+                'username' => 'admin',
+                'email' => 'info@example.com'
             ]
         ]);
     }
