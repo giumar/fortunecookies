@@ -10,16 +10,16 @@
         "cakephp/migrations": "^4.0",
         "cakephp/plugin-installer": "^2.0",
         "cakephp/authentication": "~3.0",
-        "mobiledetect/mobiledetectlib": "^3.74"
+        "mobiledetect/mobiledetectlib": "^4.8.0"
     },
     "require-dev": {
         "cakephp/bake": "^3.0",
         "cakephp/cakephp-codesniffer": "^5.1",
         "cakephp/debug_kit": "^5.0",
         "josegonzalez/dotenv": "^4.0",
+        "phpstan/phpstan": "^2.0",
         "phpunit/phpunit": "^10.0",
-        "psy/psysh": "@stable",
-        "phpstan/phpstan": "@stable"
+        "psy/psysh": "@stable"
     },
     "suggest": {
         "markstory/asset_compress": "An asset compression plugin which provides file concatenation and a flexible filter system for preprocessing and minification.",
@@ -46,8 +46,7 @@
         "cs-check": "phpcs --colors -p",
         "cs-fix": "phpcbf --colors -p",
         "test": "phpunit --colors=always",
-        "stan": "phpstan analyse src/",
-        "test": "phpunit --colors=always"
+        "stan": "phpstan analyse"
     },
     "prefer-stable": true,
     "config": {
