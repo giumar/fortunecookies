@@ -9,14 +9,6 @@ jobs:
       # Specify the version you desire here
       - image: cimg/php:8.3
 
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # Using the RAM variation mitigates I/O contention
-      # for database intensive operations.
-      # - image: circleci/mysql:5.7-ram
-      #
-      # - image: redis:2.8.19
       - image: cimg/mysql:8.0
         environment:
           MYSQL_ROOT_PASSWORD: secret
@@ -27,9 +19,6 @@ jobs:
     steps:
       - checkout
 
-      #- run: sudo apt update # PHP CircleCI 2.0 Configuration File# PHP CircleCI 2.0 Configuration File sudo apt install zlib1g-dev libsqlite3-dev
-      #- run: sudo docker-php-ext-install zip
-
       # Download and cache dependencies
       - restore_cache:
           keys:
@@ -39,13 +28,9 @@ jobs:
             - v1-dependencies-
 
       - run: composer install -n --prefer-dist
-      #- run: "cp config/app.default.php config/app_local.php"
       - run: "sed -i 's/localhost/127.0.0.1/g' ./config/app_local.php"
-      - run: "sed -i 's/E_ALL/E_ALL \\& ~E_USER_DEPRECATED \\& ~E_DEPRECATED/g' ./config/app_local.php"
       - run: "sed -i 's/test_myapp/test_my_app/g' ./config/app_local.php"
-      - run: "sed -i 's/__SALT__/0123456789/g' ./config/app_local.php"
       - run: "cat ./config/app_local.php"
-      #- run: "php bin/cake.php migrations migrate"
 
       - save_cache:
           key: v1-dependencies-{{ checksum "composer.json" }}
