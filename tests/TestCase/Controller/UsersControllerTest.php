@@ -3,19 +3,22 @@
 namespace App\Test\TestCase\Controller;
 
 use App\Controller\UsersController;
-use Cake\TestSuite\IntegrationTestCase;
+use Cake\TestSuite\IntegrationTestTrait;
+use Cake\TestSuite\TestCase;
 
 /**
  * App\Controller\UsersController Test Case
  */
-class UsersControllerTest extends IntegrationTestCase {
+class UsersControllerTest extends TestCase {
 
+    use IntegrationTestTrait;
+    
     /**
      * Fixtures
      *
      * @var array
      */
-    public $fixtures = [
+    protected array $fixtures = [
         'app.Users'
     ];
 
@@ -24,10 +27,9 @@ class UsersControllerTest extends IntegrationTestCase {
 
         $this->session([
             'Auth' => [
-                'User' => [
-                    'id' => 1,
-                    'username' => 'admin',
-                ]
+                'id' => 1,
+                'username' => 'admin',
+                'email' => 'info@example.com'
             ]
         ]);
     }

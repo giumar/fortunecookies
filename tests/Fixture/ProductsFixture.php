@@ -15,7 +15,7 @@ class ProductsFixture extends TestFixture {
      *
      * @var array
      */
-    public $records = [
+    public array $records = [
         [
             'id' => 1,
             'name' => 'Lorem ipsum dolor sit amet',

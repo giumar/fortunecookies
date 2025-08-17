@@ -3,19 +3,21 @@
 namespace App\Test\TestCase\Controller;
 
 use App\Controller\TickettypesController;
-use Cake\TestSuite\IntegrationTestCase;
+use Cake\TestSuite\IntegrationTestTrait;
+use Cake\TestSuite\TestCase;
 
 /**
  * App\Controller\TickettypesController Test Case
  */
-class TickettypesControllerTest extends IntegrationTestCase {
+class TickettypesControllerTest extends TestCase {
 
+    use IntegrationTestTrait;
     /**
      * Fixtures
      *
      * @var array
      */
-    public $fixtures = [
+    protected array $fixtures = [
         'app.Tickettypes'
     ];
 
@@ -24,10 +26,9 @@ class TickettypesControllerTest extends IntegrationTestCase {
 
         $this->session([
             'Auth' => [
-                'User' => [
-                    'id' => 1,
-                    'username' => 'admin',
-                ]
+                'id' => 1,
+                'username' => 'admin',
+                'email' => 'info@example.com'
             ]
         ]);
     }

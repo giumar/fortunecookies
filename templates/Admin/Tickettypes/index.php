@@ -1,17 +1,14 @@
 <?php
 /**
-  * @var \App\View\AppView $this
-  */
+ * @var \App\View\AppView $this
+ */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New type of ticket'), ['action' => 'add']) ?></li>
-    </ul>
-</nav>
+<ul class="h-menu">
+    <li><?= $this->Html->link(__('New type of ticket'), ['action' => 'add']) ?></li>
+</ul>
 <div class="col-xs-12">
     <h3><?= __('Types of ticket') ?></h3>
-    <table cellpadding="0" cellspacing="0" class="table">
+    <table class="table">
         <thead>
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
@@ -23,17 +20,17 @@
         </thead>
         <tbody>
             <?php foreach ($tickettypes as $tickettype): ?>
-            <tr>
-                <td><?= $this->Number->format($tickettype->id) ?></td>
-                <td><?= h($tickettype->name) ?></td>
-                <td><?= h($tickettype->created) ?></td>
-                <td><?= h($tickettype->modified) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $tickettype->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $tickettype->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $tickettype->id], ['confirm' => __('Are you sure you want to delete # {0}?', $tickettype->id)]) ?>
-                </td>
-            </tr>
+                <tr>
+                    <td><?= $this->Number->format($tickettype->id) ?></td>
+                    <td><?= h($tickettype->name) ?></td>
+                    <td><?= h($tickettype->created) ?></td>
+                    <td><?= h($tickettype->modified) ?></td>
+                    <td class="actions">
+                        <?= $this->Html->link(__('View'), ['action' => 'view', $tickettype->id]) ?>
+                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $tickettype->id]) ?>
+                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $tickettype->id], ['confirm' => __('Are you sure you want to delete # {0}?', $tickettype->id)]) ?>
+                    </td>
+                </tr>
             <?php endforeach; ?>
         </tbody>
     </table>

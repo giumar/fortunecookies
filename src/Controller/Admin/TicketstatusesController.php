@@ -75,11 +75,11 @@ class TicketstatusesController extends AppController
             'contain' => []
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $ticketstatus = $this->Ticketstatuses->patchEntity($ticketstatus, $this->request->data);
+            $ticketstatus = $this->Ticketstatuses->patchEntity($ticketstatus, $this->getRequest()->getData());
             if ($this->Ticketstatuses->save($ticketstatus)) {
                 $this->Flash->success(__('The ticketstatus has been saved.'));
 
-                return $this->redirect(['prefix'=>false, 'controller'=>'Ticketstatuses', 'action' => 'index']);
+                return $this->redirect(['prefix'=>'Admin', 'controller'=>'Ticketstatuses', 'action' => 'index']);
             }
             $this->Flash->error(__('The ticketstatus could not be saved. Please, try again.'));
         }
@@ -104,6 +104,6 @@ class TicketstatusesController extends AppController
             $this->Flash->error(__('The ticketstatus could not be deleted. Please, try again.'));
         }
 
-        return $this->redirect(['prefix'=>false, 'controller'=>'Ticketstatuses', 'action' => 'index']);
+        return $this->redirect(['prefix'=>'Admin', 'controller'=>'Ticketstatuses', 'action' => 'index']);
     }
 }

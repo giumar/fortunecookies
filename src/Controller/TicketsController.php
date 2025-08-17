@@ -13,6 +13,7 @@ use Cake\I18n\I18n;
  */
 class TicketsController extends AppController {
 
+    private $Operations;
     /**
      * Index method
      *
@@ -20,7 +21,7 @@ class TicketsController extends AppController {
      */
     public function index() {
 
-        $tickets = $this->paginate($this->Tickets->find('all', ['contain' => ['Tickettypes', 'Ticketstatuses']]));
+        $tickets = $this->paginate($this->Tickets->find('all')->contain(['Tickettypes', 'Ticketstatuses']));
 
         $this->set(compact('tickets'));
         $this->set('_serialize', ['tickets']);
@@ -34,9 +35,7 @@ class TicketsController extends AppController {
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function view($id = null) {
-        $ticket = $this->Tickets->get($id, [
-            'contain' => ['Operations', 'Tickettypes']
-        ]);
+        $ticket = $this->Tickets->get($id, contain: ['Operations', 'Tickettypes']);
 
         $this->set('ticket', $ticket);
         $this->set('_serialize', ['ticket']);
@@ -72,9 +71,7 @@ class TicketsController extends AppController {
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
     public function edit($id = null) {
-        $ticket = $this->Tickets->get($id, [
-            'contain' => ['Tickettypes']
-        ]);
+        $ticket = $this->Tickets->get($id, contain: ['Tickettypes']);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $ticket = $this->Tickets->patchEntity($ticket, $this->getRequest()->getData());
             if ($this->Tickets->save($ticket)) {
@@ -110,21 +107,15 @@ class TicketsController extends AppController {
     }
 
     public function addOperation($id = null) {
-        $ticket = $this->Tickets->get($id, [
-            'contain' => []
-        ]);
+        $ticket = $this->Tickets->get($id, contain: []);
 
-        $this->loadModel('Operations');
+        $this->Operations = $this->fetchTable('Operations');
         $newOperation = $this->Operations->newEmptyEntity();
         if ($this->request->is('post')) {
-            //$datetimeStart = Time::parseDateTime($this->request->getData('start'));
-            //$datetimeEnd = Time::parseDateTime($this->request->getData('end'));
-            $datetimeStart = $this->request->getData('start');
-            $datetimeEnd = $this->request->getData('end');
-            $newOperation->ticket_id = $this->request->getData('ticket_id');
-            $newOperation->description = $this->request->getData('description');
-            $newOperation->start = $datetimeStart;
-            $newOperation->end = $datetimeEnd;
+            $newOperation->ticket_id = $this->getRequest()->getData('ticket_id');
+            $newOperation->description = $this->getRequest()->getData('description');
+            $newOperation->start = $this->getRequest()->getData('start');
+            $newOperation->end = $this->getRequest()->getData('end');
             if ($this->Operations->save($newOperation)) {
                 $this->Flash->success(__('The new operation has been saved.'));
                 return $this->redirect(['prefix' => false, 'controller' => 'Tickets', 'action' => 'view', $this->request->getData('ticket_id')]);
@@ -139,21 +130,17 @@ class TicketsController extends AppController {
      * @param null $operation_id
      * @return \Cake\Network\Response|null
      */
-    public function editOperation($operation_id = null) {
+    public function editOperation($id = null) {
 
-        $this->loadModel('Operations');
-        $operation = $this->Operations->get($operation_id, [
-            'contain' => ['Tickets']
-        ]);
+        $this->Operations = $this->fetchTable('Operations');
+        $operation = $this->Operations->get($id, contain: ['Tickets']);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $this->request->data['start'] = Time::parseDateTime($this->request->data['start']);
-            $this->request->data['end'] = Time::parseDateTime($this->request->data['end']);
-            $operation = $this->Operations->patchEntity($operation, $this->request->data);
+            $operation = $this->Operations->patchEntity($operation, $this->getRequest()->getData());
 
             if ($this->Operations->save($operation)) {
                 $this->Flash->success(__('The operation has been saved.'));
 
-                return $this->redirect(['prefix' => false, 'controller' => 'Tickets', 'action' => 'view', $this->request->data['ticket_id']]);
+                return $this->redirect(['prefix' => false, 'controller' => 'Tickets', 'action' => 'view', $this->request->GetData('ticket_id')]);
             }
             $this->Flash->error(__('The operation could not be saved. Please, try again.'));
         }
@@ -163,23 +150,19 @@ class TicketsController extends AppController {
 
     public function viewOperation($id = null) {
 
-        $this->loadModel('Operations');
-        $operation = $this->Operations->get($id, [
-            'contain' => ['Tickets']
-        ]);
-
+        $this->Operations = $this->fetchTable('Operations');
+        $operation = $this->Operations->get($id, contain: ['Tickets']);
+        
         $this->set('operation', $operation);
         $this->set('_serialize', ['operation']);
     }
 
     public function deleteOperation($id = null) {
 
-        $this->loadModel('Operations');
+        $this->Operations = $this->fetchTable('Operations');
         $this->request->allowMethod(['post', 'delete']);
-        $operation = $this->Operations->get($id, [
-            'contain' => ['Tickets']
-                ]
-        );
+        $operation = $this->Operations->get($id, contain: ['Tickets']);
+        
         if ($this->Operations->delete($operation)) {
             $this->Flash->success(__('The operation has been deleted.'));
         } else {

@@ -26,7 +26,7 @@ class Organization extends Entity
      *
      * @var array
      */
-    protected $_accessible = [
+    protected array $_accessible = [
         'name' => true,
         'user_id' => true,
         'created' => true,

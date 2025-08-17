@@ -1,14 +1,18 @@
 <?php
+
 namespace App\Test\TestCase\Console;
 
 use App\Console\Installer;
-use Cake\TestSuite\IntegrationTestCase;
+use Cake\TestSuite\IntegrationTestTrait;
+use Cake\TestSuite\TestCase;
 
-class InstallerTest extends IntegrationTestCase
-{
-	public function testInstaller()
-	{
-		$this->markTestIncomplete();
-	}
+class InstallerTest extends TestCase {
+
+    use IntegrationTestTrait;
+
+    public function testInstaller() {
+        $this->markTestIncomplete();
+    }
 }
+
 ?>

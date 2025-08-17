@@ -2,20 +2,22 @@
 namespace App\Test\TestCase\Controller;
 
 use App\Controller\DocumentsController;
-use Cake\TestSuite\IntegrationTestCase;
+use Cake\TestSuite\IntegrationTestTrait;
+use Cake\TestSuite\TestCase;
 
 /**
  * App\Controller\DocumentsController Test Case
  */
-class DocumentsControllerTest extends IntegrationTestCase
+class DocumentsControllerTest extends TestCase
 {
 
+    use IntegrationTestTrait;
     /**
      * Fixtures
      *
      * @var array
      */
-    public $fixtures = [
+    protected array $fixtures = [
         'app.Documents'
     ];
 

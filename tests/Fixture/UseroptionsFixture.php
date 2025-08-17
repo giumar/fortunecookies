@@ -17,7 +17,7 @@ class UseroptionsFixture extends TestFixture
      *
      * @var array
      */
-    public $records = [
+    public array $records = [
         [
             'id' => 1,
             'user_id' => 1,

@@ -22,7 +22,7 @@ class DocumentsTableTest extends TestCase
      *
      * @var array
      */
-    public $fixtures = [
+    protected array $fixtures = [
         'app.Documents'
     ];
 

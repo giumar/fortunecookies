@@ -23,7 +23,7 @@ class UseroptionsTableTest extends TestCase
      *
      * @var array
      */
-    public $fixtures = [
+    protected array $fixtures = [
         'app.Useroptions',
         'app.Users'
     ];

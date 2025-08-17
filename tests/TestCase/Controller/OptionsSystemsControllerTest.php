@@ -2,20 +2,22 @@
 namespace App\Test\TestCase\Controller;
 
 use App\Controller\OptionsSystemsController;
-use Cake\TestSuite\IntegrationTestCase;
+use Cake\TestSuite\IntegrationTestTrait;
+use Cake\TestSuite\TestCase;
 
 /**
  * App\Controller\OptionsSystemsController Test Case
  */
-class OptionsSystemsControllerTest extends IntegrationTestCase
+class OptionsSystemsControllerTest extends TestCase
 {
 
+    use IntegrationTestTrait;
     /**
      * Fixtures
      *
      * @var array
      */
-    public $fixtures = [
+    protected array $fixtures = [
         'app.OptionsSystems'
     ];
 
