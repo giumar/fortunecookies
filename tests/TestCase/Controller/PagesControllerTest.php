@@ -30,6 +30,18 @@ class PagesControllerTest extends TestCase
 {
     use IntegrationTestTrait;
 
+    public function setUp(): void {
+        parent::setUp();
+
+        $this->session([
+            'Auth' => [
+                'id' => 1,
+                'username' => 'admin',
+                'email' => 'info@example.com'
+            ]
+        ]);
+    }
+    
     /**
      * testDisplay method
      *
