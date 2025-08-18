@@ -3,6 +3,10 @@
 # Check https://circleci.com/docs/2.0/language-php/ for more details
 #
 version: 2.1
+
+orbs:
+  sonarcloud: sonarsource/sonarcloud@3.0.0
+
 jobs:
   build:
     docker:
@@ -43,10 +47,9 @@ jobs:
       # run tests with phpunit or codecept
       - run: ./vendor/bin/phpunit
       #- run: ./vendor/bin/codecept build
-      - run: sonarcloud/scan
+      - sonarcloud/scan
 
-orbs:
-  sonarcloud: sonarsource/sonarcloud@3.0.0
+
 
 workflows:
   main:
